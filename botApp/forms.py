@@ -15,7 +15,7 @@ class audio_fonoForm(forms.ModelForm):
 
     class Meta:
         model = audio_fono
-        fields = ['audio_fo','ano_nac','genero_usuario','audio_etiqueta']
+        fields = ['id_paciente_ingresado','audio_fo','ano_nac','genero_usuario','audio_etiqueta','fecha_registro']
 
     def clean_genero_usuario(self):
         genero = self.cleaned_data['genero_usuario']

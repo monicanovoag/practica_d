@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from .forms import *
 
@@ -37,12 +37,11 @@ def formulario (request):
     }
 
     if request.method == "POST":
-        formu = audio_fonoForm(request.POST)
+        formu = audio_fonoForm(request.POST, request.FILES)
         if formu.is_valid():
             formu.save()
-            print("Formulario Enviado")
+            messages.success(request,"Audio paciente registrado con éxito")
         else:
-            print("Error, ingrese los datos de manera correcta.")
-
+            messages.error(request,"Error, registro no realizado")
 
     return render (request,"formulario.html",data)
