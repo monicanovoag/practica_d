@@ -7,10 +7,7 @@
    
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="form-group">
-        <label for="id_paciente_ingresado">Id Paciente: </label>
-        {{ formFono.id_paciente_ingresado }}
-    </div>
+
 
     <div class="form-group">
         <label for="audio_fo">Audio del paciente: </label>
@@ -22,7 +19,7 @@
         {{ formFono.audio_etiqueta }}
     </div>
     <div class="form-group">
-        <label for="ano_nac">Año Nacimiento: </label>
+        <label for="ano_nac">Año Nacimiento Paciente: </label>
         {{ formFono.ano_nac }}
     </div>
 
@@ -31,10 +28,6 @@
         {{ formFono.genero_usuario }}
     </div>
 
-    <div class="form-group">
-        <label for="fecha_registro">Fecha Registro: </label>
-        {{ formFono.fecha_registro }}
-    </div>
 
     <button type="submit" class="button" > Enviar Formulario </button> 
 
