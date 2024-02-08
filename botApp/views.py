@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 
 
 def home (request):
+
+
     return render (request,"home.html")
 
 def login (request):
@@ -29,7 +31,12 @@ def login (request):
 
 @login_required
 def perfil (request):
-    return render (request,"perfil.html")
+
+     
+    nombre_usuario = request.user.username
+    
+
+    return render (request,"perfil.html",{'nombre_usuario': nombre_usuario})
 
 @login_required
 def formulario (request):
