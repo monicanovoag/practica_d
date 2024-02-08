@@ -61,6 +61,11 @@
           <li class="current">
             <a href="{% url 'formulario' %}">Formulario</a>
           </li>
+          <form method="post" class="form" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Cerrar Sesión</button>
+          </form>
+
           {% else %}
           <li class="current"><a href="{% url 'login' %}">Login</a></li>
 
@@ -84,3 +89,9 @@
 </html>
 
 <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+
+<style>
+  .form {
+    margin-top: 15px;
+  }
+</style>
