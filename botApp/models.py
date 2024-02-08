@@ -71,6 +71,7 @@ class audio_persona(models.Model):
 
 class audio_fono(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio") 
+    id_fono = models.IntegerField()
     audio_fo = models.FileField(upload_to='audios/')
     ano_nac = models.CharField(max_length=10, verbose_name="Año Nacimiento")
     fecha_registro = models.DateTimeField(default=timezone.now)

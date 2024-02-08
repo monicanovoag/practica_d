@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from .forms import *
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -39,6 +40,7 @@ def formulario (request):
     if request.method == "POST":
         formu = audio_fonoForm(request.POST, request.FILES)
         if formu.is_valid():
+            formu.instance.id_fono = request.user.id
             formu.save()
             messages.success(request,"Audio paciente registrado con éxito")
         else:
