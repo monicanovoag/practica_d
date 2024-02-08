@@ -2,7 +2,15 @@
 
 {% block title %}Inicio{% endblock %}
 {% block subtitle %}Inicio{% endblock %}
-
+{% block fecha %}
+<div class="info">
+    <span class="date">
+      <span class="month">{{ fecha_actual|date:"F" }} </span>
+      <span class="day">{{ fecha_actual|date:"d" }}</span>
+      <span class="year">{{ fecha_actual|date:"Y" }}</span>
+    </span>
+  </div>
+{% endblock %}
 {% block content %}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan sit amet nulla facilisi morbi. Eget felis eget nunc lobortis mattis. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat. Fringilla ut morbi tincidunt augue interdum velit euismod. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Consequat interdum varius sit amet. Eget gravida cum sociis natoque penatibus et. Nullam eget felis eget nunc lobortis mattis aliquam faucibus. Neque volutpat ac tincidunt vitae semper quis lectus. Aliquam faucibus purus in massa tempor nec feugiat nisl. At augue eget arcu dictum varius duis at consectetur lorem.

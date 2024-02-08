@@ -3,15 +3,17 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.contrib.auth.models import User
-
+from datetime import datetime
 
 # Create your views here.
 
 
 def home (request):
 
-
-    return render (request,"home.html")
+    data = {
+        "fecha_actual" : datetime.now()       
+    }
+    return render (request,"home.html",data)
 
 def login (request):
 
@@ -27,22 +29,26 @@ def login (request):
         else:
             return render(request, "registration/login.html")
         
+  
     return render (request,"registration/login.html")
 
 @login_required
 def perfil (request):
 
-     
-    nombre_usuario = request.user.username
-    
+    data = {
+        "fecha_actual" : datetime.now(), 
+        "nombre_usuario" : request.user.first_name      
+    }
 
-    return render (request,"perfil.html",{'nombre_usuario': nombre_usuario})
+    return render (request,"perfil.html", data)
 
 @login_required
 def formulario (request):
     data = {
-        "formFono": audio_fonoForm
+        "formFono": audio_fonoForm,
+        "fecha_actual" : datetime.now()       
     }
+    
 
     if request.method == "POST":
         formu = audio_fonoForm(request.POST, request.FILES)
