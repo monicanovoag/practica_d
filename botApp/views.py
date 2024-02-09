@@ -60,7 +60,7 @@ def formulario (request):
             formu.save()
             messages.success(request,"Audio paciente registrado con éxito")
         else:
-            messages.error(request,"Error, registro no realizado")
+            messages.error(request,"Error, registro no realizado. Por favor verifica la información ingresada")
 
     return render (request,"formulario.html",data)
 
