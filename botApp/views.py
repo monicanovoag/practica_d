@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.shortcuts import render
+from django.http import HttpResponse
+import os
 
 # Create your views here.
 
@@ -53,10 +56,21 @@ def formulario (request):
     if request.method == "POST":
         formu = audio_fonoForm(request.POST, request.FILES)
         if formu.is_valid():
-            formu.instance.id_fono = request.user.id
+            formu.instance.id_usuario = request.user.id
             formu.save()
             messages.success(request,"Audio paciente registrado con éxito")
         else:
             messages.error(request,"Error, registro no realizado")
 
     return render (request,"formulario.html",data)
+
+def archivo(request, nombre_archivo):
+    ruta_archivo = 'archivos/audios/' + nombre_archivo 
+
+    if os.path.exists(ruta_archivo):
+        with open(ruta_archivo, 'rb') as archivo:
+            response = HttpResponse(archivo.read(), content_type='audio/mpeg')
+            return response
+    else:
+
+        return HttpResponse("El archivo solicitado no existe", status=404)

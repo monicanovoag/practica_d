@@ -13,7 +13,7 @@ class tipousuarioAdmin(admin.ModelAdmin):
     list_display = ("id", "nombre_tipo_usuario")
 
 class audiofonoAdmin(admin.ModelAdmin):
-    list_display = ("id","id_fono","audio_fo","genero_usuario","ano_nac","fecha_registro")
+    list_display = ("id","id_usuario","audio_fo","genero_usuario","ano_nac","fecha_registro")
 
 class audioPersonaAdmin(admin.ModelAdmin):
     list_display = ("id","audio_us","wsp_usuario","ano_nac","fecha_registro_paciente")
