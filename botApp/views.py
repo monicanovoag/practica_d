@@ -8,7 +8,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import os
 
-
 # Create your views here.
 
 
@@ -74,4 +73,4 @@ def archivo(request, nombre_archivo):
             return response
     else:
 
-        return HttpResponse("El archivo solicitado no corresponde a un audio", status=404)
+        return HttpResponse("El archivo solicitado no existe", status=404)
