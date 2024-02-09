@@ -23,4 +23,11 @@ class audio_fonoForm(forms.ModelForm):
 
     def clean_audio_etiqueta(self):
         audio_etiqueta = self.cleaned_data['audio_etiqueta']
-        return audio_etiqueta       
+        return audio_etiqueta    
+
+    def clean_audio_fo(self):
+        audio_file = self.cleaned_data.get('audio_fo', False)
+        if audio_file:
+            if not audio_file.name.endswith(('.mp3', '.wav', '.ogg', '.flac', '.aac')):
+                raise forms.ValidationError('Por favor, suba un archivo de audio válido (MP3, WAV, OGG, FLAC, AAC).')
+        return audio_file   
