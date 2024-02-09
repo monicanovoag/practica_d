@@ -28,8 +28,11 @@ def login (request):
 
         if user is not None:
             auth.login(request, user)
+
+            messages.success(request,"Inicio de sesión exitoso")
             return redirect("perfil")
         else:
+            messages.error(request,"No fue posible iniciar sesión, inténtelo nuevamente")
             return render(request, "registration/login.html")
         
   
