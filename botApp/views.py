@@ -7,6 +7,10 @@ from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
 import os
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import viewsets
+from .serializer import *
 
 # Create your views here.
 
@@ -77,3 +81,9 @@ def archivo(request, nombre_archivo):
     else:
 
         return HttpResponse("El archivo solicitado no existe", status=404)
+    
+#API
+
+class audiofonoViewSet(viewsets.ModelViewSet):
+    queryset = audio_fono.objects.all()
+    serializer_class = audio_fonoSerializer
