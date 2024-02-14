@@ -57,7 +57,13 @@
           <li class="current">
             <a href="{% url 'formulario' %}">Formulario</a>
           </li>
+          {% if user.is_staff %}
+          <li class="current">
+            <a href="{% url 'api' %}">API</a>
+          </li>
+          {% endif %}
           <form method="post" class="form" action="{% url 'logout' %}">
+          
             {% csrf_token %}
             <button type="submit">Cerrar Sesión</button>
           </form>

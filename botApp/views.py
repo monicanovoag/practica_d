@@ -8,9 +8,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import os
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import viewsets
 from .serializer import *
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+
+
+
 
 # Create your views here.
 
@@ -83,7 +89,20 @@ def archivo(request, nombre_archivo):
         return HttpResponse("El archivo solicitado no existe", status=404)
     
 #API
+@login_required
+def api(request):
+    data = {
+        "fecha_actual" : datetime.now()       
+    }
+    return render (request,"api/api_home.html",data)
 
-class audiofonoViewSet(viewsets.ModelViewSet):
-    queryset = audio_fono.objects.all()
-    serializer_class = audio_fonoSerializer
+
+
+class AudioFonoAPIView(APIView):
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAdminUser]
+
+    def get(self, request, format=None):
+        audio_fonos = audio_fono.objects.all()
+        serializer = audio_fonoSerializer(audio_fonos, many=True)
+        return Response(serializer.data)
