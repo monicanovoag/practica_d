@@ -82,7 +82,7 @@ class audio_fono(models.Model):
     audio_fo5 = models.FileField(upload_to='audios/', blank=True, null=True)
     ano_nac = models.CharField(max_length=10, verbose_name="Año Nacimiento")
     fecha_registro = models.DateTimeField(default=timezone.now)
-    
+    otras_enfermedades = models.CharField(max_length=50)
 
     genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)
     audio_etiqueta = models.ForeignKey(audio_etiqueta, on_delete=models.CASCADE)

@@ -4,9 +4,20 @@ from .models import *
 
 class audio_fonoForm(forms.ModelForm):
     
+    ENFERMEDADES_CHOICES = [
+        ('parkinson', 'Enfermedad de Parkinson'),
+        ('diabetes', 'Diabetes'),
+        ('hipertension', 'Hipertensión'),
+    ]
+
+    otras_enfermedades = forms.MultipleChoiceField(
+        choices=ENFERMEDADES_CHOICES,
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+    )
     class Meta:
         model = audio_fono
-        fields = ['audio_fo','audio_fo2','audio_fo3','audio_fo4','audio_fo5','ano_nac','genero_usuario','audio_etiqueta','nombre_paciente']
+        fields = ['audio_fo','audio_fo2','audio_fo3','audio_fo4','audio_fo5','ano_nac','genero_usuario','audio_etiqueta','nombre_paciente','otras_enfermedades']
 
 
     def clean_genero_usuario(self):
