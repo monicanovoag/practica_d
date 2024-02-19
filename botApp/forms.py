@@ -5,9 +5,9 @@ from .models import *
 class audio_fonoForm(forms.ModelForm):
     
     ENFERMEDADES_CHOICES = [
-        ('parkinson', 'Enfermedad de Parkinson'),
-        ('diabetes', 'Diabetes'),
-        ('hipertension', 'Hipertensión'),
+        ('Enf_parkinson', 'Enfermedad de Parkinson'),
+        ('Diabetes', 'Diabetes'),
+        ('Hipertensión', 'Hipertensión'),
     ]
 
     otras_enfermedades = forms.MultipleChoiceField(
