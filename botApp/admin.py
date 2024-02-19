@@ -13,13 +13,15 @@ class tipousuarioAdmin(admin.ModelAdmin):
     list_display = ("id", "nombre_tipo_usuario")
 
 class audiofonoAdmin(admin.ModelAdmin):
-    list_display = ("id","id_usuario","audio_fo","genero_usuario","ano_nac","fecha_registro")
+    list_display = ("id","id_usuario","nombre_paciente","audio_fo","audio_fo2","audio_fo3","audio_fo4","audio_fo5","genero_usuario","ano_nac","fecha_registro",)
 
 class audioPersonaAdmin(admin.ModelAdmin):
     list_display = ("id","audio_us","wsp_usuario","ano_nac","fecha_registro_paciente")
 
 class CustomUserAdmin(BaseUserAdmin):
     list_display = ('id','username', 'email', 'first_name', 'last_name', 'is_staff')
+
+
 
 admin.site.register(genero_usuario,generoAdmin)
 admin.site.register(audio_etiqueta,etiquetaAdmin)

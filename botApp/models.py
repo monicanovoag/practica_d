@@ -9,12 +9,14 @@ class audio_etiqueta(models.Model):
     DISARTRIA = "Disartria"
     DISFAGIA = "Disfagia"
     VOZ_Y_HABLA = "Voz_Habla"
+    PACIENTE_SANO = "Paciente_Sano"
     OTRO = "Otro"
 
     ETIQUETA_CHOICES = [
         (DISARTRIA, "Disartria"),
         (DISFAGIA, "Disfagia"),
         (VOZ_Y_HABLA, "Voz_Habla"),
+        (PACIENTE_SANO, "Paciente_Sano"),
         (OTRO, "Otro"),]
 
     id = models.AutoField(primary_key=True, verbose_name="id_etiqueta") 
@@ -72,9 +74,15 @@ class audio_persona(models.Model):
 class audio_fono(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio") 
     id_usuario = models.IntegerField()
+    nombre_paciente = models.CharField(max_length=20)
     audio_fo = models.FileField(upload_to='audios/')
+    audio_fo2 = models.FileField(upload_to='audios/', blank=True, null=True)
+    audio_fo3 = models.FileField(upload_to='audios/', blank=True, null=True)
+    audio_fo4 = models.FileField(upload_to='audios/', blank=True, null=True)
+    audio_fo5 = models.FileField(upload_to='audios/', blank=True, null=True)
     ano_nac = models.CharField(max_length=10, verbose_name="Año Nacimiento")
     fecha_registro = models.DateTimeField(default=timezone.now)
+    
 
     genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)
     audio_etiqueta = models.ForeignKey(audio_etiqueta, on_delete=models.CASCADE)

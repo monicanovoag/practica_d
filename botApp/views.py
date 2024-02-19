@@ -62,7 +62,7 @@ def perfil (request):
 def formulario (request):
     data = {
         "formFono": audio_fonoForm,
-        "fecha_actual" : datetime.now()       
+        "fecha_actual" : datetime.now()
     }
     
 
