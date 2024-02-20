@@ -6,8 +6,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 class generoAdmin(admin.ModelAdmin):
     list_display = ("id","nombre_genero")
 
-class etiquetaAdmin(admin.ModelAdmin):
-    list_display = ("id","nombre_etiqueta")
+class diagnosticoAdmin(admin.ModelAdmin):
+    list_display = ("id","nombre_diagnostico")
 
 class tipousuarioAdmin(admin.ModelAdmin):
     list_display = ("id", "nombre_tipo_usuario")
@@ -24,7 +24,7 @@ class CustomUserAdmin(BaseUserAdmin):
 
 
 admin.site.register(genero_usuario,generoAdmin)
-admin.site.register(audio_etiqueta,etiquetaAdmin)
+admin.site.register(tipo_diagnostico_flgo,diagnosticoAdmin)
 admin.site.register(audio_fono,audiofonoAdmin)
 admin.site.register(audio_persona,audioPersonaAdmin)
 admin.site.register(tipo_usuario, tipousuarioAdmin)

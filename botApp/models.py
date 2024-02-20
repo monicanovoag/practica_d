@@ -4,26 +4,14 @@ from django.utils import timezone
 # Create your models here.
 
 
-class audio_etiqueta(models.Model):
+class tipo_diagnostico_flgo(models.Model):
 
-    DISARTRIA = "Disartria"
-    DISFAGIA = "Disfagia"
-    VOZ_Y_HABLA = "Voz_Habla"
-    PACIENTE_SANO = "Paciente_Sano"
-    OTRO = "Otro"
-
-    ETIQUETA_CHOICES = [
-        (DISARTRIA, "Disartria"),
-        (DISFAGIA, "Disfagia"),
-        (VOZ_Y_HABLA, "Voz_Habla"),
-        (PACIENTE_SANO, "Paciente_Sano"),
-        (OTRO, "Otro"),]
 
     id = models.AutoField(primary_key=True, verbose_name="id_etiqueta") 
-    nombre_etiqueta = models.CharField(max_length=20, choices=ETIQUETA_CHOICES)
+    nombre_diagnostico = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.nombre_etiqueta
+        return self.nombre_diagnostico
     
 
 class genero_usuario(models.Model):
@@ -69,7 +57,7 @@ class audio_persona(models.Model):
     fecha_registro_paciente = models.DateTimeField(default=timezone.now)
 
     genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)
-    audio_etiqueta = models.ForeignKey(audio_etiqueta, on_delete=models.CASCADE)
+    tipo_diagnostico_flgo = models.ForeignKey(tipo_diagnostico_flgo, on_delete=models.CASCADE)
 
 class audio_fono(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio") 
@@ -85,5 +73,5 @@ class audio_fono(models.Model):
     otras_enfermedades = models.CharField(max_length=50)
 
     genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)
-    audio_etiqueta = models.ForeignKey(audio_etiqueta, on_delete=models.CASCADE)
+    tipo_diagnostico_flgo = models.ForeignKey(tipo_diagnostico_flgo, on_delete=models.CASCADE)
 

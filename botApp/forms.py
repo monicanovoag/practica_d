@@ -17,16 +17,15 @@ class audio_fonoForm(forms.ModelForm):
     )
     class Meta:
         model = audio_fono
-        fields = ['audio_fo','audio_fo2','audio_fo3','audio_fo4','audio_fo5','ano_nac','genero_usuario','audio_etiqueta','nombre_paciente','otras_enfermedades']
-
+        fields = ['audio_fo','audio_fo2','audio_fo3','audio_fo4','audio_fo5','ano_nac','genero_usuario','tipo_diagnostico_flgo','nombre_paciente','otras_enfermedades']
 
     def clean_genero_usuario(self):
         genero = self.cleaned_data['genero_usuario']
         return genero
 
-    def clean_audio_etiqueta(self):
-        audio_etiqueta = self.cleaned_data['audio_etiqueta']
-        return audio_etiqueta
+    def clean_tipo_diagnostico_flgo(self):
+        tipo_diagnostico_flgo = self.cleaned_data['tipo_diagnostico_flgo']
+        return tipo_diagnostico_flgo
 
     def clean_audio_fo(self):
         audio_file = self.cleaned_data.get('audio_fo', False)
