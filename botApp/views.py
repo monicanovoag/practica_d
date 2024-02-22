@@ -14,6 +14,8 @@ from rest_framework import viewsets
 from .serializer import *
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
 
@@ -110,10 +112,9 @@ class AudioFonoAPIView(APIView):
 
 def admin_audios_fono (request):
 
-    data = {
-        "fecha_actual" : datetime.now()       
-    }
-    return render (request,"admin/botAudio/audio_fono.html",data)
+    admin_url = reverse('admin:index')
+
+    return HttpResponseRedirect(admin_url)
 
 def admin_audios_persona (request):
 
