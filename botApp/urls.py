@@ -16,6 +16,10 @@ urlpatterns = [
  #ACCESO A ADMIN DJANGO
  path('admin/', admin, name="admin_django"),
  
+ #ACCESO AUDIOS 
+ path('admin/botApp/audio_fono/', admin_audios_fono, name="admin_audios_fono"),
+ path('admin/botApp/audio_persona/', admin_audios_persona, name="admin_audios_persona"),
+
  #API
 
  path('api_home/',api, name='api'),
