@@ -112,16 +112,16 @@ class AudioFonoAPIView(APIView):
 
 def admin_audios_fono (request):
 
-    admin_url = reverse('admin:index')
+    admin_url = reverse('admin:botApp_audio_fono_changelist')
 
     return HttpResponseRedirect(admin_url)
 
 def admin_audios_persona (request):
 
-    data = {
-        "fecha_actual" : datetime.now()       
-    }
-    return render (request,"admin/botAudio/audio_persona.html",data)
+    admin_url = reverse('admin:botApp_audio_persona_changelist')
+
+    return HttpResponseRedirect(admin_url)
+
 
 def admin (request):
 
