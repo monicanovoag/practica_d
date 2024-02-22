@@ -106,3 +106,28 @@ class AudioFonoAPIView(APIView):
         audio_fonos = audio_fono.objects.all()
         serializer = audio_fonoSerializer(audio_fonos, many=True)
         return Response(serializer.data)
+
+
+def admin_audios_fono (request):
+
+    data = {
+        "fecha_actual" : datetime.now()       
+    }
+    return render (request,"admin/botAudio/audio_fono.html",data)
+
+def admin_audios_persona (request):
+
+    data = {
+        "fecha_actual" : datetime.now()       
+    }
+    return render (request,"admin/botAudio/audio_persona.html",data)
+
+def admin (request):
+
+    data = {
+        "fecha_actual" : datetime.now()       
+    }
+    return render (request,"admin.html",data)
+
+def handler404(request, exception):
+    return render (request, "404.html", status=404)

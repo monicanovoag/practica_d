@@ -2,6 +2,34 @@ from django.contrib import admin
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.http import HttpResponse
+from django.urls import reverse
+import requests
+
+def download_audios(modeladmin, request, queryset):
+    import zipfile
+    import io
+
+    # Crear un archivo ZIP en memoria
+    zip_buffer = io.BytesIO()
+    with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
+        for audio in queryset:
+            # Iterar sobre los campos de audio y agregar al archivo ZIP si contienen archivos
+            for i in range(1, 6):  # Iterar sobre los campos audio_fo1 a audio_fo5
+                audio_field_name = f'audio_fo{i}'
+                audio_file = getattr(audio, audio_field_name)
+                if audio_file:
+                    # Descargar el archivo de la URL y agregarlo al archivo ZIP
+                    response = requests.get(request.build_absolute_uri(audio_file.url))
+                    if response.status_code == 200:
+                        zip_file.writestr(audio_file.name.split('/')[-1], response.content)
+
+    # Configurar la respuesta HTTP para descargar el archivo ZIP
+    response = HttpResponse(zip_buffer.getvalue(), content_type='application/zip')
+    response['Content-Disposition'] = 'attachment; filename="audios.zip"'
+    return response
+
+download_audios.short_description = "Descargar audios seleccionado/s"
 
 class generoAdmin(admin.ModelAdmin):
     list_display = ("id","nombre_genero")
@@ -13,7 +41,8 @@ class tipousuarioAdmin(admin.ModelAdmin):
     list_display = ("id", "nombre_tipo_usuario")
 
 class audiofonoAdmin(admin.ModelAdmin):
-    list_display = ("id","id_usuario","nombre_paciente","genero_usuario","ano_nac","otras_enfermedades","audio_fo","audio_fo2","audio_fo3","audio_fo4","audio_fo5","fecha_registro")
+    actions = [download_audios]
+    list_display = ("id","id_usuario","nombre_paciente","genero_usuario","ano_nac","otras_enfermedades","audio_fo1","audio_fo2","audio_fo3","audio_fo4","audio_fo5","fecha_registro")
 
 class audioPersonaAdmin(admin.ModelAdmin):
     list_display = ("id","audio_us","wsp_usuario","ano_nac","fecha_registro_paciente")

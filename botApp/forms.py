@@ -17,7 +17,7 @@ class audio_fonoForm(forms.ModelForm):
     )
     class Meta:
         model = audio_fono
-        fields = ['audio_fo','audio_fo2','audio_fo3','audio_fo4','audio_fo5','ano_nac','genero_usuario','tipo_diagnostico_flgo','nombre_paciente','otras_enfermedades']
+        fields = ['audio_fo1','audio_fo2','audio_fo3','audio_fo4','audio_fo5','ano_nac','genero_usuario','tipo_diagnostico_flgo','nombre_paciente','otras_enfermedades']
 
     def clean_genero_usuario(self):
         genero = self.cleaned_data['genero_usuario']
@@ -28,7 +28,7 @@ class audio_fonoForm(forms.ModelForm):
         return tipo_diagnostico_flgo
 
     def clean_audio_fo(self):
-        audio_file = self.cleaned_data.get('audio_fo', False)
+        audio_file = self.cleaned_data.get('audio_fo1', False)
         if audio_file:
             if not audio_file.name.endswith(('.mp3', '.wav', '.ogg', '.flac', '.aac','.opus')):
                 raise forms.ValidationError('Por favor, suba un archivo de audio válido (MP3, WAV, OGG, FLAC, AAC).')
@@ -37,7 +37,7 @@ class audio_fonoForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         audio_files = [
-            cleaned_data.get('audio_fo'),
+            cleaned_data.get('audio_fo1'),
             cleaned_data.get('audio_fo2'),
             cleaned_data.get('audio_fo3'),
             cleaned_data.get('audio_fo4'),

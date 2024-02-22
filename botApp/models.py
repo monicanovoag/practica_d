@@ -63,7 +63,7 @@ class audio_fono(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio") 
     id_usuario = models.IntegerField()
     nombre_paciente = models.CharField(max_length=20)
-    audio_fo = models.FileField(upload_to='audios/')
+    audio_fo1 = models.FileField(upload_to='audios/')
     audio_fo2 = models.FileField(upload_to='audios/', blank=True, null=True)
     audio_fo3 = models.FileField(upload_to='audios/', blank=True, null=True)
     audio_fo4 = models.FileField(upload_to='audios/', blank=True, null=True)
