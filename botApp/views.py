@@ -108,6 +108,15 @@ class AudioFonoAPIView(APIView):
         audio_fonos = audio_fono.objects.all()
         serializer = audio_fonoSerializer(audio_fonos, many=True)
         return Response(serializer.data)
+    
+class AudioPersonaAPIView(APIView):
+    authentication_classes = [SessionAuthentication]
+    permission_classes = [IsAdminUser]
+
+    def get(self, request, format=None):
+        audio_personas = audio_persona.objects.all()
+        serializer = audio_personaSerializer(audio_personas, many=True)
+        return Response(serializer.data)
 
 
 def admin_audios_fono (request):
