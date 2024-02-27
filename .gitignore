@@ -15,6 +15,7 @@
 
 #Directorios
 pycache/
+__pycache__/
 node_modules/
 archivos/
 
