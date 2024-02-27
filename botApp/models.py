@@ -50,15 +50,15 @@ class tipo_usuario(models.Model):
         return self.nombre_tipo_usuario
     
 class audio_persona(models.Model):
-    id = models.AutoField(primary_key=True, verbose_name="id_audio") 
-    audio_us = models.FileField(upload_to='audios/')
-    wsp_usuario = models.IntegerField()
+    id = models.AutoField(primary_key=True, verbose_name="id_audio")
+    wsp_usuario = models.IntegerField() 
     ano_nac = models.CharField(max_length=10, verbose_name="año_nacimiento")
+    comuna_residencia = models.CharField(max_length=10, verbose_name="comuna_residencia")
+    genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)    
+    sistema_salud = models.CharField(max_length=10)
+    audio_us = models.FileField(upload_to='audios/personas/')    
     fecha_registro_paciente = models.DateTimeField(default=timezone.now)
-
-    genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)
-    tipo_diagnostico_flgo = models.ForeignKey(tipo_diagnostico_flgo, on_delete=models.CASCADE)
-
+       
 class audio_fono(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio") 
     id_usuario = models.IntegerField()

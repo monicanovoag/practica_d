@@ -45,7 +45,7 @@ class audiofonoAdmin(admin.ModelAdmin):
     list_display = ("id","id_usuario","nombre_paciente","genero_usuario","ano_nac","otras_enfermedades","audio_fo1","audio_fo2","audio_fo3","audio_fo4","audio_fo5","fecha_registro")
 
 class audioPersonaAdmin(admin.ModelAdmin):
-    list_display = ("id","audio_us","wsp_usuario","ano_nac","fecha_registro_paciente")
+    list_display = ("id","wsp_usuario","ano_nac","comuna_residencia","genero_usuario","sistema_salud","audio_us","fecha_registro_paciente")
 
 class CustomUserAdmin(BaseUserAdmin):
     list_display = ('id','username', 'email', 'first_name', 'last_name', 'is_staff')
