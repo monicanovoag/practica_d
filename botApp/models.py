@@ -51,7 +51,7 @@ class tipo_usuario(models.Model):
     
 class audio_persona(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio")
-    wsp_usuario = models.IntegerField() 
+    wsp_usuario = models.CharField(max_length = 30) 
     ano_nac = models.CharField(max_length=10, verbose_name="año_nacimiento")
     comuna_residencia = models.CharField(max_length=30, verbose_name="comuna_residencia")
     genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)    
