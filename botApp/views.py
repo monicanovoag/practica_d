@@ -152,3 +152,8 @@ def admin (request):
 
 def handler404(request, exception):
     return render (request, "404.html", status=404)
+
+
+class audio_personaViewSet(viewsets.ModelViewSet):
+    queryset = audio_persona.objects.all()
+    serializer_class = audio_personaSerializer

@@ -4,6 +4,8 @@ from rest_framework import routers
 from .import views
 
 handler_404 = views.handler404
+router = routers.DefaultRouter()
+router.register(r'audio_persona', views.audio_personaViewSet)
 
 urlpatterns = [
  path('', home, name='home'),
@@ -23,6 +25,7 @@ urlpatterns = [
  path('api_home/',api, name='api'),
  path('view_audio_fonos/', AudioFonoAPIView.as_view(), name="api_audio_fonos"),
  path('view_audio_personas/', AudioPersonaAPIView.as_view(), name="api_audio_personas"),
+ path('api/', include(router.urls)),
 
-]
+] 
 
