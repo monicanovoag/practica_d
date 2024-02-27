@@ -53,10 +53,10 @@ class audio_persona(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio")
     wsp_usuario = models.IntegerField() 
     ano_nac = models.CharField(max_length=10, verbose_name="año_nacimiento")
-    comuna_residencia = models.CharField(max_length=10, verbose_name="comuna_residencia")
+    comuna_residencia = models.CharField(max_length=30, verbose_name="comuna_residencia")
     genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)    
     sistema_salud = models.CharField(max_length=10)
-    audio_us = models.FileField(upload_to='audios/persona/')    
+    audio_usuario = models.CharField(max_length=255)    
     fecha_registro_paciente = models.DateTimeField(default=timezone.now)
        
 class audio_fono(models.Model):
