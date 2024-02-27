@@ -10,11 +10,14 @@ urlpatterns = [
  path('login/', login, name='login'),
  path('perfil/', perfil, name='perfil'),
  path('formulario/', formulario, name='formulario'),
- path('archivos/audios/<str:nombre_archivo>/', archivo, name='archivo_audio'),
+ path('archivos/audios/fono/<str:nombre_archivo>/', archivo_fono, name='archivo_audio'),
+ path('archivos/audios/persona/<str:nombre_archivo>/', archivo_persona, name='archivo_audio'),
+
  
  
  #ACCESO AUDIOS 
  path('admin/botApp/audio_fono/', admin_audios_fono, name="admin_audios_fono"),
+ path('admin/botApp/audio_persona/', admin_audios_persona, name="admin_audios_persona"),
 
  #API
  path('api_home/',api, name='api'),

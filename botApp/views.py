@@ -79,8 +79,19 @@ def formulario (request):
 
     return render (request,"formulario.html",data)
 
-def archivo(request, nombre_archivo):
-    ruta_archivo = 'archivos/audios/' + nombre_archivo 
+def archivo_fono(request, nombre_archivo):
+    ruta_archivo = 'archivos/audios/fono/' + nombre_archivo 
+
+    if os.path.exists(ruta_archivo):
+        with open(ruta_archivo, 'rb') as archivo:
+            response = HttpResponse(archivo.read(), content_type='audio/mpeg')
+            return response
+    else:
+
+        return HttpResponse("El archivo solicitado no existe", status=404)
+    
+def archivo_persona(request, nombre_archivo):
+    ruta_archivo = 'archivos/audios/persona/' + nombre_archivo 
 
     if os.path.exists(ruta_archivo):
         with open(ruta_archivo, 'rb') as archivo:

@@ -16,6 +16,7 @@
 #Directorios
 pycache/
 node_modules/
+archivos/
 
 #Entornos virtuales de Python
 .venv
