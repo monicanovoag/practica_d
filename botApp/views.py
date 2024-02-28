@@ -1,23 +1,22 @@
-from django.shortcuts import render, redirect
+from datetime import datetime
+import os
+
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
-from .forms import *
 from django.contrib.auth.models import User
-from datetime import datetime
-from django.shortcuts import render
-from django.http import HttpResponse
-import os
-from rest_framework.decorators import api_view
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import viewsets
-from .serializer import *
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.http import HttpResponseRedirect
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import viewsets
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
+from .forms import *
+from .serializer import *
 
 
 # Create your views here.
@@ -95,10 +94,9 @@ def archivo_persona(request, nombre_archivo):
 
     if os.path.exists(ruta_archivo):
         with open(ruta_archivo, 'rb') as archivo:
-            response = HttpResponse(archivo.read(), content_type='audio/mpeg')
+            response = HttpResponse(archivo.read(), content_type='audio/ogg')
             return response
     else:
-
         return HttpResponse("El archivo solicitado no existe", status=404)
     
 #API
