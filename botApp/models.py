@@ -56,7 +56,8 @@ class audio_persona(models.Model):
     comuna_residencia = models.CharField(max_length=30, verbose_name="comuna_residencia")
     genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)    
     sistema_salud = models.CharField(max_length=10)
-    audio_manychat = models.CharField(max_length=255)    
+    audio_manychat = models.CharField(max_length=255)
+    audio_fisico = models.FileField(upload_to='audios/fono/', blank=True, null=True)    
     fecha_registro_paciente = models.DateTimeField(default=timezone.now)
        
 class audio_fono(models.Model):
