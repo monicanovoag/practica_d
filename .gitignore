@@ -9,6 +9,8 @@
 *.pyd
 *.class
 
+settings.py
+
 #Archivos de respaldo
 *~
 *.backup

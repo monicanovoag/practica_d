@@ -40,9 +40,16 @@ class diagnosticoAdmin(admin.ModelAdmin):
 class tipousuarioAdmin(admin.ModelAdmin):
     list_display = ("id", "nombre_tipo_usuario")
 
+class otras_enfAdmin(admin.ModelAdmin):
+    list_display = ("id", "nombre_otras_enf")
+
 class audiofonoAdmin(admin.ModelAdmin):
     actions = [download_audios]
-    list_display = ("id","id_usuario","nombre_paciente","genero_usuario","ano_nac","otras_enfermedades","audio_fo1","audio_fo2","audio_fo3","audio_fo4","audio_fo5","fecha_registro")
+    list_display = ("id","id_usuario","nombre_paciente","genero_usuario","ano_nac","display_otras_enf","audio_fo1","audio_fo2","audio_fo3","audio_fo4","audio_fo5","fecha_registro")
+
+    def display_otras_enf(self, obj):
+        return ', '.join([otras.nombre_otras_enf for otras in obj.otras_enf.all()])
+    
 
 class audioPersonaAdmin(admin.ModelAdmin):
     list_display = ("id","wsp_usuario","ano_nac","comuna_residencia","genero_usuario","sistema_salud","audio_manychat","audio_fisico","fecha_registro_paciente")
@@ -57,6 +64,7 @@ admin.site.register(tipo_diagnostico_flgo,diagnosticoAdmin)
 admin.site.register(audio_fono,audiofonoAdmin)
 admin.site.register(audio_persona,audioPersonaAdmin)
 admin.site.register(tipo_usuario, tipousuarioAdmin)
+admin.site.register(OtrasEnf, otras_enfAdmin)
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 

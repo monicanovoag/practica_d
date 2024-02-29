@@ -3,21 +3,13 @@ from .models import *
 
 
 class audio_fonoForm(forms.ModelForm):
-    
-    ENFERMEDADES_CHOICES = [
-        ('Enf_parkinson', 'Enfermedad de Parkinson'),
-        ('Diabetes', 'Diabetes'),
-        ('Hipertensión', 'Hipertensión'),
-    ]
 
-    otras_enfermedades = forms.MultipleChoiceField(
-        choices=ENFERMEDADES_CHOICES,
-        widget=forms.CheckboxSelectMultiple,
-        required=False,
-    )
+    otras_enf = forms.ModelMultipleChoiceField(queryset=OtrasEnf.objects.all(), widget=forms.CheckboxSelectMultiple, required=False)
+
+    
     class Meta:
         model = audio_fono
-        fields = ['audio_fo1','audio_fo2','audio_fo3','audio_fo4','audio_fo5','ano_nac','genero_usuario','tipo_diagnostico_flgo','nombre_paciente','otras_enfermedades']
+        fields = ['audio_fo1','audio_fo2','audio_fo3','audio_fo4','audio_fo5','ano_nac','genero_usuario','tipo_diagnostico_flgo','nombre_paciente','otras_enf']
 
     def clean_genero_usuario(self):
         genero = self.cleaned_data['genero_usuario']

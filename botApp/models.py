@@ -32,6 +32,25 @@ class genero_usuario(models.Model):
     def __str__(self):
         return self.nombre_genero
     
+class OtrasEnf(models.Model):
+
+    ENF_PARKINSON = "Enfermedad de Parkinson"
+    DIABETES = "Diabetes"
+    HIPERTENSIÓN = "Hipertensión"
+    NINGUNA = "Ninguna"
+
+    OTRAS_ENF_CHOICES = [
+        (ENF_PARKINSON, "Enfermedad de Parkinson"),
+        (DIABETES, "Diabetes"),
+        (HIPERTENSIÓN, "Hipertensión"),
+        (NINGUNA, "Ninguna")
+    ]
+    
+    nombre_otras_enf = models.CharField(max_length=30, choices=OTRAS_ENF_CHOICES)
+
+    def __str__(self):
+        return self.nombre_otras_enf
+    
 class tipo_usuario(models.Model):
 
     USUARIO = "Usuario"
@@ -71,8 +90,9 @@ class audio_fono(models.Model):
     audio_fo5 = models.FileField(upload_to='audios/fono/', blank=True, null=True)
     ano_nac = models.CharField(max_length=10, verbose_name="Año Nacimiento")
     fecha_registro = models.DateTimeField(default=timezone.now)
-    otras_enfermedades = models.CharField(max_length=50)
 
     genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)
     tipo_diagnostico_flgo = models.ForeignKey(tipo_diagnostico_flgo, on_delete=models.CASCADE)
+    otras_enf = models.ManyToManyField(OtrasEnf)
+        
 
