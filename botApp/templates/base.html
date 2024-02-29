@@ -57,6 +57,9 @@
           <li class="current">
             <a href="{% url 'formulario' %}">Formulario</a>
           </li>
+          <li class="current">
+            <a href="{% url 'reporte' %}">Reportes</a>
+          </li>
           {% if user.is_staff %}
           <li class="current">
             <a href="{% url 'api' %}">API</a>

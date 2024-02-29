@@ -155,3 +155,10 @@ def handler404(request, exception):
 class audio_personaViewSet(viewsets.ModelViewSet):
     queryset = audio_persona.objects.all()
     serializer_class = audio_personaSerializer
+
+def reporte (request):
+
+    data = {
+        "fecha_actual" : datetime.now()       
+    }
+    return render (request,"reporte.html",data)
