@@ -58,7 +58,10 @@
             <a href="{% url 'formulario' %}">Formulario</a>
           </li>
           <li class="current">
-            <a href="{% url 'reporte' %}">Reportes</a>
+            <a href="{% url 'reporte_fono' %}">Reportes Audio Fono</a>
+          </li>
+          <li class="current">
+            <a href="{% url 'reporte_persona' %}">Reportes Audio Persona</a>
           </li>
           {% if user.is_staff %}
           <li class="current">

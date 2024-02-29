@@ -1,5 +1,6 @@
-from datetime import datetime
+import matplotlib.pyplot as plt
 import os
+from datetime import datetime
 
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
@@ -8,15 +9,17 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 from .forms import *
+from .models import *
 from .serializer import *
+
 
 
 # Create your views here.
@@ -156,9 +159,35 @@ class audio_personaViewSet(viewsets.ModelViewSet):
     queryset = audio_persona.objects.all()
     serializer_class = audio_personaSerializer
 
-def reporte (request):
+def reporte_fono (request):
 
     data = {
         "fecha_actual" : datetime.now()       
     }
-    return render (request,"reporte.html",data)
+    return render (request,"reportes/reporte_fono.html",data)
+
+def reporte_persona (request):
+
+    data = {
+        "fecha_actual" : datetime.now()       
+    }
+    return render (request,"reportes/reporte_persona.html",data)
+
+
+def grafico_torta(request):
+    # Obtener los datos de la tabla de Django
+    datos = genero_usuario.objects.all()
+
+    # Calcular los valores para el gráfico de torta
+    etiquetas = [dato.etiqueta for dato in datos]
+    valores = [dato.valor for dato in datos]
+
+    # Crear el gráfico de torta
+    plt.figure(figsize=(8, 8))
+    plt.pie(valores, labels=etiquetas, autopct='%1.1f%%')
+    plt.title('Gráfico de Torta')
+
+    plt.show()
+    
+    return render(request, 'reporte.html', {'graph_img': 'grafico_torta.png'})
+

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Reporte_fono{% endblock %}
+{% block subtitle %}Reportes Audios Fonoaudiólogos {{ nombre_usuario }} {% endblock %}
+
+{% block fecha %}
+<div class="info">
+    <span class="date">
+      <span class="month">{{ fecha_actual|date:"F" }} </span>
+      <span class="day">{{ fecha_actual|date:"d" }}</span>
+      <span class="year">{{ fecha_actual|date:"Y" }}</span>
+    </span>
+  </div>
+{% endblock %}
+
+{% block content %}
+
+<div id="grafico_torta"></div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    // Datos del gráfico de torta (esto debería ser pasado desde tu vista Django)
+    var etiquetas = ["Etiqueta 1", "Etiqueta 2", "Etiqueta 3"];
+    var valores = [50, 30, 20];
+
+    // Crear el gráfico de torta
+    var data = [{
+        values: valores,
+        labels: etiquetas,
+        type: 'pie'
+    }];
+
+    var layout = {
+        title: 'Gráfico de Torta'
+    };
+
+    Plotly.newPlot('grafico_torta', data, layout);
+</script>
+
+{% endblock %}

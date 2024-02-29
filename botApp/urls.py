@@ -12,7 +12,9 @@ urlpatterns = [
  path('login/', login, name='login'),
  path('perfil/', perfil, name='perfil'),
  path('formulario/', formulario, name='formulario'),
- path('reporte/', reporte, name='reporte'),
+ path('reporte_fono/', reporte_fono, name='reporte_fono'),
+ path('reporte_persona/', reporte_persona, name='reporte_persona'),
+
  path('archivos/audios/fono/<str:nombre_archivo>/', archivo_fono, name='archivo_audio'),
  path('archivos/audios/persona/<str:nombre_archivo>/', archivo_persona, name='archivo_audio'),
 
