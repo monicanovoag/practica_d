@@ -45,10 +45,12 @@ class otras_enfAdmin(admin.ModelAdmin):
 
 class audiofonoAdmin(admin.ModelAdmin):
     actions = [download_audios]
-    list_display = ("id","id_usuario","nombre_paciente","genero_usuario","ano_nac","display_otras_enf","audio_fo1","audio_fo2","audio_fo3","audio_fo4","audio_fo5","fecha_registro")
+    list_display = ("id","id_usuario","nombre_paciente","genero_usuario","ano_nac","tipo_diagnostico_flgo","otras_enfermedades","audio_fo1","audio_fo2","audio_fo3","audio_fo4","audio_fo5","fecha_registro")
 
-    def display_otras_enf(self, obj):
+    def otras_enfermedades(self, obj):
         return ', '.join([otras.nombre_otras_enf for otras in obj.otras_enf.all()])
+    otras_enfermedades.short_description = 'Otras Enfermedades'
+
     
 
 class audioPersonaAdmin(admin.ModelAdmin):
