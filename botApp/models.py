@@ -8,7 +8,7 @@ class tipo_diagnostico_flgo(models.Model):
 
 
     id = models.AutoField(primary_key=True, verbose_name="id_etiqueta") 
-    nombre_diagnostico = models.CharField(max_length=20)
+    nombre_diagnostico = models.CharField(max_length=100)
 
     def __str__(self):
         return self.nombre_diagnostico
@@ -17,7 +17,7 @@ class tipo_diagnostico_flgo(models.Model):
 class genero_usuario(models.Model):
     
     id = models.AutoField(primary_key=True, verbose_name="id_genero") 
-    nombre_genero = models.CharField(max_length=20)
+    nombre_genero = models.CharField(max_length=100)
 
 
     def __str__(self):
@@ -25,7 +25,7 @@ class genero_usuario(models.Model):
     
 class OtrasEnf(models.Model):
 
-    nombre_otras_enf = models.CharField(max_length=30)
+    nombre_otras_enf = models.CharField(max_length=100)
 
     def __str__(self):
         return self.nombre_otras_enf
