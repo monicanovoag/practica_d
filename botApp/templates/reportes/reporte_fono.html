@@ -14,27 +14,40 @@
 {% endblock %}
 
 {% block content %}
+<div class="chart-container" style="width: 50%; margin: 0 auto;">
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Género de Usuarios</h2> <!-- Título del gráfico con letras más pequeñas, centrado horizontalmente y separado del gráfico -->
+    <canvas id="generoChart" width="500" height="500"></canvas> <!-- Ajusta el ancho y alto aquí -->
+</div>
 
-<div id="grafico_torta"></div>
-
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Datos del gráfico de torta (esto debería ser pasado desde tu vista Django)
-    var etiquetas = ["Etiqueta 1", "Etiqueta 2", "Etiqueta 3"];
-    var valores = [50, 30, 20];
+    var ctx = document.getElementById('generoChart').getContext('2d');
+    var generoData = {{ genero_data|safe }};
+    var labels = Object.keys(generoData);
+    var data = Object.values(generoData);
 
-    // Crear el gráfico de torta
-    var data = [{
-        values: valores,
-        labels: etiquetas,
-        type: 'pie'
-    }];
-
-    var layout = {
-        title: 'Gráfico de Torta'
-    };
-
-    Plotly.newPlot('grafico_torta', data, layout);
+    var generoChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Género de Usuarios',
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false, // Desactiva la capacidad de respuesta
+            maintainAspectRatio: true, // Mantiene el aspecto
+        }
+    });
 </script>
-
 {% endblock %}

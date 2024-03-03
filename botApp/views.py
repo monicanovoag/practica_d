@@ -1,6 +1,6 @@
-import matplotlib.pyplot as plt
-import os
+from collections import Counter
 from datetime import datetime
+import os
 
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,9 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.db.models import Count
+
+import matplotlib.pyplot as plt
 
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.decorators import api_view
@@ -19,6 +22,7 @@ from rest_framework import viewsets
 from .forms import *
 from .models import *
 from .serializer import *
+
 
 
 
@@ -159,12 +163,19 @@ class audio_personaViewSet(viewsets.ModelViewSet):
     queryset = audio_persona.objects.all()
     serializer_class = audio_personaSerializer
 
-def reporte_fono (request):
+
+def reporte_fono(request):
+    # Obtener la cuenta de usuarios por género
+    genero_counts = audio_fono.objects.values('genero_usuario__nombre_genero').annotate(total=Count('id'))
+
+    # Convertir los resultados en un diccionario
+    genero_data = {item['genero_usuario__nombre_genero']: item['total'] for item in genero_counts}
 
     data = {
-        "fecha_actual" : datetime.now()       
+        "fecha_actual": datetime.now(),
+        "genero_data": genero_data
     }
-    return render (request,"reportes/reporte_fono.html",data)
+    return render(request, "reportes/reporte_fono.html", data)
 
 def reporte_persona (request):
 
