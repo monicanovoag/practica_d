@@ -164,17 +164,51 @@ class audio_personaViewSet(viewsets.ModelViewSet):
     serializer_class = audio_personaSerializer
 
 
+
+from django.shortcuts import render
+from .models import audio_fono
+from django.db.models import Count
+from datetime import datetime
+
 def reporte_fono(request):
+    # Inicializar data como un diccionario vacío
+    data = {}
+
     # Obtener la cuenta de usuarios por género
     genero_counts = audio_fono.objects.values('genero_usuario__nombre_genero').annotate(total=Count('id'))
 
     # Convertir los resultados en un diccionario
     genero_data = {item['genero_usuario__nombre_genero']: item['total'] for item in genero_counts}
 
-    data = {
-        "fecha_actual": datetime.now(),
-        "genero_data": genero_data
+    # Agregar genero_data al diccionario data
+    data["genero_data"] = genero_data
+
+    # Obtener los datos de los años de nacimiento
+    datos_audio_fono = audio_fono.objects.all()
+    anos_nacimiento = {}
+
+    # Procesar los datos para contar los años de nacimiento
+    for dato in datos_audio_fono:
+        ano = dato.ano_nac
+        if ano in anos_nacimiento:
+            anos_nacimiento[ano] += 1
+        else:
+            anos_nacimiento[ano] = 1
+
+    # Preparar los datos para el gráfico de línea
+    labels = list(anos_nacimiento.keys())
+    data_values = list(anos_nacimiento.values())
+
+    # Agregar ano_nacimiento_data al diccionario data
+    data["ano_nacimiento_data"] = {
+        "labels": labels,
+        "data": data_values
     }
+
+    # Agregar la fecha actual al diccionario data
+    data["fecha_actual"] = datetime.now()
+
+    # Renderizar el template con los datos
     return render(request, "reportes/reporte_fono.html", data)
 
 def reporte_persona (request):
@@ -183,22 +217,4 @@ def reporte_persona (request):
         "fecha_actual" : datetime.now()       
     }
     return render (request,"reportes/reporte_persona.html",data)
-
-
-def grafico_torta(request):
-    # Obtener los datos de la tabla de Django
-    datos = genero_usuario.objects.all()
-
-    # Calcular los valores para el gráfico de torta
-    etiquetas = [dato.etiqueta for dato in datos]
-    valores = [dato.valor for dato in datos]
-
-    # Crear el gráfico de torta
-    plt.figure(figsize=(8, 8))
-    plt.pie(valores, labels=etiquetas, autopct='%1.1f%%')
-    plt.title('Gráfico de Torta')
-
-    plt.show()
-    
-    return render(request, 'reporte.html', {'graph_img': 'grafico_torta.png'})
 

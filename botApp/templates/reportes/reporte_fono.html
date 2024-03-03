@@ -19,20 +19,26 @@
     <canvas id="generoChart" width="500" height="500"></canvas> <!-- Ajusta el ancho y alto aquí -->
 </div>
 
+<div class="chart-container" style="width: 50%; margin: 0 auto;margin-top: 80px;">
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Año de Nacimiento</h2> <!-- Título del gráfico con letras más pequeñas, centrado horizontalmente y separado del gráfico -->
+    <canvas id="anoNacimientoChart" width="500" height="300"></canvas> <!-- Ajusta el ancho y alto aquí -->
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    var ctx = document.getElementById('generoChart').getContext('2d');
+    // Gráfico de género de usuarios
+    var ctxGenero = document.getElementById('generoChart').getContext('2d');
     var generoData = {{ genero_data|safe }};
-    var labels = Object.keys(generoData);
-    var data = Object.values(generoData);
+    var generoLabels = Object.keys(generoData);
+    var generoDataArray = Object.values(generoData);
 
-    var generoChart = new Chart(ctx, {
+    var generoChart = new Chart(ctxGenero, {
         type: 'pie',
         data: {
-            labels: labels,
+            labels: generoLabels,
             datasets: [{
                 label: 'Género de Usuarios',
-                data: data,
+                data: generoDataArray,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
                     'rgba(54, 162, 235, 0.5)',
@@ -46,7 +52,36 @@
         },
         options: {
             responsive: false, // Desactiva la capacidad de respuesta
-            maintainAspectRatio: true, // Mantiene el aspecto
+            maintainAspectRatio: true // Mantiene el aspecto
+        }
+    });
+
+    // Gráfico de año de nacimiento
+
+    
+    var ctxAnoNacimiento = document.getElementById('anoNacimientoChart').getContext('2d');
+    var anoNacimientoData = {{ ano_nacimiento_data|safe }};
+    var anoNacimientoLabels = anoNacimientoData.labels;
+    var anoNacimientoDataArray = anoNacimientoData.data;
+
+    var anoNacimientoChart = new Chart(ctxAnoNacimiento, {
+        type: 'line',
+        data: {
+            labels: anoNacimientoLabels,
+            datasets: [{
+                label: 'Año de Nacimiento',
+                data: anoNacimientoDataArray,
+                fill: false, // No rellenar el área bajo la línea
+                borderColor: 'rgba(75, 192, 192, 1)', // Color de la línea
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color del área debajo de la línea
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Color de los marcadores
+                pointRadius: 5, // Tamaño de los marcadores
+                borderWidth: 2 // Ancho de la línea
+            }]
+        },
+        options: {
+            responsive: false, // Desactiva la capacidad de respuesta
+            maintainAspectRatio: true // Mantiene el aspecto
         }
     });
 </script>
