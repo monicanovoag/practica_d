@@ -165,10 +165,13 @@ class audio_personaViewSet(viewsets.ModelViewSet):
 
 
 
-from django.shortcuts import render
-from .models import audio_fono
-from django.db.models import Count
-from datetime import datetime
+def reporte_persona (request):
+
+    data = {
+        "fecha_actual" : datetime.now()       
+    }
+    return render (request,"reportes/reporte_persona.html",data)
+
 
 def reporte_fono(request):
     # Inicializar data como un diccionario vacío
@@ -205,16 +208,17 @@ def reporte_fono(request):
         "data": data_values
     }
 
+    # Obtener la cuenta de tipos de diagnóstico
+    tipo_diagnostico_counts = audio_fono.objects.values('tipo_diagnostico_flgo__nombre_diagnostico').annotate(total=Count('id'))
+
+    # Convertir los resultados en un diccionario
+    tipo_diagnostico_data = {item['tipo_diagnostico_flgo__nombre_diagnostico']: item['total'] for item in tipo_diagnostico_counts}
+
+    # Agregar tipo_diagnostico_data al diccionario data
+    data["tipo_diagnostico_data"] = tipo_diagnostico_data
+
     # Agregar la fecha actual al diccionario data
     data["fecha_actual"] = datetime.now()
 
     # Renderizar el template con los datos
     return render(request, "reportes/reporte_fono.html", data)
-
-def reporte_persona (request):
-
-    data = {
-        "fecha_actual" : datetime.now()       
-    }
-    return render (request,"reportes/reporte_persona.html",data)
-

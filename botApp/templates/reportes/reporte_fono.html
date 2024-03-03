@@ -15,13 +15,18 @@
 
 {% block content %}
 <div class="chart-container" style="width: 50%; margin: 0 auto;">
-    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Género de Usuarios</h2> <!-- Título del gráfico con letras más pequeñas, centrado horizontalmente y separado del gráfico -->
-    <canvas id="generoChart" width="500" height="500"></canvas> <!-- Ajusta el ancho y alto aquí -->
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Género de Usuarios</h2>
+    <canvas id="generoChart" width="500" height="500"></canvas>
 </div>
 
-<div class="chart-container" style="width: 50%; margin: 0 auto;margin-top: 80px;">
-    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Año de Nacimiento</h2> <!-- Título del gráfico con letras más pequeñas, centrado horizontalmente y separado del gráfico -->
-    <canvas id="anoNacimientoChart" width="500" height="300"></canvas> <!-- Ajusta el ancho y alto aquí -->
+<div class="chart-container" style="width: 50%; margin: 0 auto; margin-top: 50px;">
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Año de Nacimiento</h2>
+    <canvas id="anoNacimientoChart" width="500" height="300"></canvas>
+</div>
+
+<div class="chart-container" style="width: 50%; margin: 0 auto; margin-top: 50px;">
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Tipo de Diagnóstico</h2>
+    <canvas id="tipoDiagnosticoChart" width="500" height="500"></canvas>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -57,8 +62,6 @@
     });
 
     // Gráfico de año de nacimiento
-
-    
     var ctxAnoNacimiento = document.getElementById('anoNacimientoChart').getContext('2d');
     var anoNacimientoData = {{ ano_nacimiento_data|safe }};
     var anoNacimientoLabels = anoNacimientoData.labels;
@@ -71,17 +74,47 @@
             datasets: [{
                 label: 'Año de Nacimiento',
                 data: anoNacimientoDataArray,
-                fill: false, // No rellenar el área bajo la línea
-                borderColor: 'rgba(75, 192, 192, 1)', // Color de la línea
-                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color del área debajo de la línea
-                pointBackgroundColor: 'rgba(75, 192, 192, 1)', // Color de los marcadores
-                pointRadius: 5, // Tamaño de los marcadores
-                borderWidth: 2 // Ancho de la línea
+                fill: false,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                pointRadius: 5,
+                borderWidth: 2
             }]
         },
         options: {
-            responsive: false, // Desactiva la capacidad de respuesta
-            maintainAspectRatio: true // Mantiene el aspecto
+            responsive: false,
+            maintainAspectRatio: true
+        }
+    });
+
+    // Gráfico de tipo de diagnóstico
+    var ctxTipoDiagnostico = document.getElementById('tipoDiagnosticoChart').getContext('2d');
+    var tipoDiagnosticoData = {{ tipo_diagnostico_data|safe }};
+    var tipoDiagnosticoLabels = Object.keys(tipoDiagnosticoData);
+    var tipoDiagnosticoDataArray = Object.values(tipoDiagnosticoData);
+
+    var tipoDiagnosticoChart = new Chart(ctxTipoDiagnostico, {
+        type: 'pie',
+        data: {
+            labels: tipoDiagnosticoLabels,
+            datasets: [{
+                label: 'Tipo de Diagnóstico',
+                data: tipoDiagnosticoDataArray,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: true
         }
     });
 </script>
