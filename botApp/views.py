@@ -165,7 +165,7 @@ class audio_personaViewSet(viewsets.ModelViewSet):
     serializer_class = audio_personaSerializer
 
 
-
+@login_required
 def reporte_persona (request):
 
     data = {
@@ -173,7 +173,7 @@ def reporte_persona (request):
     }
     return render (request,"reportes/reporte_persona.html",data)
 
-
+@login_required
 def reporte_fono(request):
     # Inicializar data como un diccionario vacío
     data = {}
