@@ -118,4 +118,33 @@
         }
     });
 </script>
+
+{% for otra_enf, chart_data in otras_enf_data.items %}
+<div class="chart-container" style="width: 30%; margin: 0 auto; margin-top: 90px;">
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de {{ otra_enf }}</h2>
+    <canvas id="{{ otra_enf|slugify }}Chart" width="250" height="400"></canvas>
+</div>
+
+<script>
+    var ctx{{ otra_enf|slugify }} = document.getElementById('{{ otra_enf|slugify }}Chart').getContext('2d');
+    var {{ otra_enf|slugify }}Data = {{ chart_data|safe }};
+    
+    var {{ otra_enf|slugify }}Chart = new Chart(ctx{{ otra_enf|slugify }}, {
+        type: 'bar',
+        data: {
+            labels: {{ chart_data.labels|safe }},
+            datasets: [{
+                label: '{{ otra_enf }}',
+                data: {{ chart_data.data|safe }},
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: true
+        }
+    });
+</script>
+{% endfor %}
 {% endblock %}

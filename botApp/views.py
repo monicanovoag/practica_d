@@ -1,5 +1,6 @@
 from collections import Counter
 from datetime import datetime
+from collections import defaultdict
 import os
 
 from django.contrib import auth, messages
@@ -179,30 +180,20 @@ def reporte_fono(request):
 
     # Obtener la cuenta de usuarios por género
     genero_counts = audio_fono.objects.values('genero_usuario__nombre_genero').annotate(total=Count('id'))
-
-    # Convertir los resultados en un diccionario
     genero_data = {item['genero_usuario__nombre_genero']: item['total'] for item in genero_counts}
-
-    # Agregar genero_data al diccionario data
     data["genero_data"] = genero_data
 
     # Obtener los datos de los años de nacimiento
     datos_audio_fono = audio_fono.objects.all()
     anos_nacimiento = {}
-
-    # Procesar los datos para contar los años de nacimiento
     for dato in datos_audio_fono:
         ano = dato.ano_nac
         if ano in anos_nacimiento:
             anos_nacimiento[ano] += 1
         else:
             anos_nacimiento[ano] = 1
-
-    # Preparar los datos para el gráfico de línea
     labels = list(anos_nacimiento.keys())
     data_values = list(anos_nacimiento.values())
-
-    # Agregar ano_nacimiento_data al diccionario data
     data["ano_nacimiento_data"] = {
         "labels": labels,
         "data": data_values
@@ -210,12 +201,18 @@ def reporte_fono(request):
 
     # Obtener la cuenta de tipos de diagnóstico
     tipo_diagnostico_counts = audio_fono.objects.values('tipo_diagnostico_flgo__nombre_diagnostico').annotate(total=Count('id'))
-
-    # Convertir los resultados en un diccionario
     tipo_diagnostico_data = {item['tipo_diagnostico_flgo__nombre_diagnostico']: item['total'] for item in tipo_diagnostico_counts}
-
-    # Agregar tipo_diagnostico_data al diccionario data
     data["tipo_diagnostico_data"] = tipo_diagnostico_data
+
+    # Obtener los datos de cada otra_enf
+    otras_enf_data = {}
+    for otra_enf in OtrasEnf.objects.all():
+        count = otra_enf.audio_fono_set.count()
+        otras_enf_data[otra_enf.nombre_otras_enf] = {
+            "labels": [otra_enf.nombre_otras_enf],
+            "data": [count]
+        }
+    data["otras_enf_data"] = otras_enf_data
 
     # Agregar la fecha actual al diccionario data
     data["fecha_actual"] = datetime.now()
