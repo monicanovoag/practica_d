@@ -169,7 +169,6 @@ class audio_personaViewSet(viewsets.ModelViewSet):
 @login_required
 def reporte_persona(request):
 
-    # Inicializar data como un diccionario vacío
     data = {}
 
     # Obtener la cuenta de usuarios por género
@@ -194,10 +193,17 @@ def reporte_persona(request):
         "labels": labels,
         "data": data_values
     }
-    
 
+    # Obtener la cuenta de usuarios por género
+    genero_counts = audio_persona.objects.values('genero_usuario__nombre_genero').annotate(total=Count('id'))
+    genero_data = {item['genero_usuario__nombre_genero']: item['total'] for item in genero_counts}
 
-    # Consulta para agrupar por día y contar registros
+    # Obtener la cuenta de usuarios por sistema de salud
+    sistema_salud_counts = audio_persona.objects.values('sistema_salud__nombre_sistema').annotate(total=Count('id'))
+    sistema_salud_data = {item['sistema_salud__nombre_sistema']: item['total'] for item in sistema_salud_counts}
+    data["sistema_salud_data"] = sistema_salud_data
+
+   # Consulta para agrupar por día y contar registros
     registros_diarios = audio_persona.objects.annotate(
         dia_registro=TruncDate('fecha_registro_paciente')
     ).values('dia_registro').annotate(
@@ -213,10 +219,10 @@ def reporte_persona(request):
         "fechas": fechas,
         "cantidades": cantidades
     }
+ 
 
-    # Agregar la fecha actual al diccionario data
+
     data["fecha_actual"] = datetime.now()
-
 
     return render(request, "reportes/reporte_persona.html", data)
 
