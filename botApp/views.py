@@ -167,12 +167,62 @@ class audio_personaViewSet(viewsets.ModelViewSet):
 
 
 @login_required
-def reporte_persona (request):
+def reporte_persona(request):
 
-    data = {
-        "fecha_actual" : datetime.now()       
+    # Inicializar data como un diccionario vacío
+    data = {}
+
+    # Obtener la cuenta de usuarios por género
+    genero_counts = audio_persona.objects.values('genero_usuario__nombre_genero').annotate(total=Count('id'))
+    genero_data = {item['genero_usuario__nombre_genero']: item['total'] for item in genero_counts}
+
+    # Agregar los datos del género al diccionario data
+    data["genero_data"] = genero_data
+
+    # Obtener los datos de los años de nacimiento
+    datos_audio_fono = audio_persona.objects.all()
+    anos_nacimiento = {}
+    for dato in datos_audio_fono:
+        ano = dato.ano_nac
+        if ano in anos_nacimiento:
+            anos_nacimiento[ano] += 1
+        else:
+            anos_nacimiento[ano] = 1
+    labels = list(anos_nacimiento.keys())
+    data_values = list(anos_nacimiento.values())
+    data["ano_nacimiento_data"] = {
+        "labels": labels,
+        "data": data_values
     }
-    return render (request,"reportes/reporte_persona.html",data)
+
+    # Obtener la cuenta de usuarios por sistema de salud
+    sistema_salud_counts = audio_persona.objects.values('sistema_salud__nombre_sistema').annotate(total=Count('id'))
+    sistema_salud_data = {item['sistema_salud__nombre_sistema']: item['total'] for item in sistema_salud_counts}
+
+    data["sistema_salud_data"] = sistema_salud_data
+
+    # Consulta para agrupar por día y contar registros
+    registros_diarios = audio_persona.objects.annotate(
+        dia_registro=TruncDate('fecha_registro_paciente')
+    ).values('dia_registro').annotate(
+        total=Count('id')
+    ).order_by('dia_registro')
+
+    # Convertir datos a formato adecuado para el gráfico
+    fechas = [registro['dia_registro'].strftime('%Y-%m-%d') for registro in registros_diarios]
+    cantidades = [registro['total'] for registro in registros_diarios]
+
+    # Pasar los datos al template
+    data["registros_diarios"] = {
+        "fechas": fechas,
+        "cantidades": cantidades
+    }
+
+    # Agregar la fecha actual al diccionario data
+    data["fecha_actual"] = datetime.now()
+
+
+    return render(request, "reportes/reporte_persona.html", data)
 
 @login_required
 
@@ -236,5 +286,4 @@ def reporte_fono(request):
     # Agregar la fecha actual al diccionario data
     data["fecha_actual"] = datetime.now()
 
-    # Renderizar el template con los datos
     return render(request, "reportes/reporte_fono.html", data)

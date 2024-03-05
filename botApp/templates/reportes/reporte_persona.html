@@ -14,27 +14,143 @@
 {% endblock %}
 
 {% block content %}
+<div class="chart-container" style="width: 50%; margin: 0 auto;">
+  <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Género de Usuarios</h2>
+  <canvas id="generoChart" width="500" height="500"></canvas>
+</div>
 
-<div id="grafico_torta"></div>
+<div class="chart-container" style="width: 50%; margin: 0 auto; margin-top: 90px;">
+  <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Año de Nacimiento de Usuarios</h2>
+  <canvas id="anoNacimientoChart" width="500" height="300"></canvas>
+</div>
 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<div class="chart-container" style="width: 50%; margin: 0 auto;">
+  <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Sistema de Salud de Usuarios</h2>
+  <canvas id="sistemaSaludChart" width="500" height="500"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Datos del gráfico de torta (esto debería ser pasado desde tu vista Django)
-    var etiquetas = ["Etiqueta 1", "Etiqueta 2", "Etiqueta 3"];
-    var valores = [50, 30, 20];
+    // Gráfico de género de usuarios
+    var ctxGenero = document.getElementById('generoChart').getContext('2d');
+    var generoData = {{ genero_data|safe }};
+    var generoLabels = Object.keys(generoData);
+    var generoDataArray = Object.values(generoData);
 
-    // Crear el gráfico de torta
-    var data = [{
-        values: valores,
-        labels: etiquetas,
-        type: 'pie'
-    }];
+    var generoChart = new Chart(ctxGenero, {
+        type: 'pie',
+        data: {
+            labels: generoLabels,
+            datasets: [{
+                label: 'Género de Usuarios',
+                data: generoDataArray,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false, // Desactiva la capacidad de respuesta
+            maintainAspectRatio: true // Mantiene el aspecto
+        }
+    });
 
-    var layout = {
-        title: 'Gráfico de Torta'
-    };
+    // Gráfico de año de nacimiento
+    var ctxAnoNacimiento = document.getElementById('anoNacimientoChart').getContext('2d');
+    var anoNacimientoData = {{ ano_nacimiento_data|safe }};
+    var anoNacimientoLabels = anoNacimientoData.labels;
+    var anoNacimientoDataArray = anoNacimientoData.data;
 
-    Plotly.newPlot('grafico_torta', data, layout);
+    var anoNacimientoChart = new Chart(ctxAnoNacimiento, {
+        type: 'bar',
+        data: {
+            labels: anoNacimientoLabels,
+            datasets: [{
+                label: 'Año de Nacimiento',
+                data: anoNacimientoDataArray,
+                fill: false,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                pointRadius: 5,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: true
+        }
+    });
+
+      // Gráfico de sistema de salud de usuarios
+      var ctxSistemaSalud = document.getElementById('sistemaSaludChart').getContext('2d');
+      var sistemaSaludData = {{ sistema_salud_data|safe }};
+      var sistemaSaludLabels = Object.keys(sistemaSaludData);
+      var sistemaSaludDataArray = Object.values(sistemaSaludData);
+  
+      var sistemaSaludChart = new Chart(ctxSistemaSalud, {
+          type: 'bar',
+          data: {
+              labels: sistemaSaludLabels,
+              datasets: [{
+                  label: 'Sistema de Salud de Usuarios',
+                  data: sistemaSaludDataArray,
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.5)',
+                      'rgba(54, 162, 235, 0.5)',
+                      'rgba(255, 206, 86, 0.5)',
+                      'rgba(75, 192, 192, 0.5)',
+                      'rgba(153, 102, 255, 0.5)',
+                      'rgba(255, 159, 64, 0.5)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              responsive: false, // Desactiva la capacidad de respuesta
+              maintainAspectRatio: true // Mantiene el aspecto
+          }
+      });
+
 </script>
+
+<div class="chart-container" style="width: 50%; margin: 0 auto; margin-top: 90px;">
+  <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Registros Diarios</h2>
+  <canvas id="registrosDiariosChart" width="500" height="300"></canvas>
+</div>
+
+<script>
+  // Gráfico de registros diarios
+  var ctxRegistrosDiarios = document.getElementById('registrosDiariosChart').getContext('2d');
+  var registrosDiariosData = {{ registros_diarios|safe }};
+  var fechas = registrosDiariosData.fechas;
+  var cantidades = registrosDiariosData.cantidades;
+
+  var registrosDiariosChart = new Chart(ctxRegistrosDiarios, {
+      type: 'bar',
+      data: {
+          labels: fechas,
+          datasets: [{
+              label: 'Registros Diarios',
+              data: cantidades,
+              borderColor: 'rgba(75, 192, 192, 1)',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+          responsive: false,
+          maintainAspectRatio: true
+      }
+  });
+</script>
+
 
 {% endblock %}
