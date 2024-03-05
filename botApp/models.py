@@ -55,6 +55,15 @@ class sistema_salud(models.Model):
 
     def __str__(self):
         return self.nombre_sistema
+    
+class comuna_usuario(models.Model):
+    
+    id = models.AutoField(primary_key=True, verbose_name="id_comuna") 
+    nombre_comuna = models.CharField(max_length=100)
+
+
+    def __str__(self):
+        return self.nombre_comuna
 
 class audio_persona(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio")
