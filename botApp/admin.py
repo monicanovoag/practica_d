@@ -59,7 +59,7 @@ class audiofonoAdmin(admin.ModelAdmin):
 
 
 class audioPersonaAdmin(admin.ModelAdmin):
-    list_display = ("id","wsp_usuario","ano_nac","genero_usuario","audio_manychat","audio_fisico","fecha_registro_paciente")
+    list_display = ("id","wsp_usuario","ano_nac","genero_usuario","comuna_usuario","audio_manychat","audio_fisico","fecha_registro_paciente")
 
 class CustomUserAdmin(BaseUserAdmin):
     list_display = ('id','username', 'email', 'first_name', 'last_name', 'is_staff')

@@ -76,6 +76,8 @@ class audio_persona(models.Model):
 
     genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)  
     sistema_salud = models.ForeignKey(sistema_salud, on_delete=models.CASCADE)  
+    comuna_usuario = models.ForeignKey(comuna_usuario, on_delete=models.CASCADE)  
+
        
 class audio_fono(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio") 
