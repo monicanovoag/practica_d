@@ -47,16 +47,24 @@ class tipo_usuario(models.Model):
     def __str__(self):
         return self.nombre_tipo_usuario
     
+class sistema_salud(models.Model):
+    id = models.AutoField(primary_key=True, verbose_name="id_sistema") 
+    nombre_sistema = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre_sistema
+    
 class audio_persona(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio")
     wsp_usuario = models.CharField(max_length = 30) 
     ano_nac = models.CharField(max_length=10, verbose_name="año_nacimiento")
     comuna_residencia = models.CharField(max_length=30, verbose_name="comuna_residencia")
-    genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)    
-    sistema_salud = models.CharField(max_length=10)
     audio_manychat = models.CharField(max_length=255)
     audio_fisico = models.FileField(upload_to='audios/fono/', blank=True, null=True)    
     fecha_registro_paciente = models.DateTimeField(default=timezone.now)
+
+    genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)  
+    sistema_salud = models.ForeignKey(sistema_salud, on_delete=models.CASCADE)
        
 class audio_fono(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio") 

@@ -194,7 +194,7 @@ def reporte_persona(request):
         "labels": labels,
         "data": data_values
     }
-
+    
     # Obtener la cuenta de usuarios por sistema de salud
     sistema_salud_counts = audio_persona.objects.values('sistema_salud__nombre_sistema').annotate(total=Count('id'))
     sistema_salud_data = {item['sistema_salud__nombre_sistema']: item['total'] for item in sistema_salud_counts}
