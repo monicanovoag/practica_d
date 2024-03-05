@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Reporte fono{% endblock %}
+{% block title %}Reporte Fono{% endblock %}
 {% block subtitle %}Reportes Audios Fonoaudiólogos {{ nombre_usuario }} {% endblock %}
 
-{% block fecha %}
+{% block fecha %}   
 <div class="info">
     <span class="date">
       <span class="month">{{ fecha_actual|date:"F" }} </span>
@@ -136,7 +136,9 @@
             datasets: [{
                 label: '{{ otra_enf }}',
                 data: {{ chart_data.data|safe }},
+                borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
             }]
         },
@@ -147,4 +149,38 @@
     });
 </script>
 {% endfor %}
+
+<div class="chart-container" style="width: 50%; margin: 0 auto; margin-top: 90px;">
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Registros Diarios</h2>
+    <canvas id="registrosDiariosChart" width="500" height="300"></canvas>
+</div>
+
+<script>
+    // Gráfico de registros diarios
+    var ctxRegistrosDiarios = document.getElementById('registrosDiariosChart').getContext('2d');
+    var registrosDiariosData = {{ registros_diarios|safe }};
+    var fechas = registrosDiariosData.fechas;
+    var cantidades = registrosDiariosData.cantidades;
+
+    var registrosDiariosChart = new Chart(ctxRegistrosDiarios, {
+        type: 'bar',
+        data: {
+            labels: fechas,
+            datasets: [{
+                label: 'Registros Diarios',
+                data: cantidades,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: true
+        }
+    });
+</script>
+
+
 {% endblock %}

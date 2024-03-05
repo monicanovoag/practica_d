@@ -10,6 +10,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Count
+from django.db.models.functions import TruncDate
 
 import matplotlib.pyplot as plt
 
@@ -174,6 +175,7 @@ def reporte_persona (request):
     return render (request,"reportes/reporte_persona.html",data)
 
 @login_required
+
 def reporte_fono(request):
     # Inicializar data como un diccionario vacío
     data = {}
@@ -213,6 +215,23 @@ def reporte_fono(request):
             "data": [count]
         }
     data["otras_enf_data"] = otras_enf_data
+
+    # Consulta para agrupar por día y contar registros
+    registros_diarios = audio_fono.objects.annotate(
+        dia_registro=TruncDate('fecha_registro')
+    ).values('dia_registro').annotate(
+        total=Count('id')
+    ).order_by('dia_registro')
+
+    # Convertir datos a formato adecuado para el gráfico
+    fechas = [registro['dia_registro'].strftime('%Y-%m-%d') for registro in registros_diarios]
+    cantidades = [registro['total'] for registro in registros_diarios]
+
+    # Pasar los datos al template
+    data["registros_diarios"] = {
+        "fechas": fechas,
+        "cantidades": cantidades
+    }
 
     # Agregar la fecha actual al diccionario data
     data["fecha_actual"] = datetime.now()
