@@ -147,4 +147,37 @@
     });
 </script>
 {% endfor %}
+
+<div class="chart-container" style="width: 50%; margin: 0 auto; margin-top: 90px;">
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Registros Diarios</h2>
+    <canvas id="registrosDiariosChart" width="250" height="400"></canvas>
+</div>
+
+<script>
+    // Gráfico de registros diarios
+    var ctxRegistrosDiarios = document.getElementById('registrosDiariosChart').getContext('2d');
+    var registrosDiariosData = {{ registros_diarios|safe }};
+    var fechas = registrosDiariosData.fechas;
+    var cantidades = registrosDiariosData.cantidades;
+
+    var registrosDiariosChart = new Chart(ctxRegistrosDiarios, {
+        type: 'bar',
+        data: {
+            labels: fechas,
+            datasets: [{
+                label: 'Registros Diarios',
+                data: cantidades,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: true
+        }
+    });
+</script>
+
 {% endblock %}
