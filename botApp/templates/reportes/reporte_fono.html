@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}Reporte fono{% endblock %}
+{% block subtitle %}Reportes Audios Fonoaudiólogos {{ nombre_usuario }} {% endblock %}
+
+{% block fecha %}
+<div class="info">
+    <span class="date">
+      <span class="month">{{ fecha_actual|date:"F" }} </span>
+      <span class="day">{{ fecha_actual|date:"d" }}</span>
+      <span class="year">{{ fecha_actual|date:"Y" }}</span>
+    </span>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="chart-container" style="width: 50%; margin: 0 auto;">
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Género de Usuarios</h2>
+    <canvas id="generoChart" width="500" height="500"></canvas>
+</div>
+
+<div class="chart-container" style="width: 50%; margin: 0 auto; margin-top: 90px;">
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Año de Nacimiento</h2>
+    <canvas id="anoNacimientoChart" width="500" height="300"></canvas>
+</div>
+
+<div class="chart-container" style="width: 50%; margin: 0 auto; margin-top: 90px;">
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Tipo de Diagnóstico Fonoaudiológico</h2>
+    <canvas id="tipoDiagnosticoChart" width="500" height="500"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Gráfico de género de usuarios
+    var ctxGenero = document.getElementById('generoChart').getContext('2d');
+    var generoData = {{ genero_data|safe }};
+    var generoLabels = Object.keys(generoData);
+    var generoDataArray = Object.values(generoData);
+
+    var generoChart = new Chart(ctxGenero, {
+        type: 'pie',
+        data: {
+            labels: generoLabels,
+            datasets: [{
+                label: 'Género de Usuarios',
+                data: generoDataArray,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false, // Desactiva la capacidad de respuesta
+            maintainAspectRatio: true // Mantiene el aspecto
+        }
+    });
+
+    // Gráfico de año de nacimiento
+    var ctxAnoNacimiento = document.getElementById('anoNacimientoChart').getContext('2d');
+    var anoNacimientoData = {{ ano_nacimiento_data|safe }};
+    var anoNacimientoLabels = anoNacimientoData.labels;
+    var anoNacimientoDataArray = anoNacimientoData.data;
+
+    var anoNacimientoChart = new Chart(ctxAnoNacimiento, {
+        type: 'bar',
+        data: {
+            labels: anoNacimientoLabels,
+            datasets: [{
+                label: 'Año de Nacimiento',
+                data: anoNacimientoDataArray,
+                fill: false,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                pointRadius: 5,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: true
+        }
+    });
+
+    // Gráfico de tipo de diagnóstico
+    var ctxTipoDiagnostico = document.getElementById('tipoDiagnosticoChart').getContext('2d');
+    var tipoDiagnosticoData = {{ tipo_diagnostico_data|safe }};
+    var tipoDiagnosticoLabels = Object.keys(tipoDiagnosticoData);
+    var tipoDiagnosticoDataArray = Object.values(tipoDiagnosticoData);
+
+    var tipoDiagnosticoChart = new Chart(ctxTipoDiagnostico, {
+        type: 'pie',
+        data: {
+            labels: tipoDiagnosticoLabels,
+            datasets: [{
+                label: 'Tipo de Diagnóstico',
+                data: tipoDiagnosticoDataArray,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: true
+        }
+    });
+</script>
+
+{% for otra_enf, chart_data in otras_enf_data.items %}
+<div class="chart-container" style="width: 30%; margin: 0 auto; margin-top: 90px;">
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de {{ otra_enf }}</h2>
+    <canvas id="{{ otra_enf|slugify }}Chart" width="250" height="400"></canvas>
+</div>
+
+<script>
+    var ctx{{ otra_enf|slugify }} = document.getElementById('{{ otra_enf|slugify }}Chart').getContext('2d');
+    var {{ otra_enf|slugify }}Data = {{ chart_data|safe }};
+    
+    var {{ otra_enf|slugify }}Chart = new Chart(ctx{{ otra_enf|slugify }}, {
+        type: 'bar',
+        data: {
+            labels: {{ chart_data.labels|safe }},
+            datasets: [{
+                label: '{{ otra_enf }}',
+                data: {{ chart_data.data|safe }},
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: true
+        }
+    });
+</script>
+{% endfor %}
+{% endblock %}

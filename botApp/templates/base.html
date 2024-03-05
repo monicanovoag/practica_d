@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7/dist/sweetalert2.all.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="is-preload">
+    <!-- Content -->
+    <div id="content">
+      <div class="inner">
+        <article class="box post post-excerpt">
+          <header>
+            <h2>{% block subtitle %}{% endblock %}</h2>
+          </header>
+          {% block fecha %}
+         
+          {% endblock %}
+          {% if messages %} {% for message in messages %}
+          <script>
+            Swal.fire({
+              icon: "{{ message.tags }}",
+              title: "{{ message }}",
+              showConfirmButton: false,
+              timer: 2500,
+            });
+          </script>
+          {% endfor %} {% endif %} {% block content %}{% endblock %}
+        </article>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <!-- Logo -->
+      <h1 id="logo"><a href="{% url 'home' %}">Cuido Mi Voz</a></h1>
+
+      <!-- Nav -->
+      <nav id="nav">
+        <ul>
+          {% if user.is_authenticated %}
+          <li class="current"><a href="{% url 'perfil' %}">Inicio</a></li>
+          <li class="current">
+            <a href="{% url 'formulario' %}">Formulario</a>
+          </li>
+          <li class="current">
+            <a href="{% url 'reporte_fono' %}">Reportes Audio Fono</a>
+          </li>
+          <li class="current">
+            <a href="{% url 'reporte_persona' %}">Reportes Audio Persona</a>
+          </li>
+          {% if user.is_staff %}
+          <li class="current">
+            <a href="{% url 'api' %}">API</a>
+          </li>
+          {% endif %}
+          <form method="post" class="form" action="{% url 'logout' %}">
+          
+            {% csrf_token %}
+            <button type="submit">Cerrar Sesión</button>
+          </form>
+
+          {% else %}
+          <li class="current"><a href="{% url 'login' %}">Login</a></li>
+
+          {% endif %}
+        </ul>
+      </nav>
+
+      <!-- Copyright -->
+      <ul id="copyright">
+        <li>&copy; Untitled.</li>
+      </ul>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/browser.min.js' %}"></script>
+    <script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/util.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+  </body>
+</html>
+
+<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+
+<style>
+  .form {
+    margin-top: 15px;
+  }
+</style>
