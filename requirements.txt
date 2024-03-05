@@ -1,6 +1,0 @@
-mysqlclient==2.2.1
-djangorestframework 
-djangorestframework-simplejwt
-python-dotenv
-requests
-matplotlib  
