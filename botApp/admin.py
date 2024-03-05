@@ -44,7 +44,7 @@ class otras_enfAdmin(admin.ModelAdmin):
     list_display = ("id", "nombre_otras_enf")
 
 class sistema_saludAdmin(admin.ModelAdmin):
-    list_display = ("id", "nombre_otras_enf")
+    list_display = ("id", "nombre_sistema")
 
 class audiofonoAdmin(admin.ModelAdmin):
     actions = [download_audios]
