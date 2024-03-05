@@ -51,11 +51,9 @@ class audiofonoAdmin(admin.ModelAdmin):
         return ', '.join([otras.nombre_otras_enf for otras in obj.otras_enf.all()])
     otras_enfermedades.short_description = 'Otras Enfermedades'
 
-class sistema_saludAdmin(admin.ModelAdmin):
-    list_display = ("id","nombre_sistema")   
 
 class audioPersonaAdmin(admin.ModelAdmin):
-    list_display = ("id","wsp_usuario","ano_nac","comuna_residencia","genero_usuario","sistema_salud","audio_manychat","audio_fisico","fecha_registro_paciente")
+    list_display = ("id","wsp_usuario","ano_nac","comuna_residencia","genero_usuario","audio_manychat","audio_fisico","fecha_registro_paciente")
 
 class CustomUserAdmin(BaseUserAdmin):
     list_display = ('id','username', 'email', 'first_name', 'last_name', 'is_staff')
@@ -68,7 +66,6 @@ admin.site.register(audio_fono,audiofonoAdmin)
 admin.site.register(audio_persona,audioPersonaAdmin)
 admin.site.register(tipo_usuario, tipousuarioAdmin)
 admin.site.register(OtrasEnf, otras_enfAdmin)
-admin.site.register(sistema_salud, sistema_saludAdmin)
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 
