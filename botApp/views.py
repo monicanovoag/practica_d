@@ -286,9 +286,12 @@ def descargar_xls(request):
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('audio_fono')
 
+    # Obtener todas las enfermedades únicas presentes en la tabla audio_fono
+    enfermedades_unicas = OtrasEnf.objects.values_list('nombre_otras_enf', flat=True).distinct()
+
     # Escribir encabezados de columnas
     row_num = 0
-    columns = ['ID', 'ID Usuario', 'Nombre Paciente', 'Género', 'Año de Nacimiento', 'Diagnóstico Fono', 'Otras Enfermedades', 'Audio FO1', 'Audio FO2', 'Audio FO3', 'Audio FO4', 'Audio FO5', 'Fecha de Registro']
+    columns = ['ID', 'ID Usuario', 'Nombre Paciente', 'Género', 'Año de Nacimiento', 'Diagnóstico Fono'] + list(enfermedades_unicas) + ['Audio FO1', 'Audio FO2', 'Audio FO3', 'Audio FO4', 'Audio FO5', 'Fecha de Registro']
     for col_num, column_title in enumerate(columns):
         ws.write(row_num, col_num, column_title)
 
@@ -302,18 +305,27 @@ def descargar_xls(request):
         ws.write(row_num, 3, audio.genero_usuario.nombre_genero if audio.genero_usuario else '')  # Acceder al campo de género si existe
         ws.write(row_num, 4, audio.ano_nac)
         ws.write(row_num, 5, audio.tipo_diagnostico_flgo.nombre_diagnostico if audio.tipo_diagnostico_flgo else '')  # Acceder al campo de diagnóstico si existe
-        ws.write(row_num, 6, ', '.join([enf.nombre_otras_enf for enf in audio.otras_enf.all()]))  # Concatenar nombres de otras enfermedades separados por comas
-        ws.write(row_num, 7, audio.audio_fo1.name if audio.audio_fo1 else '')  # Acceder al campo de audio FO1 si existe
-        ws.write(row_num, 8, audio.audio_fo2.name if audio.audio_fo2 else '')  # Acceder al campo de audio FO2 si existe
-        ws.write(row_num, 9, audio.audio_fo3.name if audio.audio_fo3 else '')  # Acceder al campo de audio FO3 si existe
-        ws.write(row_num, 10, audio.audio_fo4.name if audio.audio_fo4 else '')  # Acceder al campo de audio FO4 si existe
-        ws.write(row_num, 11, audio.audio_fo5.name if audio.audio_fo5 else '')  # Acceder al campo de audio FO5 si existe
-        ws.write(row_num, 12, audio.fecha_registro.strftime('%Y-%m-%d %H:%M:%S'))  # Formatear la fecha como string
+
+        # Marcar "Sí" o "No" para cada enfermedad única presente en esta fila
+        for col_num, enfermedad in enumerate(enfermedades_unicas, start=6):
+            if enfermedad in [enf.nombre_otras_enf for enf in audio.otras_enf.all()]:
+                ws.write(row_num, col_num, "Sí")
+            else:
+                ws.write(row_num, col_num, "No")
+
+        ws.write(row_num, 6 + len(enfermedades_unicas), audio.audio_fo1.name if audio.audio_fo1 else '')  # Acceder al campo de audio FO1 si existe
+        ws.write(row_num, 7 + len(enfermedades_unicas), audio.audio_fo2.name if audio.audio_fo2 else '')  # Acceder al campo de audio FO2 si existe
+        ws.write(row_num, 8 + len(enfermedades_unicas), audio.audio_fo3.name if audio.audio_fo3 else '')  # Acceder al campo de audio FO3 si existe
+        ws.write(row_num, 9 + len(enfermedades_unicas), audio.audio_fo4.name if audio.audio_fo4 else '')  # Acceder al campo de audio FO4 si existe
+        ws.write(row_num, 10 + len(enfermedades_unicas), audio.audio_fo5.name if audio.audio_fo5 else '')  # Acceder al campo de audio FO5 si existe
+        ws.write(row_num, 11 + len(enfermedades_unicas), audio.fecha_registro.strftime('%Y-%m-%d %H:%M:%S'))  # Formatear la fecha como string
 
     wb.save(response)
     return response
 
-import xlwt
+
+
+
 
 def descargar_xls_persona(request):
     response = HttpResponse(content_type='application/ms-excel')
