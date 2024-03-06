@@ -186,15 +186,27 @@ def reporte_persona(request):
         "data": data_values
     }
 
+    # Obtener la cuenta de usuarios por comuna
+    comuna_counts = audio_persona.objects.values('comuna_usuario').annotate(total=Count('id'))
+    comuna_data = {item['comuna_usuario']: item['total'] for item in comuna_counts}
+    data["comuna_data"] = comuna_data
+
+    # Preparar datos para el gráfico de barras
+    labels = list(comuna_data.keys())
+    data_values = list(comuna_data.values())
+
+    # Renderizar el gráfico en formato JSON para pasarlo a la plantilla HTML
+    data["bar_chart_data"] = {
+        "labels": labels,
+        "data": data_values
+    }
+
+
     # Obtener la cuenta de usuarios por sistema de salud
     sistema_salud_counts = audio_persona.objects.values('sistema_salud__nombre_sistema').annotate(total=Count('id'))
     sistema_salud_data = {item['sistema_salud__nombre_sistema']: item['total'] for item in sistema_salud_counts}
     data["sistema_salud_data"] = sistema_salud_data
 
-    # Obtener la cuenta de usuarios por comuna de residencia
-    comuna_counts = audio_persona.objects.values('comuna_residencia').annotate(total=Count('id'))
-    comuna_data = {item['comuna_residencia']: item['total'] for item in comuna_counts}
-    data["comuna_data"] = comuna_data
 
     # Consulta para agrupar por día y contar registros
     registros_diarios = audio_persona.objects.annotate(

@@ -134,32 +134,31 @@
          }
      });
 
-     // Gráfico de comunas
+     // Gráfico de comuna de usuarios
+    var ctxComuna = document.getElementById('comunaChart').getContext('2d');
     var comunaData = {{ comuna_data|safe }};
-    var labels = Object.keys(comunaData);
-    var data = Object.values(comunaData);
+    var comunaLabels = Object.keys(comunaData);
+    var comunaDataArray = Object.values(comunaData);
 
-    var ctx = document.getElementById('comunaChart').getContext('2d');
-    var myChart = new Chart(ctx, {
+    var comunaChart = new Chart(ctxComuna, {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: comunaLabels,
             datasets: [{
                 label: 'Usuarios por Comuna',
-                data: data,
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                data: comunaDataArray,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                pointBackgroundColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
             }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-   });
+    },
+    options: {
+        responsive: false, // Desactiva la capacidad de respuesta
+        maintainAspectRatio: true // Mantiene el aspecto
+    }
+});
+
 
    // Gráfico de registros diarios
     var ctxRegistrosDiarios = document.getElementById('registrosDiariosChart').getContext('2d');

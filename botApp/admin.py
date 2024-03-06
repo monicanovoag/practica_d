@@ -46,8 +46,6 @@ class otras_enfAdmin(admin.ModelAdmin):
 class sistema_saludAdmin(admin.ModelAdmin):
     list_display = ("id", "nombre_sistema")
 
-class comuna_usuarioAdmin(admin.ModelAdmin):
-    list_display = ("id", "nombre_comuna")
 
 class audiofonoAdmin(admin.ModelAdmin):
     actions = [download_audios]
@@ -71,7 +69,6 @@ admin.site.register(tipo_diagnostico_flgo,diagnosticoAdmin)
 admin.site.register(audio_fono,audiofonoAdmin)
 admin.site.register(audio_persona,audioPersonaAdmin)
 admin.site.register(tipo_usuario, tipousuarioAdmin)
-admin.site.register(comuna_usuario, comuna_usuarioAdmin)
 admin.site.register(OtrasEnf, otras_enfAdmin)
 admin.site.register(sistema_salud, sistema_saludAdmin)
 admin.site.unregister(User)
