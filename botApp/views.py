@@ -2,6 +2,7 @@ from collections import Counter
 from datetime import datetime
 from collections import defaultdict
 import os
+import xlwt
 
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
@@ -276,3 +277,41 @@ def reporte_fono(request):
     data["fecha_actual"] = datetime.now()
 
     return render(request, "reportes/reporte_fono.html", data)
+
+
+def descargar_xls(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="audio_fono.xls"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('audio_fono')
+
+    # Escribir encabezados de columnas
+    row_num = 0
+    columns = ['ID', 'ID Usuario', 'Nombre Paciente', 'Género', 'Año de Nacimiento', 'Diagnóstico Fono', 'Otras Enfermedades', 'Audio FO1', 'Audio FO2', 'Audio FO3', 'Audio FO4', 'Audio FO5', 'Fecha de Registro']
+    for col_num, column_title in enumerate(columns):
+        ws.write(row_num, col_num, column_title)
+
+    # Escribir datos de la tabla audio_fono
+    audio_fonos = audio_fono.objects.all()
+    for audio in audio_fonos:
+        row_num += 1
+        ws.write(row_num, 0, audio.id)
+        ws.write(row_num, 1, audio.id_usuario)
+        ws.write(row_num, 2, audio.nombre_paciente)
+        ws.write(row_num, 3, audio.genero_usuario.nombre_genero if audio.genero_usuario else '')  # Acceder al campo de género si existe
+        ws.write(row_num, 4, audio.ano_nac)
+        ws.write(row_num, 5, audio.tipo_diagnostico_flgo.nombre_diagnostico if audio.tipo_diagnostico_flgo else '')  # Acceder al campo de diagnóstico si existe
+        ws.write(row_num, 6, ', '.join([enf.nombre_otras_enf for enf in audio.otras_enf.all()]))  # Concatenar nombres de otras enfermedades separados por comas
+        ws.write(row_num, 7, audio.audio_fo1.name if audio.audio_fo1 else '')  # Acceder al campo de audio FO1 si existe
+        ws.write(row_num, 8, audio.audio_fo2.name if audio.audio_fo2 else '')  # Acceder al campo de audio FO2 si existe
+        ws.write(row_num, 9, audio.audio_fo3.name if audio.audio_fo3 else '')  # Acceder al campo de audio FO3 si existe
+        ws.write(row_num, 10, audio.audio_fo4.name if audio.audio_fo4 else '')  # Acceder al campo de audio FO4 si existe
+        ws.write(row_num, 11, audio.audio_fo5.name if audio.audio_fo5 else '')  # Acceder al campo de audio FO5 si existe
+        ws.write(row_num, 12, audio.fecha_registro.strftime('%Y-%m-%d %H:%M:%S'))  # Formatear la fecha como string
+
+    wb.save(response)
+    return response
+
+
+
