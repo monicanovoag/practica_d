@@ -313,5 +313,35 @@ def descargar_xls(request):
     wb.save(response)
     return response
 
+import xlwt
+
+def descargar_xls_persona(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="audio_persona.xls"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('audio_persona')
+
+    # Escribir encabezados de columnas
+    row_num = 0
+    columns = ['ID', 'WSP Usuario', 'Año de Nacimiento', 'Comuna de Residencia','Genero','Sistema de Salud','Audio Manychat','Audio Físico','Fecha Registro']
+    for col_num, column_title in enumerate(columns):
+        ws.write(row_num, col_num, column_title)
+
+    # Escribir datos de la tabla audio_persona
+    audio_personas = audio_persona.objects.all()
+    for audio in audio_personas:
+        row_num += 1
+        ws.write(row_num, 0, audio.id)
+        ws.write(row_num, 1, audio.wsp_usuario)
+        ws.write(row_num, 2, audio.ano_nac)
+        ws.write(row_num, 3, audio.comuna_residencia)
+        ws.write(row_num, 4, audio.genero_usuario.nombre_genero if audio.genero_usuario else '')  
+        ws.write(row_num, 5, audio.sistema_salud.nombre_sistema if audio.sistema_salud else '')  
+        ws.write(row_num, 6, audio.audio_manychat)
+        ws.write(row_num, 7, audio.audio_fisico.name if audio.audio_fisico else '') 
+        ws.write(row_num, 8, audio.fecha_registro_paciente.strftime('%Y-%m-%d %H:%M:%S'))  
+    wb.save(response)
+    return response
 
 
