@@ -364,7 +364,7 @@ def descargar_xls_persona(request):
         ws.write(row_num, 4, audio.genero_usuario.nombre_genero if audio.genero_usuario else '')  
         ws.write(row_num, 5, audio.sistema_salud.nombre_sistema if audio.sistema_salud else '')  
         ws.write(row_num, 6, audio.audio_manychat)
-        ws.write(row_num, 7, audio.audio_fisico.name if audio.audio_fisico else '') 
+        ws.write(row_num, 7, audio.audio_fisico if audio.audio_fisico else '')
         ws.write(row_num, 8, audio.fecha_registro_paciente.strftime('%Y-%m-%d %H:%M:%S'))  
     wb.save(response)
     return response
