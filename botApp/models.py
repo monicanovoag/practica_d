@@ -69,6 +69,14 @@ class audio_persona(models.Model):
     genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)  
     sistema_salud = models.ForeignKey(sistema_salud, on_delete=models.CASCADE)  
 
+    # Otros campos del modelo
+    audio_fisico = models.URLField(blank=True, null=True, verbose_name="Enlace de descarga de ManyChat")
+
+    def save(self, *args, **kwargs):
+        if self.audio_manychat and not self.audio_fisico:
+            self.audio_fisico = self.audio_manychat
+        super().save(*args, **kwargs)
+
        
 class audio_fono(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio") 
@@ -86,4 +94,5 @@ class audio_fono(models.Model):
     tipo_diagnostico_flgo = models.ForeignKey(tipo_diagnostico_flgo, on_delete=models.CASCADE)
     otras_enf = models.ManyToManyField(OtrasEnf)
         
+
 
