@@ -62,21 +62,19 @@ class audio_persona(models.Model):
     wsp_usuario = models.CharField(max_length = 30) 
     ano_nac = models.CharField(max_length=10, verbose_name="año_nacimiento")
     comuna_usuario = models.CharField(max_length=30, verbose_name="comuna")
-    audio_manychat = models.CharField(max_length=255)
-    audio_fisico = models.FileField(upload_to='audios/fono/', blank=True, null=True)       
+    audio_manychat = models.CharField(max_length=255)     
     fecha_registro_paciente = models.DateTimeField(default=timezone.now)
 
     genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)  
     sistema_salud = models.ForeignKey(sistema_salud, on_delete=models.CASCADE)  
 
     # Otros campos del modelo
-    audio_fisico = models.URLField(blank=True, null=True, verbose_name="Enlace de descarga de ManyChat")
+    audio_fisico = models.URLField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if self.audio_manychat and not self.audio_fisico:
             self.audio_fisico = self.audio_manychat
         super().save(*args, **kwargs)
-
        
 class audio_fono(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio") 

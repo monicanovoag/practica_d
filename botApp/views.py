@@ -374,12 +374,9 @@ def descargar_audio_fisico(request, id_audio_persona):
     # Obtener la instancia de audio_persona
     audio = get_object_or_404(audio_persona, pk=id_audio_persona)
 
-    # Verificar si hay un archivo físico asociado
+    # Verificar si hay un enlace de audio físico disponible
     if audio.audio_fisico:
-        # Construir la URL de descarga del archivo físico
-        audio_url = request.build_absolute_uri(audio.audio_fisico.url)
-        
-        # Devolver una respuesta de redirección al archivo físico
-        return HttpResponse(f'<a href="{audio_url}" download>Descargar audio físico</a>')
+        # Devolver una respuesta de redirección al enlace de audio físico para descargar
+        return HttpResponse(f'<a href="{audio.audio_fisico}" download>Descargar audio físico</a>')
     else:
-        return HttpResponse("El archivo físico no está disponible para descargar.")
+        return HttpResponse("El enlace de audio físico no está disponible para descargar.")
