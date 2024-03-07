@@ -376,7 +376,7 @@ def descargar_audio_fisico(request, id_audio_persona):
 
     # Verificar si hay un enlace de audio físico disponible
     if audio.audio_fisico:
-        # Devolver una respuesta de redirección al enlace de audio físico para descargar
-        return HttpResponse(f'<a href="{audio.audio_fisico}" download>Descargar audio físico</a>')
+        # Redirigir al usuario al enlace de audio físico para descargar
+        return redirect(audio.audio_fisico)
     else:
         return HttpResponse("El enlace de audio físico no está disponible para descargar.")
