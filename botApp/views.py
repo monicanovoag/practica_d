@@ -360,7 +360,7 @@ def descargar_xls_persona(request):
         ws.write(row_num, 0, audio.id)
         ws.write(row_num, 1, audio.wsp_usuario)
         ws.write(row_num, 2, audio.ano_nac)
-        ws.write(row_num, 3, audio.comuna_residencia)
+        ws.write(row_num, 3, audio.comuna_usuario)
         ws.write(row_num, 4, audio.genero_usuario.nombre_genero if audio.genero_usuario else '')  
         ws.write(row_num, 5, audio.sistema_salud.nombre_sistema if audio.sistema_salud else '')  
         ws.write(row_num, 6, audio.audio_manychat)
