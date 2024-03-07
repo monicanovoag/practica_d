@@ -60,13 +60,13 @@ class audiofonoAdmin(admin.ModelAdmin):
 class audioPersonaAdmin(admin.ModelAdmin):
     list_display = ("id","wsp_usuario","ano_nac","genero_usuario","sistema_salud","comuna_usuario","audio_manychat","audio_fisico","fecha_registro_paciente")
     
-    def audio_manychat_link(self, obj):
-        if obj.audio_manychat:
-            return format_html('<a href="{}" download>Descargar</a>', obj.audio_manychat)
+    def descargar_audio_fisico(self, obj):
+        if obj.audio_fisico:
+            return format_html('<a href="{}" download>Descargar</a>', obj.audio_fisico)
         else:
             return "No disponible"
 
-    audio_manychat_link.short_description = "Audio ManyChat"
+    descargar_audio_fisico.short_description = "Descargar Audio ManyChat"
 
 
 class CustomUserAdmin(BaseUserAdmin):
