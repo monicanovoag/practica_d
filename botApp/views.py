@@ -4,11 +4,13 @@ from collections import defaultdict
 import os
 import xlwt
 
+
+from django.conf import settings
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.db.models import Count
 from django.db.models.functions import TruncDate
@@ -25,7 +27,6 @@ from rest_framework import viewsets
 from .forms import *
 from .models import *
 from .serializer import *
-
 
 
 
@@ -368,4 +369,18 @@ def descargar_xls_persona(request):
     wb.save(response)
     return response
 
+
+def descargar_audio_fisico(request, id_audio_persona):
+    # Obtener la instancia de audio_persona
+    audio = get_object_or_404(audio_persona, pk=id_audio_persona)
+
+    # Verificar si hay un archivo físico asociado
+    if audio.audio_fisico:
+        # Construir la URL de descarga del archivo físico
+        audio_url = request.build_absolute_uri(audio.audio_fisico.url)
+        
+        # Devolver una respuesta de redirección al archivo físico
+        return HttpResponse(f'<a href="{audio_url}" download>Descargar audio físico</a>')
+    else:
+        return HttpResponse("El archivo físico no está disponible para descargar.")
 

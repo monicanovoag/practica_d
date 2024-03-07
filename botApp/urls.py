@@ -3,6 +3,7 @@ from .views import *
 from rest_framework import routers
 from .import views
 
+
 handler_404 = views.handler404
 router = routers.DefaultRouter()
 router.register(r'audio_persona', views.audio_personaViewSet)
@@ -25,6 +26,8 @@ urlpatterns = [
  #ACCESO AUDIOS 
  path('admin/botApp/audio_fono/', admin_audios_fono, name="admin_audios_fono"),
  path('admin/botApp/audio_persona/', admin_audios_persona, name="admin_audios_persona"),
+ path('descargar_audio_fisico/<int:id_audio_persona>/', descargar_audio_fisico, name='descargar_audio_fisico'),
+
 
  #API
  path('api_home/',api, name='api'),
