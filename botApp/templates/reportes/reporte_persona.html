@@ -21,10 +21,18 @@
 </form>
 
 <div class="chart-container" style="width: 30%; margin: 0 auto;">
-  <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Género de Usuarios</h2>
-  <canvas id="generoChart" width="250" height="400"></canvas>
-</div>
-
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Género de Usuarios</h2>
+    <canvas id="generoChart" width="250" height="400"></canvas>
+  
+    <div id="generoData" style="width: 50%; margin: 0 auto; margin-top: 5px;">
+        <ul>
+            {% for label, value in genero_data.items %}
+                <li>{{ label }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+  </div>
+  
 <div class="chart-container" style="width: 30%; margin: 0 auto; margin-top: 90px;">
     <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Año de Nacimiento de Usuarios</h2>
     <canvas id="anoNacimientoChart" width="250" height="400"></canvas>
@@ -33,7 +41,18 @@
 <div class="chart-container" style="width: 50%; margin: 0 auto; margin-top: 90px;">
     <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Sistema de Salud de Usuarios</h2>
     <canvas id="sistemaSaludChart" width="500" height="300"></canvas>
+
+    <div id="sistemaSaludData" style="width: 20%; margin: 0 auto; margin-top: 50px;">
+        
+        <ul>
+            {% for label, value in sistema_salud_data.items %}
+                <li>{{ label }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
 </div>
+
 
 <div class="chart-container" style="width: 30%; margin: 0 auto; margin-top: 90px;">
     <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Comunas de Usuarios</h2>
