@@ -16,12 +16,32 @@
 {% endblock %}
 {% block content %}
 
+<div class="button-container" style="margin-left: -40px;">
 
-<a class="button" href="{% url "api_audio_fonos" %}">Audio Fonos</a>
-<span style="margin-right: 30px;"></span> 
-<a class="button" href="{% url "api_audio_personas" %}">Audio Persona</a>
-<span style="margin-right: 30px;"></span> 
-<a class="button" href="{% url "admin_audios_fono" %}">Tabla Django Flgo</a>
+  <a class="button" href="{% url "api_audio_fonos" %}">Audio Fonos</a>
+    <span style="margin-right: 30px;"></span> 
+  <a class="button" href="{% url "api_audio_personas" %}">Audio Persona</a>
+    <span style="margin-right: 30px;"></span> 
+  <a class="button" href="{% url "admin_audios_fono" %}">Tabla Django Flgo</a>
+
+</div>
+
+<style>
+  .button-container {
+      display: flex;
+      margin-bottom: 20px;
+      justify-content: center;
+      align-items: center;
+  }
+  .button-container button {
+      margin-right: 20px;
+  }
+
+  .button-container button:last-child {
+      margin-right: 0;
+      margin-left: 20px;
+  }
+</style>
 
 
 
