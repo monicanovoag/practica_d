@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}Reporte fono{% endblock %}
-{% block subtitle %}Reportes Audios Fonoaudiólogos {{ nombre_usuario }} {% endblock %}
+{% block subtitle %}Reportes Audios Fonoaudiólogos {% endblock %}
 
 {% block fecha %}
 <div class="info">
@@ -15,16 +15,42 @@
 
 {% block content %}
 
-<form id="download-form" action="{% url 'descargar_xls' %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary">Descargar Tabla</button>
-</form>
+<div class="button-container" style="margin-left: -40px;">
+    <form id="download-form" action="{% url 'descargar_xls' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Descargar Tabla</button>
+    </form>
+
+    <button id="descargarPDF">Descargar Reporte</button>
+</div>
+<style>
+    .button-container {
+        display: flex;
+        margin-bottom: 20px;
+        justify-content: center;
+        align-items: center;
+    }
+    .button-container button {
+        margin-right: 20px;
+    }
+
+    .button-container button:last-child {
+        margin-right: 0;
+        margin-left: 20px;
+    }
+</style>
+
+<script>
+    document.getElementById('descargarPDF').addEventListener('click', function() {
+        window.print();
+    });
+</script>
 
 <div class="chart-container" style="width: 30%; margin: 0 auto;">
-    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Género de Usuarios</h2>
+    <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px; margin-top: 50px;">Gráfico de Género de Usuarios</h2>
     <canvas id="generoChart" width="250" height="400"></canvas>
   
-    <div id="generoData" style="width: 50%; margin: 0 auto; margin-top: 5px;">
+    <div id="generoData" style="width: 50%; margin: 0 auto; margin-top: 5px;">  
         <ul>
             {% for label, value in genero_data.items %}
                 <li>{{ label }}: {{ value }}</li>
