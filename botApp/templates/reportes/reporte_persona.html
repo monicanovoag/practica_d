@@ -50,12 +50,10 @@ document.getElementById('descargarPDF').addEventListener('click', function() {
     <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px; margin-top: 50px;">Gráfico de Género de Usuarios</h2>
     <canvas id="generoChart" width="250" height="400"></canvas>
   
-    <div id="generoData" style="width: 50%; margin: 0 auto; margin-top: 5px;">
-        <ul>
-            {% for label, value in genero_data.items %}
-                <li>{{ label }}: {{ value }}</li>
-            {% endfor %}
-        </ul>
+    <div id="generoData" style="width: 75%; margin: 0 auto; margin-top: 5px; display:block;">  
+        {% for label, value in genero_data.items %}
+            {{ label }}: {{ value }}<br>
+        {% endfor %}
     </div>
   </div>
 
@@ -68,13 +66,10 @@ document.getElementById('descargarPDF').addEventListener('click', function() {
     <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Sistema de Salud de Usuarios</h2>
     <canvas id="sistemaSaludChart" width="250" height="400"></canvas>
 
-    <div id="sistemaSaludData" style="width: 45%; margin: 0 auto; margin-top: 5px;">
-        
-        <ul>
-            {% for label, value in sistema_salud_data.items %}
-                <li>{{ label }}: {{ value }}</li>
-            {% endfor %}
-        </ul>
+    <div id="sistemaSaludData" style="width: 75%; margin: 0 auto; margin-top: 5px; display:block;">  
+        {% for label, value in sistema_salud_data.items %}
+            {{ label }}: {{ value }}<br>
+        {% endfor %}
     </div>
     
 </div>

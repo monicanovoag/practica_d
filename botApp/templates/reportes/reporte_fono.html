@@ -50,12 +50,10 @@
     <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px; margin-top: 50px;">Gráfico de Género de Usuarios</h2>
     <canvas id="generoChart" width="250" height="400"></canvas>
   
-    <div id="generoData" style="width: 50%; margin: 0 auto; margin-top: 5px;">  
-        <ul>
-            {% for label, value in genero_data.items %}
-                <li>{{ label }}: {{ value }}</li>
-            {% endfor %}
-        </ul>
+    <div id="generoData" style="width: 75%; margin: 0 auto; margin-top: 5px; display:block;">  
+        {% for label, value in genero_data.items %}
+            {{ label }}: {{ value }}<br>
+        {% endfor %}
     </div>
   </div>
 
@@ -68,12 +66,10 @@
     <h2 style="font-size: 20px; text-align: center; margin-bottom: 20px;">Gráfico de Tipo de Diagnóstico Fonoaudiológico</h2>
     <canvas id="tipoDiagnosticoChart" width="250" height="400"></canvas>
 
-    <div id="tipo_diagnostico_data" style="width: 50%; margin: 0 auto; margin-top: 5px;">
-        <ul>
-            {% for label, value in tipo_diagnostico_data.items %}
-                <li>{{ label }}: {{ value }}</li>
-            {% endfor %}
-        </ul>
+    <div id="tipo_diagnostico_data" style="width: 75%; margin: 0 auto; margin-top: 5px; display:block;">  
+        {% for label, value in tipo_diagnostico_data.items %}
+            {{ label }}: {{ value }}<br>
+        {% endfor %}
     </div>
 
 </div>
