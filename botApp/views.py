@@ -87,7 +87,7 @@ def formulario (request):
         else:
             messages.error(request,"Error, registro no realizado. Por favor verifica la información ingresada")
 
-    return render (request,"formulario.html",data)
+    return render (request,"formularios/formulario.html",data)
 
 def archivo_fono(request, nombre_archivo):
     ruta_archivo = 'archivos/audios/fono/' + nombre_archivo 
