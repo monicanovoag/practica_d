@@ -89,6 +89,14 @@ def formulario (request):
 
     return render (request,"formularios/formulario.html",data)
 
+@login_required
+def formulario_comunicativo (request):
+
+    data = {
+        "fecha_actual" : datetime.now()       
+    }
+    return render (request,"formularios/formulario_comunicativo.html",data)
+
 def archivo_fono(request, nombre_archivo):
     ruta_archivo = 'archivos/audios/fono/' + nombre_archivo 
 

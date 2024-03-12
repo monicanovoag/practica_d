@@ -17,10 +17,11 @@ urlpatterns = [
  path('reporte_persona/', reporte_persona, name='reporte_persona'),
  path('descargar-xls/', descargar_xls, name='descargar_xls'),
  path('descargar-xls-persona/', descargar_xls_persona, name='descargar_xls_persona'),
+ path('formulario_comunicativo/', formulario_comunicativo, name='formulario_comunicativo'),
 
  path('archivos/audios/fono/<str:nombre_archivo>/', archivo_fono, name='archivo_audio'),
  path('archivos/audios/persona/<str:nombre_archivo>/', archivo_persona, name='archivo_audio'),
-
+ 
  
  
  #ACCESO AUDIOS 
