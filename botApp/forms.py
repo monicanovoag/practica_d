@@ -45,5 +45,6 @@ class formulario_comunicacion(forms.ModelForm):
         model = formulario_com
         fields = "__all__"
         widgets = {
-            'tipo_relacion': forms.RadioSelect
+            'tipo_relacion': forms.RadioSelect,
+            'complementos': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
         }
