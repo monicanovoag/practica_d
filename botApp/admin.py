@@ -72,6 +72,25 @@ class audioPersonaAdmin(admin.ModelAdmin):
 class CustomUserAdmin(BaseUserAdmin):
     list_display = ('id','username', 'email', 'first_name', 'last_name', 'is_staff')
 
+#FORMULARIO SOCIOCOMUNICATIVO 
+
+class relacionAdmin(admin.ModelAdmin):
+    list_display = ('id','tipo_relacion')
+
+class frecuenciaAdmin(admin.ModelAdmin):
+    list_display = ('id','tipo_frecuencia')
+
+class duracionAdmin(admin.ModelAdmin):
+    list_display = ('id','tipo_duracion')
+
+class funcionAdmin(admin.ModelAdmin):
+    list_display = ('id','tipo_funcion')
+    
+class satisfaccionAdmin(admin.ModelAdmin):
+    list_display = ('id','tipo_satisfaccion')
+
+class formConvAdmin(admin.ModelAdmin):
+    list_display = ('id','nombre','ano_nac','genero_usuario','tipo_relacion','frecuencia_conv','duracion_conv','funcion_conv','satisfaccion_conv','complementos')
 
 
 admin.site.register(genero_usuario,generoAdmin)
@@ -83,6 +102,14 @@ admin.site.register(OtrasEnf, otras_enfAdmin)
 admin.site.register(sistema_salud, sistema_saludAdmin)
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+
+admin.site.register(tipo_relacion,relacionAdmin)
+admin.site.register(frecuencia_conv,frecuenciaAdmin)
+admin.site.register(duracion_conv,duracionAdmin)
+admin.site.register(funcion_conv,funcionAdmin)
+admin.site.register(satisfaccion_conv,satisfaccionAdmin)
+admin.site.register(formulario_com,formConvAdmin)
+
 
 
 

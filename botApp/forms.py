@@ -38,3 +38,12 @@ class audio_fonoForm(forms.ModelForm):
         if not any(audio_files):
             raise forms.ValidationError('Debe subir al menos un archivo de audio.')
         return cleaned_data
+    
+class formulario_comunicacion(forms.ModelForm):
+
+    class Meta:
+        model = formulario_com
+        fields = "__all__"
+        widgets = {
+            'tipo_relacion': forms.RadioSelect
+        }

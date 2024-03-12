@@ -92,5 +92,125 @@ class audio_fono(models.Model):
     tipo_diagnostico_flgo = models.ForeignKey(tipo_diagnostico_flgo, on_delete=models.CASCADE)
     otras_enf = models.ManyToManyField(OtrasEnf)
         
+#CLASES PARA FORMULARIO SOCIOCOMUNICATIVO 
+    
+class tipo_relacion(models.Model):
 
+    CONYUGE = "Conyuge"
+    HIJO_A = "Hijo o Hija"
+    OTRO_FAMILIAR = "Otros familiares"
+    OTRA_PERSONA = "Otras personas"
+
+    RELACION_CHOICES = [
+        (CONYUGE, "Conyuge"),
+        (HIJO_A, "Hijo o Hija"),
+        (OTRO_FAMILIAR, "Otros familiares"),
+        (OTRA_PERSONA,"Otras personas"),]
+
+    id = models.AutoField(primary_key=True, verbose_name="id_relacion")
+    tipo_relacion = models.CharField(max_length=30, choices=RELACION_CHOICES)
+
+    def __str__(self):
+        return self.tipo_relacion
+    
+class frecuencia_conv(models.Model):
+
+    ESPORADICA = "Esporadica"
+    MENSUAL = "Mensual"
+    SEMANAL = "Semanal"
+    DIARIA = "Diaria"
+    VARIAS_VECES_DIA = "Varias veces al día"
+
+    FRECUENCIA_CHOICES = [
+        (ESPORADICA, "Esporadica"),
+        (MENSUAL, "Mensual"),
+        (SEMANAL, "Semanal"),
+        (DIARIA, "Diaria"),
+        (VARIAS_VECES_DIA, "Varias veces al día"),]
+
+    id = models.AutoField(primary_key=True, verbose_name="id_frecuencia")
+    tipo_frecuencia = models.CharField(max_length=20, choices=FRECUENCIA_CHOICES)
+
+    def __str__(self):
+        return self.tipo_frecuencia
+    
+class duracion_conv(models.Model):
+
+    MIN_0_15 = "0-15 min"
+    MIN_15_30 = "15-30 min"
+    MIN_30_60 = "30-60 min"
+    MIN_60_MAS = "Más de 60 min"
+
+
+    DURACION_CHOICES = [
+        (MIN_0_15, "0-15 min"),
+        (MIN_15_30, "15-30 min"),
+        (MIN_30_60, "30-60 min"),
+        (MIN_60_MAS, "Más de 60 min"),]
+
+    id = models.AutoField(primary_key=True, verbose_name="id_duracion")
+    tipo_duracion = models.CharField(max_length=20, choices=DURACION_CHOICES)  
+
+
+    def __str__(self):
+        return self.tipo_duracion
+
+class funcion_conv(models.Model):
+
+    SATISFACCION = "Satisfacción de las necesidades vitales"
+    EMOCIONES = "Emociones o propósito en la vida"
+    NOTICIAS = "Noticias o información mundial"
+    OTRO = "Otro"
+
+
+    FUNCION_CHOICES = [
+        (SATISFACCION, "Satisfacción de las necesidades vitales"),
+        (EMOCIONES, "Emociones o propósito en la vida"),
+        (NOTICIAS, "Noticias o información mundial"),
+        (OTRO, "Otro"),]
+
+    id = models.AutoField(primary_key=True, verbose_name="id_duracion")
+    tipo_funcion = models.CharField(max_length=100, choices=FUNCION_CHOICES)  
+
+    def __str__(self):
+        return self.tipo_funcion
+    
+class satisfaccion_conv(models.Model):
+
+    NADA = "Nada satisfecho"
+    POCO = "Poco satisfecho"
+    MEDIANAMENTE = "Medianamente satisfecho"
+    SATISFECHO = "Satisfecho"
+    MUY_SATISFECHO = "Muy satisfecho"
+
+
+    SATISFACCIONES_CHOICES = [
+        (NADA, "Nada satisfecho"),
+        (POCO, "Poco satisfecho"),
+        (MEDIANAMENTE, "Medianamente satisfecho"),
+        (SATISFECHO, "Satisfecho"),
+        (MUY_SATISFECHO, "Muy satisfecho"),]
+
+    id = models.AutoField(primary_key=True, verbose_name="id_duracion")
+    tipo_satisfaccion = models.CharField(max_length=100, choices=SATISFACCIONES_CHOICES)  
+
+    def __str__(self):
+        return self.tipo_satisfaccion
+    
+    
+class formulario_com(models.Model):
+    id = models.AutoField(primary_key=True, verbose_name="id_formulario") 
+    nombre = models.CharField(max_length=20)
+    ano_nac = models.CharField(max_length=10, verbose_name="año Nacimiento")
+    complementos = models.CharField(max_length=1000)
+
+    genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)
+    tipo_relacion = models.ForeignKey(tipo_relacion, on_delete=models.CASCADE)
+    frecuencia_conv = models.ForeignKey(frecuencia_conv, on_delete=models.CASCADE)
+    duracion_conv = models.ForeignKey(duracion_conv, on_delete=models.CASCADE)
+    funcion_conv = models.ForeignKey(funcion_conv, on_delete=models.CASCADE)
+    satisfaccion_conv = models.ForeignKey(satisfaccion_conv, on_delete=models.CASCADE)
+
+    
+        
 

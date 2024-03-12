@@ -15,4 +15,71 @@
 
 {% block content %}
 
+<form action="" method="POST">
+  {% csrf_token %}
+
+  <div class="form-group">
+    <label for="nombre">Nombre Paciente: </label>
+    {{ formComu.nombre }}
+  </div>
+
+  <div class="form-group">
+    <label for="ano_nac">Año Nacimiento Paciente: </label>
+    {{ formComu.ano_nac }}
+  </div>
+
+  <div class="form-group">
+    <label for="genero_usuario">Género Paciente: </label>
+    {{ formComu.genero_usuario }}
+  </div>
+
+  <div class="form-group">
+    <label for="tipo_relacion">¿Cuál es su relación con el paciente?: </label>
+    {{ formComu.tipo_relacion }}
+  </div>
+
+  <div class="form-group">
+    <label for="frecuencia_conv">¿Con qué frecuencia se comunica con el paciente?: </label>
+    {{ formComu.frecuencia_conv }}
+  </div>
+
+  <div class="form-group">
+    <label for="duracion_conv">¿Cuál es la duración de estas conversaciones?: </label>
+    {{ formComu.duracion_conv }}
+  </div>
+
+  <div class="form-group">
+    <label for="funcion_conv">¿De qué tratan las conversaciones?: </label>
+    {{ formComu.funcion_conv }}
+  </div>
+
+  <div class="form-group">
+    <label for="satisfaccion_conv">¿Cuál es su nivel de satisfacción con esta comunicación?: </label>
+    {{ formComu.satisfaccion_conv }}
+  </div>
+
+  <div class="form-group">
+    <label for="complementos">Otros aspectos cualitativos para complementar: </label>
+    {{ formComu.complementos }}
+  </div>
+
+  <button type="submit" class="button">Guardar</button>
+
+</form>
+
+<style>
+  .form-group {
+    margin-top: 15px; 
+  }
+
+  .button {
+    margin-top: 30px;
+  }
+
+  .text {
+    font-style: italic;
+  }
+
+</style>
+
 {% endblock %}
