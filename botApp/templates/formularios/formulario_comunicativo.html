@@ -36,31 +36,32 @@
   </div>
 
   <div class="respuestas">
-        
-      {% for relacion in relaciones %}
-    <h3>{{ relacion.tipo_relacion }}</h3>
 
-    <div class="form-group">
+    {% for relacion in relaciones %}
+    <br>
+    <h3 id="relacion">{{ relacion.tipo_relacion }}</h3>
+
+    <div class="form-group" id="respuesta">
         <label for="frecuencia_conv">¿Con qué frecuencia se comunica con el paciente?: </label>
         {{ formResp.frecuencia_conv }}
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="respuesta">
         <label for="duracion_conv">¿Cuál es la duración de estas conversaciones?: </label>
         {{ formResp.duracion_conv }}
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="respuesta">
         <label for="funcion_conv">¿De qué tratan las conversaciones?: </label>
         {{ formResp.funcion_conv }}
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="respuesta">
         <label for="satisfaccion_conv">¿Cuál es su nivel de satisfacción con esta comunicación?: </label>
         {{ formResp.satisfaccion_conv }}
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="respuesta">
         <label for="complementos">Otros aspectos cualitativos para complementar: </label>
         {{ formResp.complementos }}
     </div>
@@ -89,8 +90,11 @@
   .bajada{
     font-size: 25px;
   }
-  .respuestas {
+  #respuesta {
     margin-left: 25px;
+  }
+  #relacion {
+    font-size: 20px;
   }
 
 

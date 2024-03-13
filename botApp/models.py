@@ -209,11 +209,11 @@ class formulario_com(models.Model):
 class respuestas_form(models.Model):
 
     id = models.AutoField(primary_key=True, verbose_name="id_respuestas") 
-    complementos = models.CharField(max_length=1000)
+    complementos = models.CharField(max_length=1000,blank=True, null=True)
 
-    id_formulario = models.ForeignKey(formulario_com, on_delete=models.CASCADE)
-    tipo_relacion = models.ForeignKey(tipo_relacion, on_delete=models.CASCADE)
-    frecuencia_conv = models.ForeignKey(frecuencia_conv, on_delete=models.CASCADE)
-    duracion_conv = models.ForeignKey(duracion_conv, on_delete=models.CASCADE)
-    funcion_conv = models.ForeignKey(funcion_conv, on_delete=models.CASCADE)
-    satisfaccion_conv = models.ForeignKey(satisfaccion_conv, on_delete=models.CASCADE)
+    id_formulario = models.ForeignKey(formulario_com, on_delete=models.CASCADE,blank=True, null=True)
+    tipo_relacion = models.ForeignKey(tipo_relacion, on_delete=models.CASCADE,blank=True, null=True)
+    frecuencia_conv = models.ForeignKey(frecuencia_conv, on_delete=models.CASCADE,blank=True, null=True)
+    duracion_conv = models.ForeignKey(duracion_conv, on_delete=models.CASCADE,blank=True, null=True)
+    funcion_conv = models.ForeignKey(funcion_conv, on_delete=models.CASCADE,blank=True, null=True)
+    satisfaccion_conv = models.ForeignKey(satisfaccion_conv, on_delete=models.CASCADE,blank=True, null=True)
