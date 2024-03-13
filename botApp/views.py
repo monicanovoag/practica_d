@@ -94,7 +94,9 @@ def formulario_comunicativo (request):
 
     data = {
         "formComu": formulario_comunicacion,
-        "fecha_actual" : datetime.now()       
+        "formResp": respuestas_formulario,
+        "fecha_actual" : datetime.now(),
+        "relaciones": tipo_relacion.objects.all()       
     }
 
     if request.method == "POST":

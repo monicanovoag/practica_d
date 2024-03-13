@@ -44,7 +44,14 @@ class formulario_comunicacion(forms.ModelForm):
     class Meta:
         model = formulario_com
         fields = "__all__"
+
+
+class respuestas_formulario(forms.ModelForm):
+    
+    class Meta:
+        model = respuestas_form
+        fields = ['tipo_relacion','frecuencia_conv','duracion_conv','funcion_conv','satisfaccion_conv','complementos']
+
         widgets = {
-            'tipo_relacion': forms.RadioSelect,
             'complementos': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
         }

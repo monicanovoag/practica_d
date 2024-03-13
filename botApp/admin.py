@@ -89,6 +89,9 @@ class funcionAdmin(admin.ModelAdmin):
 class satisfaccionAdmin(admin.ModelAdmin):
     list_display = ('id','tipo_satisfaccion')
 
+class respuestasAdmin(admin.ModelAdmin):
+    list_display = ('id','id_formulario','tipo_relacion','frecuencia_conv','duracion_conv','funcion_conv','satisfaccion_conv','complementos')
+
 class formConvAdmin(admin.ModelAdmin):
     list_display = ('id','nombre','ano_nac','genero_usuario')
 
@@ -109,8 +112,7 @@ admin.site.register(duracion_conv,duracionAdmin)
 admin.site.register(funcion_conv,funcionAdmin)
 admin.site.register(satisfaccion_conv,satisfaccionAdmin)
 admin.site.register(formulario_com,formConvAdmin)
-
-
+admin.site.register(respuestas_form,respuestasAdmin)
 
 
 
