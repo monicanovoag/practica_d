@@ -202,15 +202,18 @@ class formulario_com(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_formulario") 
     nombre = models.CharField(max_length=20)
     ano_nac = models.CharField(max_length=10, verbose_name="año Nacimiento")
+    
+    genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)
+
+
+class respuestas_form(models.Model):
+
+    id = models.AutoField(primary_key=True, verbose_name="id_respuestas") 
     complementos = models.CharField(max_length=1000)
 
-    genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)
+    id_formulario = models.ForeignKey(formulario_com, on_delete=models.CASCADE)
     tipo_relacion = models.ForeignKey(tipo_relacion, on_delete=models.CASCADE)
     frecuencia_conv = models.ForeignKey(frecuencia_conv, on_delete=models.CASCADE)
     duracion_conv = models.ForeignKey(duracion_conv, on_delete=models.CASCADE)
     funcion_conv = models.ForeignKey(funcion_conv, on_delete=models.CASCADE)
     satisfaccion_conv = models.ForeignKey(satisfaccion_conv, on_delete=models.CASCADE)
-
-    
-        
-

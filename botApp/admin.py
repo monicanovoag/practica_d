@@ -90,7 +90,7 @@ class satisfaccionAdmin(admin.ModelAdmin):
     list_display = ('id','tipo_satisfaccion')
 
 class formConvAdmin(admin.ModelAdmin):
-    list_display = ('id','nombre','ano_nac','genero_usuario','tipo_relacion','frecuencia_conv','duracion_conv','funcion_conv','satisfaccion_conv','complementos')
+    list_display = ('id','nombre','ano_nac','genero_usuario')
 
 
 admin.site.register(genero_usuario,generoAdmin)
