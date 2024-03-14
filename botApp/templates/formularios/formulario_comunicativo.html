@@ -37,35 +37,138 @@
 
   <div class="respuestas">
 
-    {% for relacion in relaciones %}
+    <!--RELACIÓN 1-->
     <br>
-    <h3 id="relacion">{{ relacion.tipo_relacion }}</h3>
+    <h3 id="relacion">Relación 1</h3>
+    <div class="form-group" id="respuesta">
+      <label for="frecuencia_conv">¿Cuál es su relación con el paciente?: </label>
+      {{ formComu.tipo_relacion_1 }}
+    </div>
 
     <div class="form-group" id="respuesta">
         <label for="frecuencia_conv">¿Con qué frecuencia se comunica con el paciente?: </label>
-        {{ formResp.frecuencia_conv }}
+        {{ formComu.frecuencia_1 }}
     </div>
 
     <div class="form-group" id="respuesta">
         <label for="duracion_conv">¿Cuál es la duración de estas conversaciones?: </label>
-        {{ formResp.duracion_conv }}
+        {{ formComu.duracion_1 }}
     </div>
 
     <div class="form-group" id="respuesta">
         <label for="funcion_conv">¿De qué tratan las conversaciones?: </label>
-        {{ formResp.funcion_conv }}
+        {{ formComu.funcion_1 }}
     </div>
 
     <div class="form-group" id="respuesta">
         <label for="satisfaccion_conv">¿Cuál es su nivel de satisfacción con esta comunicación?: </label>
-        {{ formResp.satisfaccion_conv }}
+        {{ formComu.satisfaccion_1 }}
     </div>
 
     <div class="form-group" id="respuesta">
         <label for="complementos">Otros aspectos cualitativos para complementar: </label>
-        {{ formResp.complementos }}
+        {{ formComu.complemento_1 }}
     </div>
-    {% endfor %} 
+
+    <!--RELACIÓN 2-->
+    <br>
+    <h3 id="relacion">Relación 2</h3>
+    <div class="form-group" id="respuesta">
+      <label for="frecuencia_conv">¿Cuál es su relación con el paciente?: </label>
+      {{ formComu.tipo_relacion_2 }}
+    </div>
+
+    <div class="form-group" id="respuesta">
+        <label for="frecuencia_conv">¿Con qué frecuencia se comunica con el paciente?: </label>
+        {{ formComu.frecuencia_2 }}
+    </div>
+    
+    <div class="form-group" id="respuesta">
+        <label for="duracion_conv">¿Cuál es la duración de estas conversaciones?: </label>
+        {{ formComu.duracion_2 }}
+    </div>
+
+    <div class="form-group" id="respuesta">
+        <label for="funcion_conv">¿De qué tratan las conversaciones?: </label>
+        {{ formComu.funcion_2 }}
+    </div>
+
+    <div class="form-group" id="respuesta">
+        <label for="satisfaccion_conv">¿Cuál es su nivel de satisfacción con esta comunicación?: </label>
+        {{ formComu.satisfaccion_2 }}
+    </div>
+
+    <div class="form-group" id="respuesta">
+        <label for="complementos">Otros aspectos cualitativos para complementar: </label>
+        {{ formComu.complemento_2 }}
+    </div>
+
+    <!--RELACIÓN 3-->
+    <br>
+    <h3 id="relacion">Relación 3</h3>
+    <div class="form-group" id="respuesta">
+      <label for="frecuencia_conv">¿Cuál es su relación con el paciente?: </label>
+      {{ formComu.tipo_relacion_3 }}
+    </div>
+
+    <div class="form-group" id="respuesta">
+        <label for="frecuencia_conv">¿Con qué frecuencia se comunica con el paciente?: </label>
+        {{ formComu.frecuencia_3 }}
+    </div>
+    
+    <div class="form-group" id="respuesta">
+        <label for="duracion_conv">¿Cuál es la duración de estas conversaciones?: </label>
+        {{ formComu.duracion_3 }}
+    </div>
+
+    <div class="form-group" id="respuesta">
+        <label for="funcion_conv">¿De qué tratan las conversaciones?: </label>
+        {{ formComu.funcion_3 }}
+    </div>
+
+    <div class="form-group" id="respuesta">
+        <label for="satisfaccion_conv">¿Cuál es su nivel de satisfacción con esta comunicación?: </label>
+        {{ formComu.satisfaccion_3 }}
+    </div>
+
+    <div class="form-group" id="respuesta">
+        <label for="complementos">Otros aspectos cualitativos para complementar: </label>
+        {{ formComu.complemento_3 }}
+    </div>
+
+    <!--RELACIÓN 4-->
+    <br>
+    <h3 id="relacion">Relación 4</h3>
+    <div class="form-group" id="respuesta">
+      <label for="frecuencia_conv">¿Cuál es su relación con el paciente?: </label>
+      {{ formComu.tipo_relacion_4 }}
+    </div>
+
+    <div class="form-group" id="respuesta">
+        <label for="frecuencia_conv">¿Con qué frecuencia se comunica con el paciente?: </label>
+        {{ formComu.frecuencia_4 }}
+    </div>
+    
+    <div class="form-group" id="respuesta">
+        <label for="duracion_conv">¿Cuál es la duración de estas conversaciones?: </label>
+        {{ formComu.duracion_4 }}
+    </div>
+
+    <div class="form-group" id="respuesta">
+        <label for="funcion_conv">¿De qué tratan las conversaciones?: </label>
+        {{ formComu.funcion_4 }}
+    </div>
+
+    <div class="form-group" id="respuesta">
+        <label for="satisfaccion_conv">¿Cuál es su nivel de satisfacción con esta comunicación?: </label>
+        {{ formComu.satisfaccion_4 }}
+    </div>
+
+    <div class="form-group" id="respuesta">
+        <label for="complementos">Otros aspectos cualitativos para complementar: </label>
+        {{ formComu.complemento_4 }}
+    </div>
+  
   </div>
 
   <button type="submit" class="button">Guardar</button>
@@ -99,5 +202,75 @@
 
 
 </style>
+
+<button onclick="scrollToTop()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; z-index: 9999;"class="btn btn-primary">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+  function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+<table class="default">
+
+  <tr>
+
+    <th>Relación</th>
+
+    <th>Frecuencia</th>
+
+    <th>Duración</th>
+
+    <th>Función de la conversación</th>
+
+    <th>Satisfacción</th>
+
+  </tr>
+
+  <tr>
+
+    <td>Soleado</td>
+
+    <td>Mayormente soleado</td>
+
+    <td>Parcialmente nublado</td>
+
+  </tr>
+
+  <tr>
+
+    <td>19°C</td>
+
+    <td>17°C</td>
+
+    <td>12°C</td>
+
+  </tr>
+
+  <tr>
+
+    <td>E 13 km/h</td>
+
+    <td>E 11 km/h</td>
+
+    <td>S 16 km/h</td>
+
+  </tr>
+
+</table>
+
+<table>
+  <tr>
+
+    <th>Otros aspectos cualitativos para complementar</th>
+
+  </tr>
+  <tr>
+    <td>El paciente se comunica jajkasjakhdkasjhdkj</td>
+  </tr>
+</table>
+
 
 {% endblock %}

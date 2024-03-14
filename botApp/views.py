@@ -90,25 +90,22 @@ def formulario (request):
     return render (request,"formularios/formulario.html",data)
 
 @login_required
-def formulario_comunicativo (request):
-
+def formulario_comunicativo(request):
     data = {
-        "formComu": formulario_comunicacion,
-        "formResp": respuestas_formulario,
-        "fecha_actual" : datetime.now(),
-        "relaciones": tipo_relacion.objects.all()       
+        "formComu": formulario_comunicacion(),
+        "fecha_actual": datetime.now(),
+        "relaciones": tipo_relacion.objects.all()
     }
 
     if request.method == "POST":
         formu = formulario_comunicacion(request.POST)
         if formu.is_valid():
             formu.save()
-            messages.success(request,"Datos registrados con éxito")
+            messages.success(request,"Información ingresada con éxito.")
         else:
             messages.error(request,"Error, registro no realizado. Por favor verifica la información ingresada")
 
-    return render (request,"formularios/formulario_comunicativo.html",data)
-
+    return render(request, "formularios/formulario_comunicativo.html", data)
 
 def archivo_fono(request, nombre_archivo):
     ruta_archivo = 'archivos/audios/fono/' + nombre_archivo 

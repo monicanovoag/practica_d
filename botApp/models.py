@@ -200,20 +200,50 @@ class satisfaccion_conv(models.Model):
     
 class formulario_com(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_formulario") 
-    nombre = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=100)
     ano_nac = models.CharField(max_length=10, verbose_name="año Nacimiento")
-    
+
     genero_usuario = models.ForeignKey(genero_usuario, on_delete=models.CASCADE)
 
+    #----------------------RESPUESTAS FORMULARIO-----------------------
 
-class respuestas_form(models.Model):
+    #RELACIÓN CON EL PACIENTE 
+    tipo_relacion_1 = models.ForeignKey(tipo_relacion, related_name='formulario_com_1', verbose_name="tipo_relacion_1", on_delete=models.CASCADE, null=True, blank=True)
+    tipo_relacion_2 = models.ForeignKey(tipo_relacion, related_name='formulario_com_2', verbose_name="tipo_relacion_2", on_delete=models.CASCADE, null=True, blank=True)
+    tipo_relacion_3 = models.ForeignKey(tipo_relacion, related_name='formulario_com_3', verbose_name="tipo_relacion_3", on_delete=models.CASCADE, null=True, blank=True)
+    tipo_relacion_4 = models.ForeignKey(tipo_relacion, related_name='formulario_com_4', verbose_name="tipo_relacion_4", on_delete=models.CASCADE, null=True, blank=True)
 
-    id = models.AutoField(primary_key=True, verbose_name="id_respuestas") 
-    complementos = models.CharField(max_length=1000,blank=True, null=True)
+    #FRECUENCIA 
+    frecuencia_1 = models.ForeignKey(frecuencia_conv, related_name='formulario_com_1', verbose_name="frecuencia_1", on_delete=models.CASCADE, null=True, blank=True)
+    frecuencia_2 = models.ForeignKey(frecuencia_conv, related_name='formulario_com_2', verbose_name="frecuencia_2", on_delete=models.CASCADE, null=True, blank=True)
+    frecuencia_3 = models.ForeignKey(frecuencia_conv, related_name='formulario_com_3', verbose_name="frecuencia_3", on_delete=models.CASCADE, null=True, blank=True)
+    frecuencia_4 = models.ForeignKey(frecuencia_conv, related_name='formulario_com_4', verbose_name="frecuencia_4", on_delete=models.CASCADE, null=True, blank=True)
 
-    id_formulario = models.ForeignKey(formulario_com, on_delete=models.CASCADE,blank=True, null=True)
-    tipo_relacion = models.ForeignKey(tipo_relacion, on_delete=models.CASCADE,blank=True, null=True)
-    frecuencia_conv = models.ForeignKey(frecuencia_conv, on_delete=models.CASCADE,blank=True, null=True)
-    duracion_conv = models.ForeignKey(duracion_conv, on_delete=models.CASCADE,blank=True, null=True)
-    funcion_conv = models.ForeignKey(funcion_conv, on_delete=models.CASCADE,blank=True, null=True)
-    satisfaccion_conv = models.ForeignKey(satisfaccion_conv, on_delete=models.CASCADE,blank=True, null=True)
+    #DURACIÓN 
+    duracion_1 = models.ForeignKey(duracion_conv, related_name='formulario_com_1', verbose_name="duracion_1", on_delete=models.CASCADE, null=True, blank=True)
+    duracion_2 = models.ForeignKey(duracion_conv, related_name='formulario_com_2', verbose_name="duracion_2", on_delete=models.CASCADE, null=True, blank=True)
+    duracion_3 = models.ForeignKey(duracion_conv, related_name='formulario_com_3', verbose_name="duracion_3", on_delete=models.CASCADE, null=True, blank=True)
+    duracion_4 = models.ForeignKey(duracion_conv, related_name='formulario_com_4', verbose_name="duracion_4", on_delete=models.CASCADE, null=True, blank=True)
+
+    #FUNCION 
+    funcion_1 = models.ForeignKey(funcion_conv, related_name='formulario_com_1', verbose_name="funcion_1", on_delete=models.CASCADE, null=True, blank=True)
+    funcion_2 = models.ForeignKey(funcion_conv, related_name='formulario_com_2', verbose_name="funcion_2", on_delete=models.CASCADE, null=True, blank=True)
+    funcion_3 = models.ForeignKey(funcion_conv, related_name='formulario_com_3', verbose_name="funcion_3", on_delete=models.CASCADE, null=True, blank=True)
+    funcion_4 = models.ForeignKey(funcion_conv, related_name='formulario_com_4', verbose_name="funcion_4", on_delete=models.CASCADE, null=True, blank=True)
+
+    #SATISFACCIÓN
+    satisfaccion_1 = models.ForeignKey(satisfaccion_conv, related_name='formulario_com_1', verbose_name="satisfaccion_1", on_delete=models.CASCADE, null=True, blank=True)
+    satisfaccion_2 = models.ForeignKey(satisfaccion_conv, related_name='formulario_com_2', verbose_name="satisfaccion_2", on_delete=models.CASCADE, null=True, blank=True)
+    satisfaccion_3 = models.ForeignKey(satisfaccion_conv, related_name='formulario_com_3', verbose_name="satisfaccion_3", on_delete=models.CASCADE, null=True, blank=True)
+    satisfaccion_4 = models.ForeignKey(satisfaccion_conv, related_name='formulario_com_4', verbose_name="satisfaccion_4", on_delete=models.CASCADE, null=True, blank=True)
+
+    #COMPLEMENTO 
+    complemento_1 = models.CharField(max_length=2000, null=True, blank=True)
+    complemento_2 = models.CharField(max_length=2000, null=True, blank=True)
+    complemento_3 = models.CharField(max_length=2000, null=True, blank=True)
+    complemento_4 = models.CharField(max_length=2000, null=True, blank=True)
+
+
+    def __str__(self):
+        return self.id
+    

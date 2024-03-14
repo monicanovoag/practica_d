@@ -44,14 +44,9 @@ class formulario_comunicacion(forms.ModelForm):
     class Meta:
         model = formulario_com
         fields = "__all__"
-
-
-class respuestas_formulario(forms.ModelForm):
-    
-    class Meta:
-        model = respuestas_form
-        fields = ['tipo_relacion','frecuencia_conv','duracion_conv','funcion_conv','satisfaccion_conv','complementos']
-
         widgets = {
-            'complementos': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
-        }
+            'complemento_1': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
+            'complemento_2': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
+            'complemento_3': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
+            'complemento_4': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
+            }
