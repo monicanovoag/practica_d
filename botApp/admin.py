@@ -90,7 +90,7 @@ class satisfaccionAdmin(admin.ModelAdmin):
     list_display = ('id','tipo_satisfaccion')
 
 class formConvAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nombre', 'ano_nac', 'genero_usuario',
+    list_display = ('id','id_fono', 'nombre', 'ano_nac', 'genero_usuario',
                     'tipo_relacion_1', 'frecuencia_1', 'duracion_1', 'funcion_1', 'satisfaccion_1','complemento_1',
                     'tipo_relacion_2', 'frecuencia_2', 'duracion_2', 'funcion_2', 'satisfaccion_2','complemento_2',
                     'tipo_relacion_3', 'frecuencia_3', 'duracion_3', 'funcion_3', 'satisfaccion_3','complemento_3',

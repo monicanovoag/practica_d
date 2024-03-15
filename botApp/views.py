@@ -90,7 +90,6 @@ def formulario (request):
     return render (request,"formularios/formulario.html",data)
 
 @login_required
-@login_required
 def formulario_comunicativo(request):
     data = {
         "formComu": formulario_comunicacion(),

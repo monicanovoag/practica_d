@@ -40,13 +40,12 @@ class audio_fonoForm(forms.ModelForm):
         return cleaned_data
     
 class formulario_comunicacion(forms.ModelForm):
-
     class Meta:
         model = formulario_com
-        fields = "__all__"
+        exclude = ['id_fono']
         widgets = {
             'complemento_1': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
             'complemento_2': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
             'complemento_3': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
             'complemento_4': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
-            }
+        }
