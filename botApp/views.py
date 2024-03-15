@@ -94,7 +94,6 @@ def formulario_comunicativo(request):
     data = {
         "formComu": formulario_comunicacion(),
         "fecha_actual": datetime.now(),
-        "relaciones": tipo_relacion.objects.all()
     }
 
     if request.method == "POST":
@@ -404,7 +403,13 @@ def descargar_audio_fisico(request, id_audio_persona):
 @login_required
 def resumen_paciente (request):
 
+    formularios_usuario = formulario_com.objects.filter(id_fono=request.user.id).order_by('-id')
+
     data = {
-        "fecha_actual" : datetime.now()       
+        "fecha_actual" : datetime.now(),      
+        "datos": formularios_usuario
     }
     return render (request,"resumen.html",data)
+
+
+       
