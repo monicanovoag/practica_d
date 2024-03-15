@@ -54,23 +54,30 @@
         <ul>
           {% if user.is_authenticated %}
           <li class="current"><a href="{% url 'perfil' %}">Inicio</a></li>
+
           <li class="current">
-            <a href="{% url 'formulario' %}">Formulario</a>
+            <a href="{% url 'formulario' %}">Formulario Ingreso Audios</a>
           </li>
           <li class="current">
             <a href="{% url 'formulario_comunicativo' %}">Formulario Sociocomunicativo</a>
           </li>
+          <li class="current">
+            <a href="{% url 'resumen_paciente' %}">Resumen Pacientes</a>
+          </li>
+
+          {% if user.is_staff %}
           <li class="current">
             <a href="{% url 'reporte_fono' %}">Reportes Audio Fono</a>
           </li>
           <li class="current">
             <a href="{% url 'reporte_persona' %}">Reportes Audio Persona</a>
           </li>
-          {% if user.is_staff %}
+          {% endif %}
+
           <li class="current">
             <a href="{% url 'api' %}">API</a>
           </li>
-          {% endif %}
+          
           <form method="post" class="form" action="{% url 'logout' %}">
           
             {% csrf_token %}

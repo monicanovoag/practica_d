@@ -22,8 +22,10 @@
     <span style="margin-right: 30px;"></span> 
   <a class="button" href="{% url "api_audio_personas" %}">Audio Persona</a>
     <span style="margin-right: 30px;"></span> 
+  {% if user.is_staff %}
   <a class="button" href="{% url "admin_audios_fono" %}">Tabla Django Flgo</a>
-
+  {% endif %}
+  
 </div>
 
 <style>

@@ -398,3 +398,11 @@ def descargar_audio_fisico(request, id_audio_persona):
         return redirect(audio.audio_fisico)
     else:
         return HttpResponse("El enlace de audio físico no está disponible para descargar.")
+    
+@login_required
+def resumen_paciente (request):
+
+    data = {
+        "fecha_actual" : datetime.now()       
+    }
+    return render (request,"resumen.html",data)
