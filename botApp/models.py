@@ -200,6 +200,7 @@ class satisfaccion_conv(models.Model):
     
 class formulario_com(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_formulario") 
+    id_fono = models.IntegerField()
     nombre = models.CharField(max_length=100)
     ano_nac = models.CharField(max_length=10, verbose_name="año Nacimiento")
 

@@ -90,6 +90,7 @@ def formulario (request):
     return render (request,"formularios/formulario.html",data)
 
 @login_required
+@login_required
 def formulario_comunicativo(request):
     data = {
         "formComu": formulario_comunicacion(),
@@ -100,7 +101,9 @@ def formulario_comunicativo(request):
     if request.method == "POST":
         formu = formulario_comunicacion(request.POST)
         if formu.is_valid():
-            formu.save()
+            formulario = formu.save(commit=False)  
+            formulario.id_fono = request.user.id  
+            formulario.save() 
             messages.success(request,"Información ingresada con éxito.")
         else:
             messages.error(request,"Error, registro no realizado. Por favor verifica la información ingresada")
