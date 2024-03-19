@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Resumen Pacientes{% endblock %}
+{% block subtitle %}Resumen Pacientes {% endblock %}
+{% block fecha %}
+
+<div class="info">
+    <span class="date">
+      <span class="month">{{ fecha_actual|date:"F" }} </span>
+      <span class="day">{{ fecha_actual|date:"d" }}</span>
+      <span class="year">{{ fecha_actual|date:"Y" }}</span>
+    </span>
+</div>
+{% endblock %}
+
+
+{% block content %}
+
+{% for formulario in datos %}
+<hr>
+  <h3>Nombre: {{ formulario.nombre }}</h3>
+  <h3>Género: {{ formulario.genero_usuario }}</h3>
+  <h3>Año de nacimiento: {{ formulario.ano_nac }}</h3>
+
+<table id="tabla">
+  <thead>
+    <tr>
+      <th>Relación</th>
+      <th>Frecuencia</th>
+      <th>Duración</th>
+      <th>Función de la conversación</th>
+      <th>Satisfacción</th>
+      <th>Complementos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{% if formulario.tipo_relacion_1 %} {{ formulario.tipo_relacion_1 }} {% endif %}</td>
+      <td>{% if formulario.frecuencia_1 %} {{ formulario.frecuencia_1 }} {% endif %}</td>
+      <td>{% if formulario.duracion_1 %} {{ formulario.duracion_1 }} {% endif %}</td>
+      <td>{% if formulario.funcion_1 %} {{ formulario.funcion_1 }} {% endif %}</td>
+      <td>{% if formulario.satisfaccion_1 %} {{ formulario.satisfaccion_1 }} {% endif %}</td>
+      <td>{% if formulario.complemento_1 %} {{ formulario.complemento_1 }} {% endif %}</td>
+    </tr>
+    <tr>
+      <td>{% if formulario.tipo_relacion_2 %} {{ formulario.tipo_relacion_2 }} {% endif %}</td>
+      <td>{% if formulario.frecuencia_2 %} {{ formulario.frecuencia_2 }} {% endif %}</td>
+      <td>{% if formulario.duracion_2 %} {{ formulario.duracion_2 }} {% endif %}</td>
+      <td>{% if formulario.funcion_2 %} {{ formulario.funcion_2 }} {% endif %}</td>
+      <td>{% if formulario.satisfaccion_2 %} {{ formulario.satisfaccion_2 }} {% endif %}</td>
+      <td>{% if formulario.complemento_2 %} {{ formulario.complemento_2 }} {% endif %}</td>
+    </tr>
+    <tr>
+      <td>{% if formulario.tipo_relacion_3 %} {{ formulario.tipo_relacion_3 }} {% endif %}</td>
+      <td>{% if formulario.frecuencia_3 %} {{ formulario.frecuencia_3 }} {% endif %}</td>
+      <td>{% if formulario.duracion_3 %} {{ formulario.duracion_3 }} {% endif %}</td>
+      <td>{% if formulario.funcion_3 %} {{ formulario.funcion_3 }} {% endif %}</td>
+      <td>{% if formulario.satisfaccion_3 %} {{ formulario.satisfaccion_3 }} {% endif %}</td>
+      <td>{% if formulario.complemento_3 %} {{ formulario.complemento_3 }} {% endif %}</td>
+    </tr>
+    <tr>
+      <td>{% if formulario.tipo_relacion_4 %} {{ formulario.tipo_relacion_4 }} {% endif %}</td>
+      <td>{% if formulario.frecuencia_4 %} {{ formulario.frecuencia_4 }} {% endif %}</td>
+      <td>{% if formulario.duracion_4 %} {{ formulario.duracion_4 }} {% endif %}</td>
+      <td>{% if formulario.funcion_4 %} {{ formulario.funcion_4 }} {% endif %}</td>
+      <td>{% if formulario.satisfaccion_4 %} {{ formulario.satisfaccion_4 }} {% endif %}</td>
+      <td>{% if formulario.complemento_4 %} {{ formulario.complemento_4 }} {% endif %}</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+{% endfor %}
+{% endblock %}

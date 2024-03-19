@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Registro Usuarios{% endblock %}
+{% block subtitle %}Registros Usuarios {% endblock %}
+
+{% block fecha %}
+<div class="info">
+    <span class="date">
+      <span class="month">{{ fecha_actual|date:"F" }} </span>
+      <span class="day">{{ fecha_actual|date:"d" }}</span>
+      <span class="year">{{ fecha_actual|date:"Y" }}</span>
+    </span>
+  </div>
+{% endblock %}
+
+{% block content %}
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="nombre_usuario">Nombre de usuario: </label>
+        {{ formReg.nombre_usuario }}
+    </div>
+
+    <div class="form-group">
+        <label for="nombre">Nombre: </label>
+        {{ formReg.nombre }}
+    </div>
+
+    <div class="form-group">
+        <label for="apellido">Apellido: </label>
+        {{ formReg.apellido }}
+    </div> 
+
+    <div class="form-group">
+        <label for="correo">Correo: </label>
+        {{ formReg.correo }}
+    </div>
+
+    <div class="form-group">
+        <label for="contrasena">Contranseña: </label>
+        {{ formReg.contrasena }}
+    </div>
+
+    <button type="submit" class="button">Enviar Formulario</button>
+</form>
+
+<style>
+    .form-group {
+      margin-top: 15px; 
+    }
+  
+    .button {
+      margin-top: 30px;
+    }
+  
+    .text {
+      font-style: italic;
+    }
+  
+  </style>
+
+{% endblock %}

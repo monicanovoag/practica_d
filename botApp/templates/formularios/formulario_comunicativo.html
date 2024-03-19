@@ -1,0 +1,327 @@
+{% extends "base.html" %}
+
+{% block title %}Formulario Comunicativo{% endblock %}
+
+{% block subtitle %}
+<h3 class="subtitulo">Formulario Participación Comunicativo-Social</h3>
+<br>
+<h4 class="bajada">Protocolo Desarrollado por el Dr. Reinaldo Salazar </h4>
+{% endblock %}
+
+{% block fecha %}
+<div class="info">
+  <span class="date">
+    <span class="month">{{ fecha_actual|date:"F" }} </span>
+    <span class="day">{{ fecha_actual|date:"d" }}</span>
+    <span class="year">{{ fecha_actual|date:"Y" }}</span>
+  </span>
+</div>
+{% endblock %}
+
+{% block content %}
+<form action="" method="POST" >
+  {% csrf_token %}
+
+  <div class="form-group">
+    <label for="nombre">Nombre Paciente: </label>
+    {{ formComu.nombre }}
+  </div>
+
+  <div class="form-group">
+    <label for="ano_nac">Año Nacimiento Paciente: </label>
+    {{ formComu.ano_nac }}
+  </div>
+
+  <div class="form-group">
+    <label for="genero_usuario">Género Paciente: </label>
+    {{ formComu.genero_usuario }}
+  </div>
+
+  <div class="respuestas">
+    <!--RELACIÓN 1-->
+    <hr>
+    <h3 id="relacion_1">Relación 1</h3>
+    <div class="form-group" id="respuesta_1">
+      <label for="frecuencia_conv_1">¿Cuál es su relación con el paciente?: </label>
+      {{ formComu.tipo_relacion_1 }}
+    </div>
+
+    <div class="form-group" id="respuesta_1">
+      <label for="frecuencia_conv_1">¿Con qué frecuencia se comunica con el paciente?: </label>
+      {{ formComu.frecuencia_1 }}
+    </div>
+
+    <div class="form-group" id="respuesta_1">
+      <label for="duracion_conv_1">¿Cuál es la duración de estas conversaciones?: </label>
+      {{ formComu.duracion_1 }}
+    </div>
+
+    <div class="form-group" id="respuesta_1">
+      <label for="funcion_conv_1">¿De qué tratan las conversaciones?: </label>
+      {{ formComu.funcion_1 }}
+    </div>
+
+    <div class="form-group" id="respuesta_1">
+      <label for="satisfaccion_conv_1">¿Cuál es su nivel de satisfacción con esta comunicación?: </label>
+      {{ formComu.satisfaccion_1 }}
+    </div>
+
+    <div class="form-group" id="respuesta_1">
+      <label for="complementos_1">Otros aspectos cualitativos para complementar: </label>
+      {{ formComu.complemento_1 }}
+    </div>
+  </div>
+  <hr>
+
+  <!--RELACIÓN 2-->
+  <hr>
+  <h3 id="relacion_2">Relación 2</h3>
+  <div class="form-group" id="respuesta_2">
+    <label for="frecuencia_conv_2">¿Cuál es su relación con el paciente?: </label>
+    {{ formComu.tipo_relacion_2 }}
+  </div>
+
+  <div class="form-group" id="respuesta_2">
+    <label for="frecuencia_conv_2">¿Con qué frecuencia se comunica con el paciente?: </label>
+    {{ formComu.frecuencia_2 }}
+  </div>
+
+  <div class="form-group" id="respuesta_2">
+    <label for="duracion_conv_2">¿Cuál es la duración de estas conversaciones?: </label>
+    {{ formComu.duracion_2 }}
+  </div>
+
+  <div class="form-group" id="respuesta_2">
+    <label for="funcion_conv_2">¿De qué tratan las conversaciones?: </label>
+    {{ formComu.funcion_2 }}
+  </div>
+
+  <div class="form-group" id="respuesta_2">
+    <label for="satisfaccion_conv_2">¿Cuál es su nivel de satisfacción con esta comunicación?: </label>
+    {{ formComu.satisfaccion_2 }}
+  </div>
+
+  <div class="form-group" id="respuesta_2">
+    <label for="complementos_2">Otros aspectos cualitativos para complementar: </label>
+    {{ formComu.complemento_2 }}
+  </div>
+  <hr>
+  <!--RELACIÓN 3-->
+  <hr>
+  <h3 id="relacion_3">Relación 3</h3>
+  <div class="form-group" id="respuesta_3">
+    <label for="frecuencia_conv_3">¿Cuál es su relación con el paciente?: </label>
+    {{ formComu.tipo_relacion_3 }}
+  </div>
+
+  <div class="form-group" id="respuesta_3">
+    <label for="frecuencia_conv_3">¿Con qué frecuencia se comunica con el paciente?: </label>
+    {{ formComu.frecuencia_3 }}
+  </div>
+
+  <div class="form-group" id="respuesta_3">
+    <label for="duracion_conv_3">¿Cuál es la duración de estas conversaciones?: </label>
+    {{ formComu.duracion_3 }}
+  </div>
+
+  <div class="form-group" id="respuesta_3">
+    <label for="funcion_conv_3">¿De qué tratan las conversaciones?: </label>
+    {{ formComu.funcion_3 }}
+  </div>
+
+  <div class="form-group" id="respuesta_3">
+    <label for="satisfaccion_conv_3">¿Cuál es su nivel de satisfacción con esta comunicación?: </label>
+    {{ formComu.satisfaccion_3 }}
+  </div>
+
+  <div class="form-group" id="respuesta_3">
+    <label for="complementos_3">Otros aspectos cualitativos para complementar: </label>
+    {{ formComu.complemento_3 }}
+  </div>
+  <hr>
+  <!--RELACIÓN 4-->
+  <hr>
+  <h3 id="relacion_4">Relación 4</h3>
+  <div class="form-group" id="respuesta_4">
+    <label for="frecuencia_conv_4">¿Cuál es su relación con el paciente?: </label>
+    {{ formComu.tipo_relacion_4 }}
+  </div>
+
+  <div class="form-group" id="respuesta_4">
+    <label for="frecuencia_conv_4">¿Con qué frecuencia se comunica con el paciente?: </label>
+    {{ formComu.frecuencia_4 }}
+  </div>
+
+  <div class="form-group" id="respuesta_4">
+    <label for="duracion_conv_4">¿Cuál es la duración de estas conversaciones?: </label>
+    {{ formComu.duracion_4 }}
+  </div>
+
+  <div class="form-group" id="respuesta_4">
+    <label for="funcion_conv_4">¿De qué tratan las conversaciones?: </label>
+    {{ formComu.funcion_4 }}
+  </div>
+
+  <div class="form-group" id="respuesta_4">
+    <label for="satisfaccion_conv_4">¿Cuál es su nivel de satisfacción con esta comunicación?: </label>
+    {{ formComu.satisfaccion_4 }}
+  </div>
+
+  <div class="form-group" id="respuesta_4">
+    <label for="complementos_4">Otros aspectos cualitativos para complementar: </label>
+    {{ formComu.complemento_4 }}
+  </div>
+  <br>
+  <hr>
+ 
+
+  <table id="tabla-a-descargar">
+    <tr>
+      <th>Relación</th>
+      <th>Frecuencia</th>
+      <th>Duración</th>
+      <th>Función de la conversación</th>
+      <th>Satisfacción</th>
+      <th>Complementos</th>
+    </tr>
+    <tr>
+      <td id="relacion_1_tabla"></td>
+      <td id="frecuencia_1_tabla"></td>
+      <td id="duracion_1_tabla"></td>
+      <td id="funcion_1_tabla"></td>
+      <td id="satisfaccion_1_tabla"></td>
+      <td id="complemento_1_tabla"></td>
+    </tr>
+    <tr>
+      <td id="relacion_2_tabla"></td>
+      <td id="frecuencia_2_tabla"></td>
+      <td id="duracion_2_tabla"></td>
+      <td id="funcion_2_tabla"></td>
+      <td id="satisfaccion_2_tabla"></td>
+      <td id="complemento_2_tabla"></td>
+    </tr>
+    <tr>
+      <td id="relacion_3_tabla"></td>
+      <td id="frecuencia_3_tabla"></td>
+      <td id="duracion_3_tabla"></td>
+      <td id="funcion_3_tabla"></td>
+      <td id="satisfaccion_3_tabla"></td>
+      <td id="complemento_3_tabla"></td>
+    </tr>
+    <tr>
+      <td id="relacion_4_tabla"></td>
+      <td id="frecuencia_4_tabla"></td>
+      <td id="duracion_4_tabla"></td>
+      <td id="funcion_4_tabla"></td>
+      <td id="satisfaccion_4_tabla"></td>
+      <td id="complemento_4_tabla"></td>
+    </tr>
+  </table>
+  <hr>
+  <div class="centrado">
+    <button type="button" class="button" onclick="llenarTabla()">Llenar Tabla</button>
+    <button type="submit" class="button">Guardar</button>
+  </div>
+
+</form>
+
+<style>
+  .form-group {
+    margin-top: 20px;
+  }
+
+  .button {
+    margin-top: 30px;
+  }
+
+  .text {
+    font-style: italic;
+  }
+
+  .subtitulo {
+    font-size: 45px;
+  }
+
+  .bajada {
+    font-size: 25px;
+  }
+
+  .centrado {
+    text-align: center;
+  }
+
+  #respuesta {
+    margin-left: 25px;
+  }
+
+  #relacion {
+    font-size: 20px;
+  }
+</style>
+
+<button onclick="scrollToTop()" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; z-index: 9999;" class="btn btn-primary">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+  function actualizarTabla(relacionId, frecuenciaId, duracionId, funcionId, satisfaccionId, complementoId, tablaRelacion, tablaFrecuencia, tablaDuracion, tablaFuncion, tablaSatisfaccion, tablaComplemento) {
+    var relacion = document.getElementById(relacionId).value;
+    var frecuencia = document.getElementById(frecuenciaId).value;
+    var duracion = document.getElementById(duracionId).value;
+    var funcion = document.getElementById(funcionId).value;
+    var satisfaccion = document.getElementById(satisfaccionId).value;
+    var complemento = document.getElementById(complementoId).value;
+
+    var relacionMap = {
+      '1': 'Conyuge',
+      '2': 'Hijo(a)',
+      '3': 'Otro familiar',
+      '4': 'Otra persona'
+    };
+    var frecuenciaMap = {
+      '1': 'Esporádica',
+      '2': 'Mensual',
+      '3': 'Semanal',
+      '4': 'Diaria',
+      '5': 'Varias veces al día'
+    };
+    var duracionMap = {
+      '1': 'MIN 0-15',
+      '2': 'MIN 15-30',
+      '3': 'MIN 30-60',
+      '4': 'MIN 60-MAS'
+    };
+    var funcionMap = {
+      '1': 'Satisfacción',
+      '2': 'Emociones',
+      '3': 'Noticias',
+      '4': 'Otro'
+    };
+    var satisfaccionMap = {
+      '1': 'Nada',
+      '2': 'Poco',
+      '3': 'Medianamente',
+      '4': 'Satisfecho',
+      '5': 'Muy Satisfecho'
+    };
+
+    document.getElementById(tablaRelacion).innerText = relacionMap[relacion] || '';
+    document.getElementById(tablaFrecuencia).innerText = frecuenciaMap[frecuencia] || '';
+    document.getElementById(tablaDuracion).innerText = duracionMap[duracion] || '';
+    document.getElementById(tablaFuncion).innerText = funcionMap[funcion] || '';
+    document.getElementById(tablaSatisfaccion).innerText = satisfaccionMap[satisfaccion] || '';
+    document.getElementById(tablaComplemento).innerText = complemento || '';
+  }
+
+  function llenarTabla() {
+    actualizarTabla("id_tipo_relacion_1", "id_frecuencia_1", "id_duracion_1", "id_funcion_1", "id_satisfaccion_1", "id_complemento_1", "relacion_1_tabla", "frecuencia_1_tabla", "duracion_1_tabla", "funcion_1_tabla", "satisfaccion_1_tabla", "complemento_1_tabla");
+    actualizarTabla("id_tipo_relacion_2", "id_frecuencia_2", "id_duracion_2", "id_funcion_2", "id_satisfaccion_2", "id_complemento_2", "relacion_2_tabla", "frecuencia_2_tabla", "duracion_2_tabla", "funcion_2_tabla", "satisfaccion_2_tabla", "complemento_2_tabla");
+    actualizarTabla("id_tipo_relacion_3", "id_frecuencia_3", "id_duracion_3", "id_funcion_3", "id_satisfaccion_3", "id_complemento_3", "relacion_3_tabla", "frecuencia_3_tabla", "duracion_3_tabla", "funcion_3_tabla", "satisfaccion_3_tabla", "complemento_3_tabla");
+    actualizarTabla("id_tipo_relacion_4", "id_frecuencia_4", "id_duracion_4", "id_funcion_4", "id_satisfaccion_4", "id_complemento_4", "relacion_4_tabla", "frecuencia_4_tabla", "duracion_4_tabla", "funcion_4_tabla", "satisfaccion_4_tabla", "complemento_4_tabla");
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+{% endblock %}
