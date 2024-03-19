@@ -1,0 +1,26 @@
+#Archivos temporales
+*.tmp
+*.log
+.log.
+*.cache
+.cache.
+*.pyc
+*.pyo
+*.pyd
+*.class
+
+settings.py
+
+#Archivos de respaldo
+*~
+*.backup
+
+#Directorios
+pycache/
+__pycache__/
+node_modules/
+archivos/
+
+#Entornos virtuales de Python
+.venv
+.env
