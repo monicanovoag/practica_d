@@ -41,9 +41,9 @@ class User(AbstractUser, PermissionsMixin):
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     tipo_usuario = models.ForeignKey(tipo_usuario, on_delete=models.CASCADE, related_name='tipo_usuario')
-    username = models.CharField(max_length=100)
+    username = models.CharField(max_length=100,unique=True)
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
     REQUIRED_FIELDS = ['nombre', 'apellido', 'tipo_usuario']
 
