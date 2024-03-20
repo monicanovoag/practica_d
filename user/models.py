@@ -40,11 +40,12 @@ class User(AbstractUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
+    tipo_usuario = models.ForeignKey(tipo_usuario, on_delete=models.CASCADE, related_name='tipo_usuario')
     username = None
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = ['nombre', 'apellido']
+    REQUIRED_FIELDS = ['nombre', 'apellido', 'tipo_usuario']
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
