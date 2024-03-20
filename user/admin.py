@@ -9,18 +9,18 @@ class tipo_usuarioAdmin(admin.ModelAdmin):
 
 class CustomUserAdmin(UserAdmin):
     model = User
-    list_display = ['email', 'nombre', 'apellido','is_staff', 'is_superuser']
+    list_display = ['username','email', 'nombre', 'apellido','tipo_usuario','is_staff', 'is_superuser']
     search_fields = ['email', 'nombre', 'apellido']
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Información personal', {'fields': ('nombre', 'apellido')}),
+        (None, {'fields': ('username','email', 'password')}),
+        ('Información personal', {'fields': ('nombre', 'apellido','tipo_usuario')}),
         ('Permisos', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Fechas importantes', {'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'nombre', 'apellido', 'password1', 'password2', 'is_staff', 'is_superuser')
+            'fields': ('username','email', 'nombre', 'apellido','tipo_usuario', 'password1', 'password2', 'is_staff', 'is_superuser')
         }),
     )
     ordering = ['email']
@@ -28,4 +28,3 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.register(tipo_usuario)
 admin.site.register(User, CustomUserAdmin)
-
