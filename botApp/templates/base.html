@@ -53,6 +53,7 @@
       <nav id="nav">
         <ul>
           {% if user.is_authenticated %}
+
           <li class="current"><a href="{% url 'perfil' %}">Inicio</a></li>
 
           <li class="current">
@@ -62,21 +63,25 @@
             <a href="{% url 'formulario_comunicativo' %}">Formulario Sociocomunicativo</a>
           </li>
           <li class="current">
-            <a href="{% url 'resumen_paciente' %}">Resumen Pacientes</a>
+            <a href="{% url 'resumen_paciente' %}">Resumen Sociocomunicativo</a>
           </li>
 
-          {% if user.is_staff %}
+
+          {% if user.tipo_usuario.nombre_tipo_usuario == "Administrador" or user.tipo_usuario.nombre_tipo_usuario == "Gerencia" %}
           <li class="current">
             <a href="{% url 'reporte_fono' %}">Reportes Audio Fono</a>
           </li>
           <li class="current">
             <a href="{% url 'reporte_persona' %}">Reportes Audio Persona</a>
           </li>
-          {% endif %}
-
           <li class="current">
             <a href="{% url 'api' %}">API</a>
           </li>
+          {% endif %}
+          
+
+
+          
           
           <form method="post" class="form" action="{% url 'logout' %}">
           
