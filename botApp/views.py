@@ -418,11 +418,14 @@ def resumen_paciente (request):
 
 
 @login_required
-def log (request):       
+def log(request):
+    log_data = LogInicioSesion.objects.all()
+    form_data = formulario_com.objects.all()
+    combined_data = list(log_data) + list(form_data)
+    sorted_data = sorted(combined_data, key=lambda x: x.fecha_ingreso if hasattr(x, 'fecha_ingreso') else x.fecha_inicio, reverse=True)
 
     data = {
-        "fecha_actual" : datetime.now(),  
-        "log" : LogInicioSesion.objects.all(), 
-        "logForm1": formulario_com.objects.all()    
+        "fecha_actual": datetime.now(),
+        "log": sorted_data
     }
-    return render (request,"log.html",data)
+    return render(request, "log.html", data) 
