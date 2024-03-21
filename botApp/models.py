@@ -63,9 +63,10 @@ class audio_persona(models.Model):
             self.audio_fisico = self.audio_manychat
         super().save(*args, **kwargs)
        
+
 class audio_fono(models.Model):
     id = models.AutoField(primary_key=True, verbose_name="id_audio") 
-    id_usuario = models.IntegerField()
+    id_usuario = models.CharField(max_length = 30) 
     nombre_paciente = models.CharField(max_length=20)
     audio_fo1 = models.FileField(upload_to='audios/fono/')
     audio_fo2 = models.FileField(upload_to='audios/fono/', blank=True, null=True)
