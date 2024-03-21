@@ -17,37 +17,21 @@
 <h3 class="subtitulo" >Registros de la plataforma</h3>
 <br>
 <table id="tabla">
-    <thead>
-        <tr>
+    <thead> <tr>
             <th>Fecha</th>
             <th>Texto</th>
         </tr>
     </thead>
     <tbody>
         {% for item in log %}
-        <tr>
-            <td>
-                {% if item.fecha_inicio %}
-                    {{ item.fecha_inicio }}
-                {% elif item.fecha_ingreso %}
-                    {{ item.fecha_ingreso }}
-                {% else %}
-                    {{ item.fecha_registro }}
-                {% endif %}
-            </td>
-            <td>
-                {% if item.fecha_inicio %}
-                    {{ item.username }} inicia sesión
-                {% elif item.fecha_ingreso %}
-                    {{ item.id_fono }} ha ingresado formulario sociocomunicativo
-                {% else %}
-                    {{ item.id_usuario }} ha registrado un audio fono
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
+    <tr> <td>
+                {{ item.fecha_inicio }}
+    </td> <td>
+                {{ item.username }} , {{ item.texto }}
+    </td> </tr>
+    {% endfor %}
     </tbody>
-  </table>
+    </table>
 
  <style>
     .subtitulo { 

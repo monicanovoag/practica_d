@@ -68,10 +68,9 @@ class User(AbstractUser, PermissionsMixin):
         return self.nombre or self.email.split('@')[0]
     
 
-class LogInicioSesion(models.Model):
+class Log(models.Model):
     username = models.CharField(max_length=150)
     fecha_inicio = models.DateTimeField(default=timezone.now)
-
+    texto = models.CharField(max_length=100, default="inicio de sesión")
     def __str__(self):
-        return f"{self.username} inició sesión el {self.fecha_inicio}"
-    
+        return f"{self.username} - {self.fecha_inicio} - {self.texto}"

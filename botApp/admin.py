@@ -87,8 +87,8 @@ class formConvAdmin(admin.ModelAdmin):
                     'tipo_relacion_2', 'frecuencia_2', 'duracion_2', 'funcion_2', 'satisfaccion_2','complemento_2',
                     'tipo_relacion_3', 'frecuencia_3', 'duracion_3', 'funcion_3', 'satisfaccion_3','complemento_3',
                     'tipo_relacion_4', 'frecuencia_4', 'duracion_4', 'funcion_4', 'satisfaccion_4','complemento_4')
-                       
 
+               
 admin.site.register(genero_usuario,generoAdmin)
 admin.site.register(tipo_diagnostico_flgo,diagnosticoAdmin)
 admin.site.register(audio_fono,audiofonoAdmin)

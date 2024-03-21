@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, tipo_usuario
+from .models import User, tipo_usuario, Log
+
+      
 
 
 class tipo_usuarioAdmin(admin.ModelAdmin):
@@ -25,6 +27,9 @@ class CustomUserAdmin(UserAdmin):
     )
     ordering = ['email']
 
+class LogInicioSesionAdmin(admin.ModelAdmin):
+    list_display = ['id', 'username', 'fecha_inicio', 'texto']
 
+admin.site.register(Log, LogInicioSesionAdmin)        
 admin.site.register(tipo_usuario)
 admin.site.register(User, CustomUserAdmin)

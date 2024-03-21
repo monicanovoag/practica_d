@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from user.models import LogInicioSesion
+from user.models import Log
 
 # Create your views here.
 from collections import Counter
@@ -88,6 +88,8 @@ def formulario (request):
         if formu.is_valid():
             formu.instance.id_usuario = request.user.username
             formu.save()
+            log = Log(username=request.user.username, texto="registro de audio fono")
+            log.save()
             messages.success(request,"Audio paciente registrado con éxito")
         else:
             messages.error(request,"Error, registro no realizado. Por favor verifica la información ingresada")
@@ -100,13 +102,15 @@ def formulario_comunicativo(request):
         "formComu": formulario_comunicacion(),
         "fecha_actual": datetime.now(),
     }
-    print(request.user.username)
+
     if request.method == "POST":
         formu = formulario_comunicacion(request.POST)
         if formu.is_valid():
             formulario = formu.save(commit=False)  
             formulario.id_fono = request.user.username 
             formulario.save() 
+            log = Log(username=request.user.username, texto="registro de fomulario comunicativo")
+            log.save()
             messages.success(request,"Información ingresada con éxito.")
         else:
             messages.error(request,"Error, registro no realizado. Por favor verifica la información ingresada")
@@ -419,26 +423,9 @@ def resumen_paciente (request):
 
 @login_required
 def log(request):
-    log_data = LogInicioSesion.objects.all()
-    form_data = formulario_com.objects.all()
-    audio_data = audio_fono.objects.all()
-
-    combined_data = list(log_data) + list(form_data) + list(audio_data)
-
-    def sorting_key(obj):
-        if isinstance(obj, LogInicioSesion):
-            return obj.fecha_inicio
-        elif isinstance(obj, formulario_com):
-            return obj.fecha_ingreso
-        elif isinstance(obj, audio_fono):
-            return obj.fecha_registro
-        else:
-            return None
-
-    sorted_data = sorted(combined_data, key=sorting_key, reverse=True)
-
+    log_data = Log.objects.all().order_by('-id')
     data = {
         "fecha_actual": datetime.now(),
-        "log": sorted_data
+        "log": log_data
     }
     return render(request, "log.html", data)
