@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from user.models import LogInicioSesion
 
 # Create your views here.
 from collections import Counter
@@ -99,12 +100,12 @@ def formulario_comunicativo(request):
         "formComu": formulario_comunicacion(),
         "fecha_actual": datetime.now(),
     }
-
+    print(request.user.username)
     if request.method == "POST":
         formu = formulario_comunicacion(request.POST)
         if formu.is_valid():
             formulario = formu.save(commit=False)  
-            formulario.id_fono = request.user.id  
+            formulario.id_fono = request.user.username 
             formulario.save() 
             messages.success(request,"Información ingresada con éxito.")
         else:
@@ -416,4 +417,12 @@ def resumen_paciente (request):
     return render (request,"resumen.html",data)
 
 
-       
+@login_required
+def log (request):       
+
+    data = {
+        "fecha_actual" : datetime.now(),  
+        "log" : LogInicioSesion.objects.all(), 
+        "logForm1": formulario_com.objects.all()    
+    }
+    return render (request,"log.html",data)

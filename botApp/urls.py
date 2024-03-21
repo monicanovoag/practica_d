@@ -19,6 +19,9 @@ urlpatterns = [
  path('descargar-xls-persona/', descargar_xls_persona, name='descargar_xls_persona'),
  path('formulario_comunicativo/', formulario_comunicativo, name='formulario_comunicativo'),
  path('resumen_paciente/', resumen_paciente , name='resumen_paciente'),
+ path('log/', log , name='log'),
+
+
 
 
  path('archivos/audios/fono/<str:nombre_archivo>/', archivo_fono, name='archivo_audio'),

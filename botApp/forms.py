@@ -42,7 +42,7 @@ class audio_fonoForm(forms.ModelForm):
 class formulario_comunicacion(forms.ModelForm):
     class Meta:
         model = formulario_com
-        exclude = ['id_fono']
+        exclude = ['id_fono','fecha_ingreso']
         widgets = {
             'complemento_1': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
             'complemento_2': forms.Textarea(attrs={'cols': 80, 'rows': 5}),

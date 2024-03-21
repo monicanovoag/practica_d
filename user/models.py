@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import UserManager, AbstractUser, PermissionsMixin, Group, Permission
 from django.utils import timezone
+
 # Create your models here.
 
 class tipo_usuario(models.Model):
@@ -65,3 +66,12 @@ class User(AbstractUser, PermissionsMixin):
     
     def get_short_name(self):
         return self.nombre or self.email.split('@')[0]
+    
+
+class LogInicioSesion(models.Model):
+    username = models.CharField(max_length=150)
+    fecha_inicio = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"{self.username} inició sesión el {self.fecha_inicio}"
+    
