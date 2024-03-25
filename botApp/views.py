@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from user.models import Log, User
 
+
 # Create your views here.
-from collections import Counter
+
 from datetime import datetime
-from collections import defaultdict
 import os
 import xlwt
 
@@ -12,7 +12,6 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.conf import settings
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
@@ -21,9 +20,9 @@ from django.db.models.functions import TruncDate
 
 import matplotlib.pyplot as plt
 
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import api_view
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
