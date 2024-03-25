@@ -81,8 +81,12 @@
           {% endif %}
           {% if user.tipo_usuario.nombre_tipo_usuario == "Administrador" %}
           <li class="current">
+            <a href="{% url 'listado_usuarios' %}">Listado Usuarios</a>
+          </li>
+          <li class="current">
             <a href="{% url 'log' %}">Log</a>
           </li>
+
           {% endif %}
 
           

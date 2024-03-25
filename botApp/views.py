@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from user.models import Log
+from user.models import Log, User
 
 # Create your views here.
 from collections import Counter
@@ -146,8 +146,6 @@ def api(request):
     }
     return render (request,"api/api_home.html",data)
 
-
-
 class AudioFonoAPIView(APIView):
     authentication_classes = [SessionAuthentication]
     permission_classes = [IsAdminUser]
@@ -256,7 +254,6 @@ def reporte_persona(request):
 
     return render(request, "reportes/reporte_persona.html", data)
 
-
 @login_required
 def reporte_fono(request):
     # Inicializar data como un diccionario vacío
@@ -319,7 +316,7 @@ def reporte_fono(request):
 
     return render(request, "reportes/reporte_fono.html", data)
 
-
+@login_required
 def descargar_xls(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="audio_fono.xls"'
@@ -364,10 +361,7 @@ def descargar_xls(request):
     wb.save(response)
     return response
 
-
-
-
-
+@login_required
 def descargar_xls_persona(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="audio_persona.xls"'
@@ -397,7 +391,7 @@ def descargar_xls_persona(request):
     wb.save(response)
     return response
 
-
+@login_required
 def descargar_audio_fisico(request, id_audio_persona):
     # Obtener la instancia de audio_persona
     audio = get_object_or_404(audio_persona, pk=id_audio_persona)
@@ -420,7 +414,6 @@ def resumen_paciente (request):
     }
     return render (request,"resumen.html",data)
 
-
 @login_required
 def log(request):
     log_data = Log.objects.all().order_by('-id')
@@ -429,3 +422,12 @@ def log(request):
         "log": log_data
     }
     return render(request, "log.html", data)
+
+@login_required
+def listado_usuarios (request):
+    list_data = User.objects.all()
+    data = {
+        "fecha_actual" : datetime.now(),
+        "list": list_data
+    }
+    return render (request,"listado_usuarios.html",data)

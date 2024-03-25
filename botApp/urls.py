@@ -20,6 +20,7 @@ urlpatterns = [
  path('formulario_comunicativo/', formulario_comunicativo, name='formulario_comunicativo'),
  path('resumen_paciente/', resumen_paciente , name='resumen_paciente'),
  path('log/', log , name='log'),
+ path('listado_usuarios/', listado_usuarios , name='listado_usuarios'),
 
 
 
