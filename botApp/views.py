@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from user.models import Log, User
-
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -441,3 +441,10 @@ def listado_usuarios(request):
         "list": list_data
     }
     return render(request, "listado_usuarios.html", data)
+
+def send_reset_password_email(user, new_password):
+    subject = 'Restablecimiento de contraseña'
+    message = f'Hola {user.username}, tu nueva contraseña es: {new_password}'
+    from_email = 'noreply@example.com'
+    to_email = [user.email]
+    send_mail(subject, message, from_email, to_email)
