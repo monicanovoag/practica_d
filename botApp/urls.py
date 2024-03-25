@@ -21,6 +21,8 @@ urlpatterns = [
  path('resumen_paciente/', resumen_paciente , name='resumen_paciente'),
  path('log/', log , name='log'),
  path('listado_usuarios/', listado_usuarios , name='listado_usuarios'),
+ path('listado_usuarios/<int:id>/', email_datos_usuario, name="email-datos-usuario"),
+ path('restablecer-contrasena/<int:id>/<str:token>/', restablecer_contrasena, name="restablecer-contrasena"),
 
 
 

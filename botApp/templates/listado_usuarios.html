@@ -34,8 +34,8 @@
                 <td>{{ item.email }}</td> 
                 <td>
                     <button class="button editar-correo" data-user-id="{{ item.id }}">Editar Correo</button>
-                    <button class="button resetear-contrasena">Resetear Contraseña</button>
-                </td>
+                    <a href="{% url 'email-datos-usuario' item.id %}"><button tyle="height:50px; width:auto;" class="btn btn-secondary"  type="button">Restablecer clave</button></a>
+
             </tr>
         {% endfor %}
     </tbody>

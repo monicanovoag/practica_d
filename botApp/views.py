@@ -442,9 +442,85 @@ def listado_usuarios(request):
     }
     return render(request, "listado_usuarios.html", data)
 
-def send_reset_password_email(user, new_password):
-    subject = 'Restablecimiento de contraseña'
-    message = f'Hola {user.username}, tu nueva contraseña es: {new_password}'
-    from_email = 'noreply@example.com'
-    to_email = [user.email]
-    send_mail(subject, message, from_email, to_email)
+def logout(request):
+    auth.logout(request)
+    return redirect("home")
+
+
+def restablecer_contrasena(request, id, token=None):
+    usuario = User.objects.get(pk=id)
+    print("RESTABVLECER CONTRASEÑA")
+    if token is not None: # el usuario llego aca con el token
+        if default_token_generator.check_token(usuario, token): # si el token es valido
+            if request.method == 'POST':
+                pwd_nueva = request.POST.get('contrasena')
+                print("POST contraseña")
+                print("usuario:", usuario.username)
+                print(request.POST)
+                # aca hacer el cambio de contraseña
+                usuario.set_password(pwd_nueva)
+                usuario.save()
+                messages.success(request, 'Se cambió la contraseña con éxito, ahora debes iniciar sesión.')
+
+                return redirect("home")
+            else:
+                logout(request) # desloguear por si acaso
+                return render(request, "restablecer_contrasena.html")
+            
+        else: # si el token es invalido redirige al login (o al home, considerarlo)
+            messages.error(request, 'Hubo un error con el restablecimiento de la contraseña (token inválido).')
+            return redirect("home")
+    
+    else: # llego sin el token
+        if usuario.restablecer_pwd: # si esta marcado con la flag de restablecer contraseña
+            if request.method == 'POST':
+                print("usuario con flag restablecer contraseña")
+                pwd_nueva = request.POST.get('contrasena')
+                # hacer el cambio de contraseña
+                usuario.set_password(pwd_nueva)
+                usuario.restablecer_pwd = False # quitar la flag de restablecer contraseña
+                usuario.save()
+
+                messages.success(request, 'Se cambió la contraseña con éxito, ahora debes iniciar sesión.')
+            else:
+                return render(request, "restablecer_contrasena.html") # cargar la pagina
+
+
+from django.contrib.auth.tokens import default_token_generator
+
+
+def email_datos_usuario(request, id):
+    usuario = User.objects.get(pk=id)
+    print(usuario.email)
+    if not usuario.email:
+        print("paso1")
+        messages.error(request, 'No se pudo enviar el correo, el usuario no tiene email asignado')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        try:
+            # generar token para restablecer password
+            print("paso2")
+            token = default_token_generator.make_token(usuario)
+            print(token)
+            reset_url = reverse('restablecer-contrasena', args=[usuario.id, token])
+            print(reset_url)
+
+            subject = 'Restablecer contraseña'
+            message = f"Haga click en el siguiente enlace para restablecer su contraseña: {request.build_absolute_uri(reset_url)}"
+            from_email = settings.EMAIL_HOST_USER
+            recipient_list = [usuario.email]
+
+            send_mail(
+                subject,
+                message,
+                from_email,
+                recipient_list,
+                fail_silently=False,
+            )
+            messages.success(request, 'Se envió el correo con éxito')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        except Exception as e:
+            messages.error(request, 'Ocurrió un error al intentar enviar el correo\n{}' .format(e))
+    print("paso3")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
