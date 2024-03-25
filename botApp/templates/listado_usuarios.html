@@ -33,7 +33,7 @@
                 <td>{{ item.tipo_usuario }}</td>
                 <td>{{ item.email }}</td> 
                 <td>
-                    <button class="button editar-correo">Editar Correo</button>
+                    <button class="button editar-correo" data-user-id="{{ item.id }}">Editar Correo</button>
                     <button class="button resetear-contrasena">Resetear Contraseña</button>
                 </td>
             </tr>
@@ -49,6 +49,8 @@
       <form id="editarCorreoForm" method="post">
           {% csrf_token %}
           <input type="email" name="nuevo_correo" placeholder="Nuevo Correo" required>
+          <!-- Agrega un campo oculto para enviar el ID del usuario -->
+          <input type="hidden" id="user_id" name="user_id">
           <br>
           <button type="submit">Guardar</button>
       </form>
@@ -109,6 +111,10 @@ var span = document.getElementsByClassName("close")[0];
 editarCorreoButtons.forEach(function(button) {
     button.onclick = function() {
         modal.style.display = "block";
+        // Obtener el ID del usuario asociado al botón
+        var userId = this.getAttribute("data-user-id");
+        // Establecer el valor del campo oculto user_id en el formulario
+        document.getElementById("user_id").value = userId;
     }
 });
 
