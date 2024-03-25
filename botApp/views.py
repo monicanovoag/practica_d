@@ -423,10 +423,21 @@ def log(request):
     return render(request, "log.html", data)
 
 @login_required
-def listado_usuarios (request):
+def listado_usuarios(request):
+    if request.method == 'POST':
+        nuevo_correo = request.POST.get('nuevo_correo')
+        user_id = request.POST.get('user_id')  # Obtener el identificador único del usuario desde la solicitud POST
+        if nuevo_correo and user_id:
+            try:
+                user = User.objects.get(pk=user_id)
+                user.email = nuevo_correo
+                user.save()
+                return redirect('listado_usuarios')
+            except User.DoesNotExist:
+                pass
     list_data = User.objects.all()
     data = {
-        "fecha_actual" : datetime.now(),
+        "fecha_actual": datetime.now(),
         "list": list_data
     }
-    return render (request,"listado_usuarios.html",data)
+    return render(request, "listado_usuarios.html", data)
