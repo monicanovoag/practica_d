@@ -433,7 +433,9 @@ def listado_usuarios(request):
                 user = User.objects.get(pk=user_id)
                 user.email = nuevo_correo
                 user.save()
-                log = Log(username=user.username, texto="modifica correo.")
+                messages.success(request, 'El correo ha sido modificado con éxito')
+
+                log = Log(username=user.username, texto="modifica correo")
                 log.save()
                 return redirect('listado_usuarios')
             except User.DoesNotExist:
@@ -460,6 +462,8 @@ def restablecer_contrasena(request, id, token=None):
                 # aca hacer el cambio de contraseña
                 usuario.set_password(pwd_nueva)
                 usuario.save()
+                log = Log(username=usuario.username, texto="modifica la contraseña")
+                log.save()
                 messages.success(request, 'Se cambió la contraseña con éxito, ahora debes iniciar sesión.')
 
                 return redirect("home")
