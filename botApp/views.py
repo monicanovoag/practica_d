@@ -513,7 +513,7 @@ def email_datos_usuario(request, id):
                 recipient_list,
                 fail_silently=False,
             )
-            log = Log(username=usuario.username, texto="solicita nueva clave")
+            log = Log(username=usuario.username, texto="solicita nueva contraseña")
             log.save()
             print(log)
             messages.success(request, 'Se envió el correo con éxito')
