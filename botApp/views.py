@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from user.models import Log, User
 from django.core.mail import send_mail
+from django.contrib.auth.tokens import default_token_generator
 
 # Create your views here.
 
@@ -474,7 +475,6 @@ def restablecer_contrasena(request, id, token=None):
     else: # llego sin el token
         if usuario.restablecer_pwd: # si esta marcado con la flag de restablecer contraseña
             if request.method == 'POST':
-                print("usuario con flag restablecer contraseña")
                 pwd_nueva = request.POST.get('contrasena')
                 # hacer el cambio de contraseña
                 usuario.set_password(pwd_nueva)
@@ -485,25 +485,19 @@ def restablecer_contrasena(request, id, token=None):
             else:
                 return render(request, "restablecer_contrasena.html") # cargar la pagina
 
-
-from django.contrib.auth.tokens import default_token_generator
-
+#log = Log(username=request.user.username, texto="registro de fomulario comunicativo")
+#            log.save()
 
 def email_datos_usuario(request, id):
     usuario = User.objects.get(pk=id)
-    print(usuario.email)
     if not usuario.email:
-        print("paso1")
         messages.error(request, 'No se pudo enviar el correo, el usuario no tiene email asignado')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         try:
             # generar token para restablecer password
-            print("paso2")
             token = default_token_generator.make_token(usuario)
-            print(token)
             reset_url = reverse('restablecer-contrasena', args=[usuario.id, token])
-            print(reset_url)
 
             subject = 'Restablecer contraseña'
             message = f"Haga click en el siguiente enlace para restablecer su contraseña: {request.build_absolute_uri(reset_url)}"
@@ -517,10 +511,12 @@ def email_datos_usuario(request, id):
                 recipient_list,
                 fail_silently=False,
             )
+            log = Log(username=usuario.username, texto="solicita nueva clave")
+            log.save()
+            print(log)
             messages.success(request, 'Se envió el correo con éxito')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         except Exception as e:
             messages.error(request, 'Ocurrió un error al intentar enviar el correo\n{}' .format(e))
-    print("paso3")
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
