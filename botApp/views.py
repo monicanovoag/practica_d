@@ -433,6 +433,8 @@ def listado_usuarios(request):
                 user = User.objects.get(pk=user_id)
                 user.email = nuevo_correo
                 user.save()
+                log = Log(username=user.username, texto="modifica correo.")
+                log.save()
                 return redirect('listado_usuarios')
             except User.DoesNotExist:
                 pass
@@ -450,14 +452,11 @@ def logout(request):
 
 def restablecer_contrasena(request, id, token=None):
     usuario = User.objects.get(pk=id)
-    print("RESTABVLECER CONTRASEÑA")
     if token is not None: # el usuario llego aca con el token
         if default_token_generator.check_token(usuario, token): # si el token es valido
             if request.method == 'POST':
                 pwd_nueva = request.POST.get('contrasena')
-                print("POST contraseña")
-                print("usuario:", usuario.username)
-                print(request.POST)
+
                 # aca hacer el cambio de contraseña
                 usuario.set_password(pwd_nueva)
                 usuario.save()
@@ -485,8 +484,7 @@ def restablecer_contrasena(request, id, token=None):
             else:
                 return render(request, "restablecer_contrasena.html") # cargar la pagina
 
-#log = Log(username=request.user.username, texto="registro de fomulario comunicativo")
-#            log.save()
+
 
 def email_datos_usuario(request, id):
     usuario = User.objects.get(pk=id)
