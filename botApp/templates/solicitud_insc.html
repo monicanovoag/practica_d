@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Tabla Inscripción Fonoaudiólogos{% endblock %}
+{% block subtitle %}Tabla Inscripción Fonoaudiólogos{% endblock %}
+
+{% block fecha %}
+<div class="info">
+    <span class="date">
+      <span class="month">{{ fecha_actual|date:"F" }} </span>
+      <span class="day">{{ fecha_actual|date:"d" }}</span>
+      <span class="year">{{ fecha_actual|date:"Y" }}</span>
+    </span>
+  </div>
+{% endblock %}
+
+{% block content %}
+<hr>
+<table id="tabla">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Comuna Residencia</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in list %}
+        <tr>
+            <td>{{ item.nombre_fono }}</td>
+            <td>{{ item.apellido_fono }}</td>
+            <td>{{ item.email_fono }}</td>
+            <td>{{ item.telefono_fono }}</td>
+            <td>{{ item.comuna_residencia }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  <hr>
+
+{% endblock %}

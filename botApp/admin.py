@@ -63,6 +63,9 @@ class audioPersonaAdmin(admin.ModelAdmin):
 
     descargar_audio_fisico.short_description = "Audio Físico"
 
+class inscripcionFonoAdmin(admin.ModelAdmin):
+    list_display = ("nombre_fono","apellido_fono","email_fono","telefono_fono","comuna_residencia")
+
 
 #FORMULARIO SOCIOCOMUNICATIVO 
 
@@ -95,6 +98,7 @@ admin.site.register(audio_fono,audiofonoAdmin)
 admin.site.register(audio_persona,audioPersonaAdmin)
 admin.site.register(OtrasEnf, otras_enfAdmin)
 admin.site.register(sistema_salud, sistema_saludAdmin)
+admin.site.register(inscripcion_fono, inscripcionFonoAdmin)
 
 admin.site.register(tipo_relacion,relacionAdmin)
 admin.site.register(frecuencia_conv,frecuenciaAdmin)

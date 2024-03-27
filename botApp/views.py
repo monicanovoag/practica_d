@@ -522,3 +522,36 @@ def email_datos_usuario(request, id):
             messages.error(request, 'Ocurrió un error al intentar enviar el correo\n{}' .format(e))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
+
+def inscripcionFono(request):
+        
+    data = {
+        "insc_fono" : insc_fono(), 
+        "fecha_actual" : datetime.now()   
+           
+    }
+
+    if request.method == "POST":
+        formu = insc_fono(request.POST)
+        if formu.is_valid():
+            formu.save()
+            messages.success(request,"Formulario enviado con éxito")
+        else:
+            messages.error(request,"Error, formulario no enviado. Por favor verifica la información ingresada")
+
+
+    return render (request,"registro_fono.html",data)
+
+def solicitud_inscripcion(request):
+
+    inscripciones = inscripcion_fono.objects.all()
+        
+    data = {
+
+        "fecha_actual" : datetime.now(),     
+        "list": inscripciones  
+    }
+
+
+    return render (request,"solicitud_insc.html",data)

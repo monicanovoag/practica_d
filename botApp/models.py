@@ -236,5 +236,15 @@ class formulario_com(models.Model):
 
     def __str__(self):
         return str(self.id)
+    
 
+class inscripcion_fono(models.Model):
+    nombre_fono = models.CharField(max_length=100)
+    apellido_fono = models.CharField(max_length=100)
+    email_fono = models.EmailField()
+    telefono_fono = models.IntegerField()
+    comuna_residencia = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre_fono
     

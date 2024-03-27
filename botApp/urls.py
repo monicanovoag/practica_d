@@ -23,7 +23,8 @@ urlpatterns = [
  path('listado_usuarios/', listado_usuarios , name='listado_usuarios'),
  path('listado_usuarios/<int:id>/', email_datos_usuario, name="email-datos-usuario"),
  path('restablecer-contrasena/<int:id>/<str:token>/', restablecer_contrasena, name="restablecer-contrasena"),
-
+ path('inscripcion_fono/', inscripcionFono , name='inscripcion_fono'),
+ path('solicitud_inscripcion/', solicitud_inscripcion , name='solicitud_inscripcion'),
 
 
 

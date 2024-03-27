@@ -50,3 +50,8 @@ class formulario_comunicacion(forms.ModelForm):
             'complemento_4': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
         }
 
+
+class insc_fono(forms.ModelForm):
+    class Meta:
+        model = inscripcion_fono
+        fields = "__all__"
