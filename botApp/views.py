@@ -406,9 +406,7 @@ def descargar_audio_fisico(request, id_audio_persona):
 @login_required
 def resumen_paciente (request):
 
-    formularios_usuario = formulario_com.objects.filter(id_fono=request.user.id).order_by('-id')
-    #formularios_usuario = formulario_com.objects.all().order_by('-id')
-    print(request.user.id)
+    formularios_usuario = formulario_com.objects.filter(id_fono=request.user.username).order_by('-id')
     data = {
         "fecha_actual" : datetime.now(),      
         "datos": formularios_usuario
