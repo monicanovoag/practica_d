@@ -11,7 +11,7 @@ class tipo_usuarioAdmin(admin.ModelAdmin):
 
 class CustomUserAdmin(UserAdmin):
     model = User
-    list_display = ['username','email', 'nombre', 'apellido','tipo_usuario','is_staff', 'is_superuser']
+    list_display = ['id','username','email', 'nombre', 'apellido','tipo_usuario','is_staff', 'is_superuser']
     search_fields = ['email', 'nombre', 'apellido']
     fieldsets = (
         (None, {'fields': ('username','email', 'password')}),
