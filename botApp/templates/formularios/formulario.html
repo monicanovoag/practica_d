@@ -1,6 +1,13 @@
 {% extends "base.html" %} 
 {% block title %}Formulario{% endblock %} 
-{% block subtitle %}Formulario Ingreso Audios Fonoaudiológicos{% endblock %} 
+
+{% block subtitle %}
+<h3 class="subtitulo">Formulario Ingreso Audios Fonoaudiológicos</h3>
+<br>
+<h4 class="bajada">Agradecemos tu colaboración para poder tener audios con las etiquetas adecuadas, y poder testear algunos algoritmos. Te estaremos contando las novedades a partir de estos datos</h4>
+{% endblock %}
+
+
 {% block fecha %}
 <div class="info">
   <span class="date">
@@ -81,7 +88,15 @@
 
   .text {
     font-style: italic;
+    
   }
+  .subtitulo {
+      font-size: 35px;
+    }
+    .bajada {
+      font-size: 20px;
+    }
+  
 
 </style>
 

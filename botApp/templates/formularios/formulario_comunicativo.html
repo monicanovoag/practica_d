@@ -6,6 +6,8 @@
 <h3 class="subtitulo">Formulario Participación Comunicativo-Social</h3>
 <br>
 <h4 class="bajada">Protocolo Desarrollado por el Dr. Reinaldo Salazar </h4>
+<br>
+<h4 class="bajada2">Disponemos esta herramienta para conocer tus comentarios y sugerencias a este tipo de instrumentos, para entregar una mejor herramienta en las siguietes versiones.</h4>
 {% endblock %}
 
 {% block fecha %}
@@ -19,6 +21,9 @@
 {% endblock %}
 
 {% block content %}
+
+
+
 <form action="" method="POST" >
   {% csrf_token %}
 
@@ -244,6 +249,9 @@
 
   .bajada {
     font-size: 25px;
+  }
+  .bajada2 {
+    font-size: 20px;
   }
 
   .centrado {
