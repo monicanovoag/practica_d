@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 
 {% block title %}Resumen Pacientes{% endblock %}
-{% block subtitle %}Resumen Pacientes {% endblock %}
-{% block fecha %}
+{% block subtitle %}
+<h4 class="subtitulo">Resumen Pacientes</h4>
+<br>
+<h4 class="bajada2">Acá disponemos el resumen de los datos que has ingresado para tus pacientes.</h4>
+{% endblock %}
 
+{% block fecha %}
 <div class="info">
     <span class="date">
       <span class="month">{{ fecha_actual|date:"F" }} </span>
@@ -70,4 +74,14 @@
 </table>
 <hr>
 {% endfor %}
+
+<style>
+  .subtitulo{
+  font-size: 45px;
+  }
+ .bajada2{
+  font-size: 20px;
+  }
+</style>
+
 {% endblock %}
